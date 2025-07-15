@@ -75,13 +75,13 @@ def is_question_too_vague(user_q):
         'assistance', 'production', 'getting', 'inside'
     }
 
-    # Check if any specific keyword is present
     if any(word in user_q.lower() for word in specific_keywords):
         return False
 
     prompt = f"""You are a support assistant. You will be given a user's message.
 
 You must check if the message matches any known vague expressions from the list below. These expressions include messages that are too general, do not mention any part, symptom, or error code, and cannot be acted on without clarification.
+
 
 - my machine is not working
 - nothing is happening
@@ -259,12 +259,11 @@ def run_chatbot_session(user_question: str) -> str:
     if is_simple_question and is_short_answer:
         final_answer = first_match_answer
     else:
-        gpt_prompt = f"""
-You are a helpful AI assistant summarizing customer support answers.
+        if is_followup:
+            gpt_prompt = f"""
+You are a helpful AI assistant summarizing customer support answers in full.
 
-You are given up to 5 answers related to the same issue. Also examine the user's original question to determine if it can be answered simply with a short response. If the first answer is a high-confidence, clearly phrased yes/no or availability response and it directly addresses the question, return that answer directly with no summary.
-
-Otherwise, summarize the full content of the answers. Do not reference brands, machines, or quote user questions. Combine similar advice, and if multiple paths exist, say: "If that doesn't work, you can also try..." Keep it precise and under 4 sentences.
+You are given up to 5 answers related to the same issue. Summarize them completely. Combine advice where possible. If multiple fixes exist, say \"If that doesn't work, you can also try...\". Be thorough, up to 4 sentences max.
 
 User Question:
 {original_question}
@@ -274,11 +273,26 @@ Answer References:
 
 Final helpful answer:
 """
+        else:
+            gpt_prompt = f"""
+You are a helpful AI assistant for technical support.
+
+Give a very short and clear answer to the question, no more than 3 sentences. Focus only on the first and most common fix. Be brief and don’t list alternatives unless essential.
+
+User Question:
+{original_question}
+
+Answer References:
+{combined_input}
+
+Final helpful answer:
+"""
+
         try:
             gpt_response = client.chat.completions.create(
                 model="gpt-4",
                 messages=[{"role": "user", "content": gpt_prompt}],
-                temperature=0.4
+                temperature=0.3
             )
             final_answer = gpt_response.choices[0].message.content.strip()
         except Exception:
