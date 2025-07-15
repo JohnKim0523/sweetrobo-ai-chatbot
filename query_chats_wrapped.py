@@ -259,25 +259,11 @@ def run_chatbot_session(user_question: str) -> str:
     if is_simple_question and is_short_answer:
         final_answer = first_match_answer
     else:
-        if is_followup:
-            gpt_prompt = f"""
-You are a helpful AI assistant summarizing customer support answers in full.
+            if is_followup:
+        gpt_prompt = f"""
+You are a helpful AI assistant for customer support. The user said the initial solution didn’t work.
 
-You are given up to 5 answers related to the same issue. Summarize them completely. Combine advice where possible. If multiple fixes exist, say \"If that doesn't work, you can also try...\". Be thorough, up to 4 sentences max.
-
-User Question:
-{original_question}
-
-Answer References:
-{combined_input}
-
-Final helpful answer:
-"""
-        else:
-            gpt_prompt = f"""
-You are a helpful AI assistant for technical support.
-
-Give a very short and clear answer to the question, no more than 3 sentences. Focus only on the first and most common fix. Be brief and don’t list alternatives unless essential.
+You are given up to 5 detailed technical answers. Summarize them fully, combining steps as needed. If there are alternative methods, say: "If that doesn't work, you can also try...". Your response should be up to 4 sentences maximum.
 
 User Question:
 {original_question}
@@ -287,6 +273,21 @@ Answer References:
 
 Final helpful answer:
 """
+    else:
+        gpt_prompt = f"""
+You are a customer support chatbot. Your job is to give the shortest possible helpful answer.
+
+Only explain the most common fix, in **1-3 short sentences**. Do NOT explain multiple solutions or say “if that doesn’t work.” Be concise and specific.
+
+User Question:
+{original_question}
+
+Answer References:
+{combined_input}
+
+Helpful answer:
+"""
+
 
         try:
             gpt_response = client.chat.completions.create(
