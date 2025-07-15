@@ -1,20 +1,21 @@
-from dotenv import dotenv_values
 import os
+import streamlit as st
+from dotenv import dotenv_values
 import json
 import uuid
 from datetime import datetime
 from openai import OpenAI
-from pinecone import Pinecone
+import pinecone
 import numpy as np
 import re
 
-# === Load .env ===
+# === Load keys from secrets or .env ===
 config = dotenv_values(".env")
-openai_key = config.get("OPENAI_API_KEY")
-pinecone_key = config.get("PINECONE_API_KEY")
+openai_key = st.secrets.get("OPENAI_API_KEY", config.get("OPENAI_API_KEY"))
+pinecone_key = st.secrets.get("PINECONE_API_KEY", config.get("PINECONE_API_KEY"))
 
 if not openai_key or not pinecone_key:
-    raise ValueError("❌ Missing OPENAI_API_KEY or PINECONE_API_KEY in .env")
+    raise ValueError("❌ Missing OPENAI_API_KEY or PINECONE_API_KEY")
 
 # === Config ===
 embedding_model = "text-embedding-3-small"
@@ -22,8 +23,8 @@ CONFIDENCE_THRESHOLD = 0.6
 
 # === Init clients ===
 client = OpenAI(api_key=openai_key)
-pc = Pinecone(api_key=pinecone_key)
-index = pc.Index("sweetrobo-ai")
+pinecone.init(api_key=pinecone_key, environment="us-east1-gcp")
+index = pinecone.Index("sweetrobo-ai")
 
 # === Global Chat State ===
 th_state = {
