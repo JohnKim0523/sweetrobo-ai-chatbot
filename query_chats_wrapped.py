@@ -273,6 +273,13 @@ Answer References:
 
 Final helpful answer:
 """
+{original_question}
+
+Answer References:
+{combined_input}
+
+Final helpful answer:
+"""
 User Question:
 {original_question}
 
