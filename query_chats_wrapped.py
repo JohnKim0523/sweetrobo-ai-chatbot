@@ -259,12 +259,20 @@ def run_chatbot_session(user_question: str) -> str:
     if is_simple_question and is_short_answer:
         final_answer = first_match_answer
     else:
-            if is_followup:
+        if is_followup:
         gpt_prompt = f"""
 You are a helpful AI assistant for customer support. The user said the initial solution didn’t work.
 
 You are given up to 5 detailed technical answers. Summarize them fully, combining steps as needed. If there are alternative methods, say: "If that doesn't work, you can also try...". Your response should be up to 4 sentences maximum.
 
+User Question:
+{original_question}
+
+Answer References:
+{combined_input}
+
+Final helpful answer:
+"""
 User Question:
 {original_question}
 
