@@ -5,7 +5,7 @@ import json
 import uuid
 from datetime import datetime
 from openai import OpenAI
-import pinecone
+from pinecone import Pinecone
 import numpy as np
 import re
 
@@ -23,8 +23,8 @@ CONFIDENCE_THRESHOLD = 0.6
 
 # === Init clients ===
 client = OpenAI(api_key=openai_key)
-pinecone.init(api_key=pinecone_key, environment="us-east1-gcp")
-index = pinecone.Index("sweetrobo-ai")
+pc = Pinecone(api_key=pinecone_key)
+index = pc.Index("sweetrobo-ai")
 
 # === Global Chat State ===
 th_state = {
