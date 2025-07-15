@@ -4,7 +4,7 @@ import json
 import uuid
 from datetime import datetime
 from openai import OpenAI
-import pinecone_client as pinecone
+from pinecone import Pinecone
 import numpy as np
 import re
 
@@ -22,8 +22,8 @@ CONFIDENCE_THRESHOLD = 0.6
 
 # === Init clients ===
 client = OpenAI(api_key=openai_key)
-pinecone.init(api_key=pinecone_key, environment="us-east1-gcp")  # adjust env if needed
-index = pinecone.Index("sweetrobo-ai")
+pc = Pinecone(api_key=pinecone_key)
+index = pc.Index("sweetrobo-ai")
 
 # === Global Chat State ===
 th_state = {
@@ -55,8 +55,6 @@ def initialize_chat(selected_machine: str):
         "thread_id": th_state["thread_id"],
         "machine_type": machine_type
     }
-
-# (The rest of your code continues unmodified below, including is_question_too_vague, fetch_valid_matches, run_chatbot_session, etc.)
 
 def is_question_too_vague(user_q):
     prompt = f"""You are a support assistant. You will be given a user's message.
