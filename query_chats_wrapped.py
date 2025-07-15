@@ -58,6 +58,27 @@ def initialize_chat(selected_machine: str):
     }
 
 def is_question_too_vague(user_q):
+    specific_keywords = {
+        'machine', 'candy', 'cotton', 'issue', 'sugar', 'after', 'settings', 'check',
+        'error', 'please', 'stick', 'ensure', 'screen', 'support', 'video', 'power',
+        'system', 'clean', 'sensor', 'provide', 'test', 'burner', 'further', 'team',
+        'design', 'during', 'could', 'properly', 'furnace', 'issues', 'motor',
+        'number', 'persists', 'time', 'correct', 'cleaning', 'nozzle', 'portal',
+        'admin', 'update', 'sure', 'working', 'water', 'sticks', 'nayax', 'send',
+        'correctly', 'showing', 'help', 'confirm', 'payment', 'heating', 'machines',
+        'replacement', 'device', 'balloon', 'restart', 'problem', 'change', 'stuck',
+        'through', 'using', 'menu', 'verify', 'connected', 'alert', 'inventory',
+        'temperature', 'address', 'prevent', 'remove', 'resolve', 'software',
+        'contact', 'robo', 'before', 'again', 'cable', 'data', 'access', 'down',
+        'reset', 'card', 'setting', 'alerts', 'sync', 'process', 'call', 'print',
+        'sweet', 'clear', 'causing', 'right', 'replace', 'internal', 'loose',
+        'assistance', 'production', 'getting', 'inside'
+    }
+
+    # Check if any specific keyword is present
+    if any(word in user_q.lower() for word in specific_keywords):
+        return False
+
     prompt = f"""You are a support assistant. You will be given a user's message.
 
 You must check if the message matches any known vague expressions from the list below. These expressions include messages that are too general, do not mention any part, symptom, or error code, and cannot be acted on without clarification.
@@ -114,11 +135,11 @@ You must check if the message matches any known vague expressions from the list 
 - doesn’t work right
 - need some help
 
-User message: "{user_q}"
+User message: \"{user_q}\"
 
 Respond only with:
-- "yes"
-- "no"
+- \"yes\"
+- \"no\"
 """
     try:
         response = client.chat.completions.create(
