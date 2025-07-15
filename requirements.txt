@@ -1,0 +1,5 @@
+openai
+pinecone-client
+streamlit
+numpy>=1.26
+python-dotenv==1.1.0
