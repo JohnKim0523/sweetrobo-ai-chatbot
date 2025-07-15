@@ -4,7 +4,7 @@ import json
 import uuid
 from datetime import datetime
 from openai import OpenAI
-import pinecone
+import pinecone_client as pinecone
 import numpy as np
 import re
 
