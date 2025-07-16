@@ -174,6 +174,12 @@ Respond only with:
     except Exception:
         return False
 
+from difflib import SequenceMatcher
+
+def is_similar_answer(ans1, ans2, threshold=0.85):
+    return SequenceMatcher(None, ans1, ans2).ratio() >= threshold
+
+
 def is_related(user_q, match_q, match_a):
     user_words = set(re.findall(r"\w+", user_q.lower()))
     match_words = set(re.findall(r"\w+", (match_q + " " + match_a).lower()))
@@ -274,10 +280,13 @@ is_followup = any(p in user_question.lower() for p in is_followup_phrases)
         "original_question": original_question
     }
 
+    last_answer = th_state["conversation_history"][-1]["content"] if th_state["conversation_history"] else ""
+
     filtered_qas = [
         m[0].metadata.get("a", "[No A]")
         for m in top_matches
         if is_related(original_question, m[0].metadata.get("q", ""), m[0].metadata.get("a", ""))
+        and not is_similar_answer(m[0].metadata.get("a", ""), last_answer)
     ][:5]
 
     if not filtered_qas:
