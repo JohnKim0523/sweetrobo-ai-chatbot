@@ -10217,7 +10217,36 @@
     "q": "What does error code E06 on my Robo Ice Cream machine mean?",
     "a": "Error code E06 indicates that the compressor is running overtime, which usually means it's freezing most likely due to the ice cream hardness setting. Ensure your ice cream hardness is set to 1 and that there is ice cream mix in the machine when it's turned on to prevent the chamber from freezing.",
     "tags": [
-      "e06",
+      "E06",
+      "compressor",
+      "ice_cream_hardness",
+      "error_code"
+    ],
+    "usefulness": {
+      "score": 8,
+      "reason": "The answer provides a clear explanation of the error code and actionable steps to prevent it."
+    },
+    "metadata": {
+      "domain": "support",
+      "confidence": 0.95,
+      "media_reference": false,
+      "escalation": false,
+      "customer_ordered": false,
+      "part_shipped": false,
+      "error_codes": [
+        "E06"
+      ]
+    }
+  },
+  {
+    "thread_id": 149,
+    "machine_type": "ROBO_ICE_CREAM",
+    "q": "how to make ice cream not melted or watery and how to control the hardness of the ice cream in the Robo Ice Cream machine?",
+    "a": "To prevent ice cream from melting or becoming watery, ensure that the ice cream mix is properly chilled before adding it to the machine. Additionally, you can control the hardness of the ice cream by adjusting the hardness setting on the machine. A setting of 1 is recommended for a softer texture, while higher settings will produce firmer ice cream.",
+    "tags": [
+      "melting",
+      "watery_ice_cream",
+      "hardness_control",
       "compressor",
       "ice_cream_hardness",
       "error_code"

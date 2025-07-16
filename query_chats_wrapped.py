@@ -307,7 +307,14 @@ def run_chatbot_session(user_question: str) -> str:
             gpt_prompt = f"""
 You are a helpful AI assistant for customer support.{' The user said the initial solution didn\'t work.' if is_followup else ''}
 
-You are given up to 5 detailed technical answers. Summarize them fully, combining steps as needed.
+You are given up to 5 technical answers. Your job is to summarize only the most helpful 1–3 suggestions.
+
+Instructions:
+- Provide only the steps needed to address the issue (1 to 5 max).
+- Use bullet points (•), not numbers.
+- Be concise and do not repeat instructions.
+- Do not say “if that doesn’t work” — that will be appended later.
+
 
 User Question:
 {original_question}
@@ -323,6 +330,7 @@ Final helpful answer:
                 temperature=0.3,
             )
             final_answer = gpt_response.choices[0].message.content.strip()
+            final_answer = final_answer.replace("•", "\n\n•")
     except Exception:
         final_answer = "Sorry, no answer was found. Escalating to our support team now."
 
