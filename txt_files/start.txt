@@ -1,0 +1,2 @@
+C:\Users\john\AppData\Roaming\Python\Python313\Scripts\streamlit run app.py
+

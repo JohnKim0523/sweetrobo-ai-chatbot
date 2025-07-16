@@ -8,6 +8,7 @@ from openai import OpenAI
 from pinecone import Pinecone
 import numpy as np
 import re
+from difflib import SequenceMatcher
 
 # === Load keys from secrets or .env ===
 config = dotenv_values(".env")
@@ -36,10 +37,8 @@ th_state = {
     "email_collected": False,
 }
 
-
 def is_valid_email(email):
     return re.match(r"[^@]+@[^@]+\.[^@]+", email)
-
 
 def track_solution_failure():
     thread_id = th_state["thread_id"]
@@ -48,30 +47,22 @@ def track_solution_failure():
     )
     return th_state["solution_attempts"][thread_id]
 
-
 def handle_email_logic(user_question):
     if "@" in user_question:
         if is_valid_email(user_question.strip()):
             th_state["email_collected"] = True
             return "✅ Email received. Adding the employee to the chat session."
         else:
-            return (
-                "⚠️ That doesn’t look like a valid email. Please check it and try again."
-            )
+            return "⚠️ That doesn’t look like a valid email. Please check it and try again."
 
-    if any(
-        phrase in user_question.lower()
-        for phrase in ["this didnt solve", "didn't work", "not fixed", "still broken"]
-    ):
+    if any(phrase in user_question.lower() for phrase in ["this didnt solve", "didn't work", "not fixed", "still broken"]):
         if not th_state["email_collected"]:
             return "Please provide the employee's email address so we can escalate this issue."
 
     return None
 
-
 def initialize_chat(selected_machine: str):
     th_state["thread_id"] = str(uuid.uuid4())
-
     machine_mapping = {
         "cotton candy": "COTTON_CANDY",
         "ice cream": "ROBO_ICE_CREAM",
@@ -84,116 +75,26 @@ def initialize_chat(selected_machine: str):
     machine_type = machine_mapping.get(selected_machine.strip().lower())
     if not machine_type:
         raise ValueError("Unknown machine type selected.")
-
     th_state["machine_type"] = machine_type
-
     return {"thread_id": th_state["thread_id"], "machine_type": machine_type}
-
 
 def is_question_too_vague(user_q):
     specific_keywords = {
-        "machine",
-        "candy",
-        "cotton",
-        "issue",
-        "sugar",
-        "after",
-        "settings",
-        "check",
-        "error",
-        "please",
-        "stick",
-        "ensure",
-        "screen",
-        "support",
-        "video",
-        "power",
-        "system",
-        "clean",
-        "sensor",
-        "provide",
-        "test",
-        "burner",
-        "further",
-        "team",
-        "design",
-        "during",
-        "could",
-        "properly",
-        "furnace",
-        "issues",
-        "motor",
-        "number",
-        "persists",
-        "time",
-        "correct",
-        "cleaning",
-        "nozzle",
-        "portal",
-        "admin",
-        "update",
-        "sure",
-        "working",
-        "water",
-        "sticks",
-        "nayax",
-        "send",
-        "correctly",
-        "showing",
-        "help",
-        "confirm",
-        "payment",
-        "heating",
-        "machines",
-        "replacement",
-        "device",
-        "balloon",
-        "restart",
-        "problem",
-        "change",
-        "stuck",
-        "through",
-        "using",
-        "menu",
-        "verify",
-        "connected",
-        "alert",
-        "inventory",
-        "temperature",
-        "address",
-        "prevent",
-        "remove",
-        "resolve",
-        "software",
-        "contact",
-        "robo",
-        "before",
-        "again",
-        "cable",
-        "data",
-        "access",
-        "down",
-        "reset",
-        "card",
-        "setting",
-        "alerts",
-        "sync",
-        "process",
-        "call",
-        "print",
-        "sweet",
-        "clear",
-        "causing",
-        "right",
-        "replace",
-        "internal",
-        "loose",
-        "assistance",
-        "production",
-        "getting",
-        "inside",
+        'machine', 'candy', 'cotton', 'issue', 'sugar', 'after', 'settings', 'check',
+        'error', 'please', 'stick', 'ensure', 'screen', 'support', 'video', 'power',
+        'system', 'clean', 'sensor', 'provide', 'test', 'burner', 'further', 'team',
+        'design', 'during', 'could', 'properly', 'furnace', 'issues', 'motor',
+        'number', 'persists', 'time', 'correct', 'cleaning', 'nozzle', 'portal',
+        'admin', 'update', 'sure', 'working', 'water', 'sticks', 'nayax', 'send',
+        'correctly', 'showing', 'help', 'confirm', 'payment', 'heating', 'machines',
+        'replacement', 'device', 'balloon', 'restart', 'problem', 'change', 'stuck',
+        'through', 'using', 'menu', 'verify', 'connected', 'alert', 'inventory',
+        'temperature', 'address', 'prevent', 'remove', 'resolve', 'software',
+        'contact', 'robo', 'before', 'again', 'cable', 'data', 'access', 'down',
+        'reset', 'card', 'setting', 'alerts', 'sync', 'process', 'call', 'print',
+        'sweet', 'clear', 'causing', 'right', 'replace', 'internal', 'loose',
+        'assistance', 'production', 'getting', 'inside'
     }
-
     if any(word in user_q.lower() for word in specific_keywords):
         return False
 
@@ -208,7 +109,6 @@ You must check if the message matches any known vague expressions from the list 
 - i’m having an issue
 - something’s wrong
 - please assist
-- it’s not turning on
 - i can’t use it
 - won’t start
 - stopped working
@@ -267,13 +167,8 @@ Respond only with:
     except Exception:
         return False
 
-
-from difflib import SequenceMatcher
-
-
 def is_similar_answer(ans1, ans2, threshold=0.85):
     return SequenceMatcher(None, ans1, ans2).ratio() >= threshold
-
 
 def is_related(user_q, match_q, match_a):
     user_words = set(re.findall(r"\w+", user_q.lower()))
@@ -281,10 +176,16 @@ def is_related(user_q, match_q, match_a):
     overlap = user_words.intersection(match_words)
     return len(overlap) / max(len(user_words), 1) > 0.3
 
+def is_already_given(answer, history, threshold=0.85):
+    for entry in history:
+        if entry["role"] == "assistant":
+            prev_ans = entry["content"]
+            if SequenceMatcher(None, answer.strip(), prev_ans.strip()).ratio() >= threshold:
+                return True
+    return False
 
 def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_text):
     filter_query = {"machine_type": {"$eq": th_state["machine_type"]}}
-
     if error_code_filter:
         filter_query["error_codes"] = {"$in": [str(error_code_filter)]}
     else:
@@ -303,7 +204,6 @@ def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_
             include_values=True,
             filter=filter_query,
         )
-
         for match in results.matches:
             if match.id in previous_ids:
                 continue
@@ -312,7 +212,6 @@ def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_
             confidence = meta.get("confidence", 0.0)
             answer = meta.get("a", "")
             tags = meta.get("tags", [])
-
             if usefulness_score == score_cutoff and confidence >= CONFIDENCE_THRESHOLD:
                 if keyword_focus and not any(keyword_focus in t.lower() for t in tags):
                     continue
@@ -323,8 +222,7 @@ def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_
         if len(all_valid) < 5:
             score_cutoff -= 1
 
-    return all_valid[:5]
-
+    return all_valid[:100]  # Fetch up to 100 matches
 
 def run_chatbot_session(user_question: str) -> str:
     email_response = handle_email_logic(user_question)
@@ -338,21 +236,11 @@ def run_chatbot_session(user_question: str) -> str:
         user_question = f"how to fix error {user_question}"
 
     if is_question_too_vague(user_question):
-        return (
-            "That’s a bit too general. Could you describe exactly what’s going wrong "
-            "(e.g., error code, what part is malfunctioning, or what’s not working as expected)?"
-        )
+        return ("That’s a bit too general. Could you describe exactly what’s going wrong "
+                "(e.g., error code, what part is malfunctioning, or what’s not working as expected)?")
 
-    is_followup_phrases = [
-        "didn't work",
-        "didnt work",
-        "didn't help",
-        "didnt help",
-        "still broken",
-        "not fixed",
-        "didn’t resolve",
-        "not working",
-    ]
+    is_followup_phrases = ["didn't work", "didnt work", "didn't help", "didnt help",
+                           "still broken", "not fixed", "didn’t resolve", "not working"]
     is_followup = any(p in user_question.lower() for p in is_followup_phrases)
 
     if is_followup and thread_id in used_matches_by_thread:
@@ -363,28 +251,18 @@ def run_chatbot_session(user_question: str) -> str:
         original_question = previous["original_question"]
         failure_count = track_solution_failure()
         if failure_count >= 2:
-            return (
-                "This seems persistent. Escalating to a human agent now. Please wait..."
-            )
+            return "This seems persistent. Escalating to a human agent now. Please wait..."
+        top_matches = fetch_valid_matches(query_embedding, previous_ids, error_code_filter, original_question)
     else:
-        response = client.embeddings.create(
-            model=embedding_model, input=[user_question]
-        )
+        response = client.embeddings.create(model=embedding_model, input=[user_question])
         query_embedding = response.data[0].embedding
         previous_ids = set()
         original_question = user_question
         match = re.search(r"(\d{4,})", user_question)
-        error_code_filter = (
-            int(match.group(1)) if "error" in user_question.lower() and match else None
-        )
-
-        top_matches = fetch_valid_matches(
-            query_embedding, previous_ids, error_code_filter, original_question
-        )
-
+        error_code_filter = int(match.group(1)) if "error" in user_question.lower() and match else None
+        top_matches = fetch_valid_matches(query_embedding, previous_ids, error_code_filter, original_question)
         if not top_matches:
             return "❌ No high-confidence, high-score matches found."
-
         used_ids = previous_ids.union({m[0].id for m in top_matches})
         used_matches_by_thread[thread_id] = {
             "embedding": query_embedding,
@@ -393,55 +271,42 @@ def run_chatbot_session(user_question: str) -> str:
             "original_question": original_question,
         }
 
-        last_answer = (
-            th_state["conversation_history"][-1]["content"]
-            if th_state["conversation_history"]
-            else ""
-        )
+    # === Filter new answers only ===
+    filtered_qas = []
+    seen_ids = set()
+    for match, usefulness, confidence in top_matches:
+        if len(filtered_qas) >= 5:
+            break
+        answer = match.metadata.get("a", "[No A]").strip()
+        if not answer or match.id in seen_ids:
+            continue
+        q = match.metadata.get("q", "")
+        a = match.metadata.get("a", "")
+        if is_related(original_question, q, a) and not is_already_given(a, th_state["conversation_history"]):
+            filtered_qas.append(a)
+            seen_ids.add(match.id)
 
-        filtered_qas = [
-            m[0].metadata.get("a", "[No A]")
-            for m in top_matches
-            if is_related(
-                original_question,
-                m[0].metadata.get("q", ""),
-                m[0].metadata.get("a", ""),
-            )
-            and not is_similar_answer(m[0].metadata.get("a", ""), last_answer)
-        ][:5]
+    if not filtered_qas:
+        failure_count = track_solution_failure()
+        if failure_count >= 2:
+            return "This seems persistent. Escalating to a human agent now. Please wait..."
+        return "Sorry, I couldn’t find any new helpful info for this issue. Could you describe it in more detail or mention exactly what you tried?"
 
-        if not filtered_qas:
-            filtered_qas = [top_matches[0][0].metadata.get("a", "[No A]")]
+    combined_input = "\n\n".join(filtered_qas)
+    first_match_answer = filtered_qas[0]
 
-        combined_input = "\n\n".join(filtered_qas)
-        first_match_answer = top_matches[0][0].metadata.get("a", "").strip()
+    simple_q_phrases = ["can i", "do you", "does it", "is there", "are there", "can we", "is it possible"]
+    is_simple_question = any(original_question.lower().startswith(p) for p in simple_q_phrases)
+    is_short_answer = len(first_match_answer.split()) <= 12 and first_match_answer.lower().startswith(("yes", "no", "sorry", "unfortunately"))
 
-        simple_q_phrases = [
-            "can i",
-            "do you",
-            "does it",
-            "is there",
-            "are there",
-            "can we",
-            "is it possible",
-        ]
-        is_simple_question = any(
-            original_question.lower().startswith(p) for p in simple_q_phrases
-        )
-        is_short_answer = len(
-            first_match_answer.split()
-        ) <= 12 and first_match_answer.lower().startswith(
-            ("yes", "no", "sorry", "unfortunately")
-        )
-
+    try:
         if is_simple_question and is_short_answer:
             final_answer = first_match_answer
         else:
-            if is_followup:
-                gpt_prompt = f"""
-You are a helpful AI assistant for customer support. The user said the initial solution didn't work.
+            gpt_prompt = f"""
+You are a helpful AI assistant for customer support.{' The user said the initial solution didn\'t work.' if is_followup else ''}
 
-You are given up to 5 detailed technical answers. Summarize them fully, combining steps as needed. If there are alternative methods, say: "If that doesn't work, you can also try...". Your response should be up to 4 sentences maximum.
+You are given up to 5 detailed technical answers. Summarize them fully, combining steps as needed.
 
 User Question:
 {original_question}
@@ -451,36 +316,16 @@ Answer References:
 
 Final helpful answer:
 """
-            else:
-                gpt_prompt = f"""
-You are a customer support chatbot. Your job is to give the shortest possible helpful answer.
+            gpt_response = client.chat.completions.create(
+                model="gpt-4",
+                messages=[{"role": "user", "content": gpt_prompt}],
+                temperature=0.3,
+            )
+            final_answer = gpt_response.choices[0].message.content.strip()
+    except Exception:
+        final_answer = first_match_answer or "[No answer found]"
 
-Only explain the most common fix, in **1-3 short sentences**. Do NOT explain multiple solutions or say "if that doesn't work." Be concise and specific.
-
-User Question:
-{original_question}
-
-Answer References:
-{combined_input}
-
-Helpful answer:
-"""
-
-            try:
-                gpt_response = client.chat.completions.create(
-                    model="gpt-4",
-                    messages=[{"role": "user", "content": gpt_prompt}],
-                    temperature=0.3,
-                )
-                final_answer = gpt_response.choices[0].message.content.strip()
-            except Exception:
-                final_answer = first_match_answer or "[No answer found]"
-
-        final_answer += "\n\nIf this didn’t resolve the issue, let me know."
-        th_state["conversation_history"].append(
-            {"role": "user", "content": user_question}
-        )
-        th_state["conversation_history"].append(
-            {"role": "assistant", "content": final_answer}
-        )
-        return final_answer
+    final_answer += "\n\nIf this didn’t resolve the issue, let me know."
+    th_state["conversation_history"].append({"role": "user", "content": user_question})
+    th_state["conversation_history"].append({"role": "assistant", "content": final_answer})
+    return final_answer
