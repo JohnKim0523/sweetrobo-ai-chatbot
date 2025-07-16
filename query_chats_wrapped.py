@@ -192,7 +192,7 @@ def is_question_too_vague(user_q):
         "production",
         "getting",
         "inside",
-    }  # your keyword list remains here
+    }
 
     if any(word in user_q.lower() for word in specific_keywords):
         return False
