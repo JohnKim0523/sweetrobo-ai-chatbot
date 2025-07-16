@@ -48,16 +48,13 @@ def handle_email_logic(user_question):
     if "@" in user_question:
         if is_valid_email(user_question.strip()):
             th_state["email_collected"] = True
-            return "✅ Email received. Adding the contact to the support case."
+            return "✅ Email received. Adding the employee to the chat session."
         else:
             return "⚠️ That doesn’t look like a valid email. Please check it and try again."
 
-    if any(phrase in user_question.lower() for phrase in [
-        "this didnt solve", "didn't work", "not fixed", "still broken", "didn't help", "didnt help"
-    ]):
-        failure_count = th_state["solution_attempts"].get(th_state["thread_id"], 0)
-        if failure_count >= 2:
-            return "This issue seems persistent. A support agent will reach out to you shortly."
+    if any(phrase in user_question.lower() for phrase in ["this didnt solve", "didn't work", "not fixed", "still broken"]):
+        if not th_state["email_collected"]:
+            return "Please provide the employee's email address so we can escalate this issue."
 
     return None
 
@@ -344,18 +341,7 @@ Helpful answer:
         except Exception:
             final_answer = first_match_answer or "[No answer found]"
 
-    resolution_phrases = ["thank you", "thanks", "that worked", "resolved", "it’s fixed", "its fixed"]
-is_resolution = any(p in user_question.lower() for p in resolution_phrases)
-
-if (
-    not is_followup and
-    not is_resolution and
-    "support agent" not in final_answer.lower() and
-    "email" not in final_answer.lower()
-):
-    final_answer += "
-
-If this didn’t resolve the issue, let me know."
+    final_answer += "\n\nIf this didn’t resolve the issue, let me know."
     th_state["conversation_history"].append({"role": "user", "content": user_question})
     th_state["conversation_history"].append({"role": "assistant", "content": final_answer})
     return final_answer
