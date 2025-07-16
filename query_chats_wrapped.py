@@ -323,7 +323,7 @@ Final helpful answer:
             )
             final_answer = gpt_response.choices[0].message.content.strip()
     except Exception:
-        final_answer = first_match_answer or "Sorry, no answer was found. Escalating to our support team now."
+        final_answer = "Sorry, no answer was found. Escalating to our support team now."
 
     final_answer += "\n\nIf this didn’t resolve the issue, let me know."
     th_state["conversation_history"].append({"role": "user", "content": user_question})
