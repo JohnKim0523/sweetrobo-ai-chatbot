@@ -31,8 +31,32 @@ th_state = {
     "thread_id": None,
     "machine_type": None,
     "used_matches_by_thread": {},
-    "conversation_history": []
+    "conversation_history": [],
+    "solution_attempts": {},
+    "email_collected": False
 }
+
+def is_valid_email(email):
+    return re.match(r"[^@]+@[^@]+\.[^@]+", email)
+
+def track_solution_failure():
+    thread_id = th_state["thread_id"]
+    th_state["solution_attempts"][thread_id] = th_state["solution_attempts"].get(thread_id, 0) + 1
+    return th_state["solution_attempts"][thread_id]
+
+def handle_email_logic(user_question):
+    if "@" in user_question:
+        if is_valid_email(user_question.strip()):
+            th_state["email_collected"] = True
+            return "✅ Email received. Adding the employee to the chat session."
+        else:
+            return "⚠️ That doesn’t look like a valid email. Please check it and try again."
+
+    if any(phrase in user_question.lower() for phrase in ["this didnt solve", "didn't work", "not fixed", "still broken"]):
+        if not th_state["email_collected"]:
+            return "Please provide the employee's email address so we can escalate this issue."
+
+    return None
 
 def initialize_chat(selected_machine: str):
     th_state["thread_id"] = str(uuid.uuid4())
@@ -73,7 +97,7 @@ def is_question_too_vague(user_q):
         'reset', 'card', 'setting', 'alerts', 'sync', 'process', 'call', 'print',
         'sweet', 'clear', 'causing', 'right', 'replace', 'internal', 'loose',
         'assistance', 'production', 'getting', 'inside'
-    }
+    } 
 
     if any(word in user_q.lower() for word in specific_keywords):
         return False
@@ -81,7 +105,6 @@ def is_question_too_vague(user_q):
     prompt = f"""You are a support assistant. You will be given a user's message.
 
 You must check if the message matches any known vague expressions from the list below. These expressions include messages that are too general, do not mention any part, symptom, or error code, and cannot be acted on without clarification.
-
 
 - my machine is not working
 - nothing is happening
@@ -201,6 +224,10 @@ def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_
     return all_valid[:5]
 
 def run_chatbot_session(user_question: str) -> str:
+    email_response = handle_email_logic(user_question)
+    if email_response:
+        return email_response
+
     thread_id = th_state["thread_id"]
     used_matches_by_thread = th_state["used_matches_by_thread"]
 
@@ -219,6 +246,9 @@ def run_chatbot_session(user_question: str) -> str:
         previous_ids = previous["used_ids"]
         error_code_filter = previous["error_filter"]
         original_question = previous["original_question"]
+        failure_count = track_solution_failure()
+        if failure_count >= 2:
+            return "This seems persistent. Escalating to a human agent now. Please wait..."
     else:
         response = client.embeddings.create(model=embedding_model, input=[user_question])
         query_embedding = response.data[0].embedding
