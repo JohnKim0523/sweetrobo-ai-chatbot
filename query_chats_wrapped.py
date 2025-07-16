@@ -97,7 +97,7 @@ def is_question_too_vague(user_q):
         'reset', 'card', 'setting', 'alerts', 'sync', 'process', 'call', 'print',
         'sweet', 'clear', 'causing', 'right', 'replace', 'internal', 'loose',
         'assistance', 'production', 'getting', 'inside'
-    } 
+    }  # your keyword list remains here
 
     if any(word in user_q.lower() for word in specific_keywords):
         return False
@@ -238,7 +238,11 @@ def run_chatbot_session(user_question: str) -> str:
         return ("That’s a bit too general. Could you describe exactly what’s going wrong "
                 "(e.g., error code, what part is malfunctioning, or what’s not working as expected)?")
 
-    is_followup = user_question.lower() in {"it did not resolve", "didn't work", "still broken", "not fixed"}
+    is_followup_phrases = [
+    "didn't work", "didnt work", "didn't help", "didnt help",
+    "still broken", "not fixed", "didn’t resolve", "not working"
+]
+is_followup = any(p in user_question.lower() for p in is_followup_phrases)
 
     if is_followup and thread_id in used_matches_by_thread:
         previous = used_matches_by_thread[thread_id]
