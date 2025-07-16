@@ -262,7 +262,7 @@ def run_chatbot_session(user_question: str) -> str:
         error_code_filter = int(match.group(1)) if "error" in user_question.lower() and match else None
         top_matches = fetch_valid_matches(query_embedding, previous_ids, error_code_filter, original_question)
         if not top_matches:
-            return "❌ No high-confidence, high-score matches found."
+            return "❌ No high-confidence, high-score matches found. Escalating to a human agent now."
         used_ids = previous_ids.union({m[0].id for m in top_matches})
         used_matches_by_thread[thread_id] = {
             "embedding": query_embedding,
@@ -290,7 +290,7 @@ def run_chatbot_session(user_question: str) -> str:
         failure_count = track_solution_failure()
         if failure_count >= 2:
             return "This seems persistent. Escalating to a human agent now. Please wait..."
-        return "Sorry, I couldn’t find any new helpful info for this issue. Could you describe it in more detail or mention exactly what you tried?"
+        return "Sorry, I couldn’t find any new helpful info for this issue. Escalating this to our support team. Please hold on."
 
     combined_input = "\n\n".join(filtered_qas)
     first_match_answer = filtered_qas[0]
@@ -323,7 +323,7 @@ Final helpful answer:
             )
             final_answer = gpt_response.choices[0].message.content.strip()
     except Exception:
-        final_answer = first_match_answer or "[No answer found]"
+        final_answer = first_match_answer or "Sorry, no answer was found. Escalating to our support team now."
 
     final_answer += "\n\nIf this didn’t resolve the issue, let me know."
     th_state["conversation_history"].append({"role": "user", "content": user_question})
