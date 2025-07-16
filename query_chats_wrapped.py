@@ -292,8 +292,9 @@ def run_chatbot_session(user_question: str) -> str:
             return "This seems persistent. Escalating to a human agent now. Please wait..."
         return "Sorry, I couldn’t find any new helpful info for this issue. Escalating this to our support team. Please hold on."
 
+    # ✅ guaranteed safe now:
     combined_input = "\n\n".join(filtered_qas)
-    first_match_answer = filtered_qas[0]
+    first_match_answer = filtered_qas[0] if filtered_qas else "[No valid answer found]"
 
     simple_q_phrases = ["can i", "do you", "does it", "is there", "are there", "can we", "is it possible"]
     is_simple_question = any(original_question.lower().startswith(p) for p in simple_q_phrases)
