@@ -11,7 +11,6 @@ import re
 from difflib import SequenceMatcher
 import math
 
-# === Load keys from secrets or .env ===
 config = dotenv_values(".env")
 openai_key = st.secrets.get("OPENAI_API_KEY", config.get("OPENAI_API_KEY"))
 pinecone_key = st.secrets.get("PINECONE_API_KEY", config.get("PINECONE_API_KEY"))
@@ -19,17 +18,14 @@ pinecone_key = st.secrets.get("PINECONE_API_KEY", config.get("PINECONE_API_KEY")
 if not openai_key or not pinecone_key:
     raise ValueError("❌ Missing OPENAI_API_KEY or PINECONE_API_KEY")
 
-# === Config ===
 embedding_model = "text-embedding-3-small"
 CONFIDENCE_THRESHOLD = 0.6
 ESCALATION_RESPONSE = "I wasn’t able to find any additional information. I’m escalating this to our support team so they can follow up with you directly."
 
-# === Init clients ===
 client = OpenAI(api_key=openai_key)
 pc = Pinecone(api_key=pinecone_key)
 index = pc.Index("sweetrobo-ai")
 
-# === Global Chat State ===
 th_state = {
     "thread_id": None,
     "machine_type": None,
@@ -183,15 +179,15 @@ def is_related(user_q, match_q, match_a):
     full_text = match_q + " " + match_a
     ratio = SequenceMatcher(None, user_q.lower(), full_text.lower()).ratio()
     
-    # 🔍 Debug output
+    # Debug output
     print(f"🔗 [is_related] Similarity between user_q and match Q+A:")
     print(f"   - User Q:    {user_q}")
     print(f"   - Match Q:   {match_q}")
-    print(f"   - Match A:   {match_a[:100]}...")  # Trim long answers
+    print(f"   - Match A:   {match_a[:100]}...") 
     print(f"   - Similarity Ratio: {ratio:.3f}")
     print(f"   - Pass? {'✅' if ratio > 0.3 else '❌'}\n")
     
-    return ratio > 0.05  # You can tune this threshold (e.g., 0.25 or 0.35)
+    return ratio > 0.05  # Can be tuned
 
 def is_already_given(answer, history, threshold=0.85):
     for entry in history:
@@ -220,12 +216,12 @@ def handle_followup_with_existing_matches(user_q, thread_id):
     print(f"🔢 Match pointer: {match_pointer}")
     print(f"📊 Total matches available: {len(all_matches)}")
     
-        # 🛑 No matches left to try — escalate immediately
+    # No matches left to try — escalate immediately
     if match_pointer >= len(all_matches):
         print("⚠️ All follow-up matches have been exhausted. Escalating.")
         return ESCALATION_RESPONSE
 
-    # Decide whether to enrich the follow-up text with the original question
+    # If follow up and vague, enrich question with original question
     query_for_related, used_enriched = build_followup_query(user_q, original_question)
 
     filtered_qas = []
@@ -288,7 +284,7 @@ def handle_followup_with_existing_matches(user_q, thread_id):
                 filtered_qas.append(a)
                 seen_ids.add(match.id)
 
-    # Nothing found after both passes → clarification or escalation
+    # Nothing found after both passes -> clarification or escalation
     if not filtered_qas:
         print("⚠️ No valid follow-up matches found. Entering fallback mode.")
         failure_count = track_solution_failure()
@@ -358,7 +354,7 @@ def get_question_similarity_boost(user_q, candidate_q):
 
 import math
 
-# Helper: cosine similarity
+# Cosine similarity
 def cosine_similarity(vec1, vec2):
     dot = sum(a * b for a, b in zip(vec1, vec2))
     norm1 = math.sqrt(sum(a * a for a in vec1))
@@ -437,14 +433,14 @@ def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_
                     boosted_score = usefulness_score + boost
                     all_valid.append((match, boosted_score, confidence))
 
-                    # ✅ Match logging (preserved)
+                    # Debug Q
                     print(f"✅ Matched Q: {candidate_q}\n→ Boosted score: {boosted_score:.2f} (Usefulness: {usefulness_score}, Boost: {boost:.2f}, Confidence: {confidence:.2f})\n")
 
                     seen_answers.add(answer)
 
     all_valid.sort(key=lambda x: (-x[1], -x[2]))  # Sort by boosted_score, then confidence
 
-    # 🔍 Apply GPT topic check to top 10
+    # Apply GPT topic check to top 10
     filtered_with_gpt = []
     for match, boosted_score, confidence in all_valid[:10]:  # Only check top 10 to keep it fast
         q = match.metadata.get("q", "")
@@ -470,7 +466,7 @@ def is_followup_message(user_q):
     if any(p in normalized for p in followup_phrases):
         return True
 
-    # ✅ Fallback: ask GPT if it's a follow-up intent
+    # Fallback: ask GPT if it's a follow-up intent
     prompt = f"""You're a support assistant. Determine if the following user message is a follow-up complaint — meaning that a previous solution attempt did not work and the user is still seeking help.
 
 Respond ONLY with "yes" or "no".
@@ -499,14 +495,14 @@ def run_chatbot_session(user_question: str) -> str:
     if not thread_id:
         return "⚠️ Please start a new support session by selecting the machine first."
 
-    # 🧠 Normalize short numeric input like "4012"
+    # Normalize short numeric input like "4012"
     if re.fullmatch(r"\d{4,}", user_question):
         user_question = f"how to fix error {user_question}"
         
-    # 🔁 Check for follow-up intent
+    # Check for follow-up intent
     is_followup = is_followup_message(user_question)
         
-    # 🚫 Check for vague question (clarification fallback)
+    # Check for vague question (clarification fallback)
     if not is_followup and is_question_too_vague(user_question):
         return ("That’s a bit too general. Could you describe exactly what’s going wrong "
                 "(e.g., error code, what part is malfunctioning, or what’s not working as expected)?")
@@ -515,14 +511,14 @@ def run_chatbot_session(user_question: str) -> str:
     print(f"📁 has_all_matches: {'all_matches' in used_matches_by_thread.get(th_state['thread_id'], {})}")
     print(f"🔁 is_followup: {is_followup}")
 
-    # ✅ If it's a follow-up, reuse prior results
+    # If it's a follow-up, reuse prior results
     if is_followup:
         if thread_id in used_matches_by_thread and "all_matches" in used_matches_by_thread[thread_id]:
             return handle_followup_with_existing_matches(user_question, thread_id)
         else:
             return "I'm still trying to find the best solution. Could you restate the issue in more detail?"
 
-    # 🧠 First-time question: embed and fetch matches
+    # First-time question: embed and fetch matches
     response = client.embeddings.create(model=embedding_model, input=[user_question])
     query_embedding = response.data[0].embedding
     previous_ids = set()
@@ -532,7 +528,7 @@ def run_chatbot_session(user_question: str) -> str:
 
     top_matches = fetch_valid_matches(query_embedding, previous_ids, error_code_filter, original_question)
 
-    # 💾 Save matches for future follow-up
+    # Save matches for future follow-up
     th_state["used_matches_by_thread"][thread_id] = {
         "embedding": query_embedding,
         "used_ids": set(),
@@ -542,7 +538,7 @@ def run_chatbot_session(user_question: str) -> str:
     }
     th_state["match_pointer"] = 1  # Start at second match for follow-up
 
-    # ✅ Optional: filter very low-similarity matches
+    # Optional: filter very low-similarity matches
     filtered_top = []
     for match, boosted_score, confidence in top_matches:
         cosine_sim = match.score
@@ -558,20 +554,20 @@ def run_chatbot_session(user_question: str) -> str:
         filtered_top.append((match, boosted_score, confidence))
     top_matches = filtered_top
 
-    # ❌ No valid matches
+    # No valid matches
     if not top_matches:
         print("❌ No top matches found after similarity filtering.")
         return "Sorry, I couldn’t find a helpful answer. Can you rephrase the question with more details?"
 
-    # ✅ Present the best GPT-filtered match (highest cosine)
+    # Present the best GPT-filtered match (highest cosine)
     if top_matches:
         best_match = top_matches[0]  # Already sorted in GPT filter
         raw_answer = best_match[0].metadata.get("a", "[No A]").strip()
 
-    # ✅ Bulletify if long
+    # Bulletify if long
     final_answer = bulletify_if_long(raw_answer)
 
-    # ⬇️ Add visible spacing if the answer starts with bullet points
+    # ⬇Add visible spacing if the answer starts with bullet points
     if final_answer.strip().startswith("•"):
         final_answer = "\n\n" + final_answer
 
@@ -580,13 +576,8 @@ def run_chatbot_session(user_question: str) -> str:
     else:
         final_answer = "Sorry, no valid answers found after GPT topic filtering."
 
-    # 💬 Append to conversation history
+    # Append to conversation history
     final_answer += "\n\nIf this didn’t resolve the issue, let me know."
     th_state["conversation_history"].append({"role": "user", "content": user_question})
     th_state["conversation_history"].append({"role": "assistant", "content": final_answer})
     return final_answer
-
-
-
-
-
