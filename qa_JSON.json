@@ -7226,7 +7226,7 @@
     "thread_id": 93,
     "machine_type": "COTTON_CANDY",
     "q": "What should I do when I get error 4012 on my cotton candy machine?",
-    "a": "Error 4012 indicates that the sugar is sticking to the burner and it needs to be cleaned.",
+    "a": "This alert is usually caused by sugar covering the nozzle. Use the metal brush from the spare parts kit to clean the nozzle surface.",
     "tags": [
       "error_4012",
       "cleaning",

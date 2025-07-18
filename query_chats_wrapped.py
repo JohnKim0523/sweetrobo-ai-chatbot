@@ -9,6 +9,7 @@ from pinecone import Pinecone
 import numpy as np
 import re
 from difflib import SequenceMatcher
+import math
 
 # === Load keys from secrets or .env ===
 config = dotenv_values(".env")
@@ -21,6 +22,7 @@ if not openai_key or not pinecone_key:
 # === Config ===
 embedding_model = "text-embedding-3-small"
 CONFIDENCE_THRESHOLD = 0.6
+ESCALATION_RESPONSE = "I wasn’t able to find any additional information. I’m escalating this to our support team so they can follow up with you directly."
 
 # === Init clients ===
 client = OpenAI(api_key=openai_key)
@@ -156,8 +158,8 @@ You must check if the message matches any known vague expressions from the list 
 User message: \"{user_q}\"
 
 Respond only with:
-- \"yes\"
-- \"no\"
+- "yes"
+- "no"
 """
     try:
         response = client.chat.completions.create(
@@ -170,11 +172,26 @@ Respond only with:
 def is_similar_answer(ans1, ans2, threshold=0.85):
     return SequenceMatcher(None, ans1, ans2).ratio() >= threshold
 
+def bulletify_if_long(answer):
+    parts = re.split(r'(?<=\.)\s+', answer.strip())
+    if len(parts) < 3:
+        return answer
+    bullets = [f"• {p.strip()}" for p in parts if p.strip()]
+    return "\n\n".join(bullets)
+
 def is_related(user_q, match_q, match_a):
-    user_words = set(re.findall(r"\w+", user_q.lower()))
-    match_words = set(re.findall(r"\w+", (match_q + " " + match_a).lower()))
-    overlap = user_words.intersection(match_words)
-    return len(overlap) / max(len(user_words), 1) > 0.3
+    full_text = match_q + " " + match_a
+    ratio = SequenceMatcher(None, user_q.lower(), full_text.lower()).ratio()
+    
+    # 🔍 Debug output
+    print(f"🔗 [is_related] Similarity between user_q and match Q+A:")
+    print(f"   - User Q:    {user_q}")
+    print(f"   - Match Q:   {match_q}")
+    print(f"   - Match A:   {match_a[:100]}...")  # Trim long answers
+    print(f"   - Similarity Ratio: {ratio:.3f}")
+    print(f"   - Pass? {'✅' if ratio > 0.3 else '❌'}\n")
+    
+    return ratio > 0.05  # You can tune this threshold (e.g., 0.25 or 0.35)
 
 def is_already_given(answer, history, threshold=0.85):
     for entry in history:
@@ -183,6 +200,193 @@ def is_already_given(answer, history, threshold=0.85):
             if SequenceMatcher(None, answer.strip(), prev_ans.strip()).ratio() >= threshold:
                 return True
     return False
+
+def build_followup_query(user_q: str, original_q: str):
+    """
+    Returns enriched question and whether enrichment was applied.
+    """
+    cleaned = user_q.strip().lower()
+    if len(cleaned.split()) <= 4:
+        return f"{user_q.strip()} — referring to: {original_q.strip()}", True
+    return user_q.strip(), False
+
+def handle_followup_with_existing_matches(user_q, thread_id):
+    match_pointer = th_state.get("match_pointer", 1)
+    used_info = th_state["used_matches_by_thread"][thread_id]
+    all_matches = used_info["all_matches"]
+    original_question = used_info["original_question"]
+    
+    print(f"🔁 [DEBUG] Starting follow-up match filtering...")
+    print(f"🔢 Match pointer: {match_pointer}")
+    print(f"📊 Total matches available: {len(all_matches)}")
+    
+        # 🛑 No matches left to try — escalate immediately
+    if match_pointer >= len(all_matches):
+        print("⚠️ All follow-up matches have been exhausted. Escalating.")
+        return ESCALATION_RESPONSE
+
+    # Decide whether to enrich the follow-up text with the original question
+    query_for_related, used_enriched = build_followup_query(user_q, original_question)
+
+    filtered_qas = []
+    seen_ids = set()
+
+    # Pass 1: try with chosen query (raw follow-up OR enriched, depending on heuristic)
+    for i in range(match_pointer, len(all_matches)):
+        match, usefulness, confidence = all_matches[i]
+        answer = match.metadata.get("a", "[No A]").strip()
+        if not answer:
+            continue
+        
+        print(f"\n🔍 [DEBUG] Checking match index {i}")
+        print(f"🆔 Match ID: {match.id}")
+        print(f"❓ Q: {match.metadata.get('q', '')}")
+        print(f"💬 A: {answer[:100]}...")
+
+        q = match.metadata.get("q", "")
+        a = match.metadata.get("a", "")
+
+        related = is_related(query_for_related, q, a)
+        already_given = is_already_given(a, th_state["conversation_history"])
+        
+        print(f"🔗 Related? {related}")
+        print(f"🧠 Already Given? {already_given}")
+
+        print(f"🧪 FOLLOW-UP FILTER (pass1 {'enriched' if used_enriched else 'raw'}):")
+        print(f"- Related: {related}")
+        print(f"- Already Given: {already_given}")
+        print(f"- Q: {q}")
+        print(f"- A: {a[:80]}...\n")
+
+        if related and not already_given:
+            th_state["match_pointer"] = i + 1  # advance pointer
+            filtered_qas.append(a)
+            seen_ids.add(match.id)
+
+    # Pass 2 (fallback): if we *did not* enrich on pass1 AND got nothing, try enriched
+    if not filtered_qas and not used_enriched:
+        enriched_again, _ = build_followup_query("", original_question)  # force enrich
+        for i in range(match_pointer, len(all_matches)):
+            match, usefulness, confidence = all_matches[i]
+            if match.id in seen_ids:
+                continue
+            a = match.metadata.get("a", "[No A]").strip()
+            if not a:
+                continue
+            q = match.metadata.get("q", "")
+            related = is_related(enriched_again, q, a)
+            already_given = is_already_given(a, th_state["conversation_history"])
+
+            print(f"🧪 FOLLOW-UP FILTER (pass2 enriched):")
+            print(f"- Related: {related}")
+            print(f"- Already Given: {already_given}")
+            print(f"- Q: {q}")
+            print(f"- A: {a[:80]}...\n")
+
+            if related and not already_given:
+                th_state["match_pointer"] = i + 1
+                filtered_qas.append(a)
+                seen_ids.add(match.id)
+
+    # Nothing found after both passes → clarification or escalation
+    if not filtered_qas:
+        print("⚠️ No valid follow-up matches found. Entering fallback mode.")
+        failure_count = track_solution_failure()
+        if failure_count == 1:
+            return ("Thanks for letting me know. Could you describe exactly what didn’t work "
+                    "or what’s still happening (e.g., error still shows, part stuck, no heat)?")
+        if failure_count >= 2:
+            return "This seems persistent. Escalating to a human agent now. Please wait..."
+        # fallback safety
+        return "Sorry, I couldn’t find any new helpful info for this issue. Escalating this to our support team. Please hold on."
+
+    # Summarize / return one or more answers
+    if len(filtered_qas) == 1:
+        final_answer = filtered_qas[0]
+    else:
+        combined_input = "\n\n".join(filtered_qas)
+        simple_q_phrases = ["can i", "do you", "does it", "is there", "are there", "can we", "is it possible"]
+        is_simple_question = any(original_question.lower().startswith(p) for p in simple_q_phrases)
+        is_short_answer = len(filtered_qas[0].split()) <= 12 and filtered_qas[0].lower().startswith(("yes", "no", "sorry", "unfortunately"))
+        try:
+            if is_simple_question and is_short_answer:
+                final_answer = filtered_qas[0]
+            else:
+                gpt_prompt = f"""
+You are a helpful AI assistant for customer support. The user said the initial solution didn’t work.
+
+You are given up to 5 technical answers. Your job is to summarize only the most helpful 1–3 suggestions.
+
+Instructions:
+- Provide only the steps needed to address the issue (1 to 5 max).
+- Use bullet points (•), not numbers.
+- Be concise and do not repeat instructions.
+- Do not say “if that doesn’t work” — that will be appended later.
+
+User Question:
+{original_question}
+
+Answer References:
+{combined_input}
+
+Final helpful answer:
+"""
+                gpt_response = client.chat.completions.create(
+                    model="gpt-4",
+                    messages=[{"role": "user", "content": gpt_prompt}],
+                    temperature=0.3,
+                )
+                final_answer = gpt_response.choices[0].message.content.strip()
+                final_answer = final_answer.replace("•", "\n\n•")
+        except Exception:
+            final_answer = "Sorry, no answer was found. Escalating to our support team now."
+
+    final_answer += "\n\nIf this didn’t resolve the issue, let me know."
+    th_state["conversation_history"].append({"role": "user", "content": user_q})
+    th_state["conversation_history"].append({"role": "assistant", "content": final_answer})
+    return final_answer
+
+def get_question_similarity_boost(user_q, candidate_q):
+    ratio = SequenceMatcher(None, user_q.lower(), candidate_q.lower()).ratio()
+    if ratio >= 0.95:
+        return 0.5
+    elif ratio >= 0.85:
+        return 0.3
+    elif ratio >= 0.7:
+        return 0.1
+    return 0
+
+import math
+
+# Helper: cosine similarity
+def cosine_similarity(vec1, vec2):
+    dot = sum(a * b for a, b in zip(vec1, vec2))
+    norm1 = math.sqrt(sum(a * a for a in vec1))
+    norm2 = math.sqrt(sum(b * b for b in vec2))
+    return dot / (norm1 * norm2 + 1e-10)
+
+def is_same_topic(user_q, candidate_q):
+    prompt = f"""You are helping match a user's support question with known help topics. Consider questions to be "the same" if they are about the same real-world issue, even if the wording is different.
+
+Are these two questions about the same issue?
+
+User: "{user_q}"
+Candidate: "{candidate_q}"
+
+Respond only with "yes" or "no".
+"""    
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0,
+        )
+        result = response.choices[0].message.content.strip().lower()
+        print(f"🧠 GPT Topic Check: '{candidate_q}' → {result}")
+        return "yes" in result
+    except Exception as e:
+        print(f"⚠️ GPT topic check failed: {e}")
+        return False
 
 def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_text):
     filter_query = {"machine_type": {"$eq": th_state["machine_type"]}}
@@ -193,36 +397,96 @@ def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_
 
     all_valid = []
     seen_answers = set()
-    score_cutoff = 10
     keyword_focus = "stick" if "stick" in query_text.lower() else None
 
-    while len(all_valid) < 5 and score_cutoff >= 1:
-        results = index.query(
-            vector=query_embedding,
-            top_k=100,
-            include_metadata=True,
-            include_values=True,
-            filter=filter_query,
-        )
-        for match in results.matches:
-            if match.id in previous_ids:
-                continue
-            meta = match.metadata
-            usefulness_score = meta.get("usefulness_score", 0)
-            confidence = meta.get("confidence", 0.0)
-            answer = meta.get("a", "")
-            tags = meta.get("tags", [])
-            if usefulness_score == score_cutoff and confidence >= CONFIDENCE_THRESHOLD:
-                if keyword_focus and not any(keyword_focus in t.lower() for t in tags):
-                    continue
-                if isinstance(match.values, list) and len(match.values) == 1536:
-                    if answer not in seen_answers:
-                        all_valid.append((match, usefulness_score, confidence))
-                        seen_answers.add(answer)
-        if len(all_valid) < 5:
-            score_cutoff -= 1
+    results = index.query(
+        vector=query_embedding,
+        top_k=20,
+        include_metadata=True,
+        include_values=True,
+        filter=filter_query,
+    )
 
-    return all_valid[:100]  # Fetch up to 100 matches
+    for match in results.matches:
+        if match.id in previous_ids:
+            continue
+
+        meta = match.metadata
+        usefulness_score = meta.get("usefulness_score", 0)
+        confidence = meta.get("confidence", 0.0)
+        answer = meta.get("a", "")
+        tags = meta.get("tags", [])
+        candidate_q = meta.get("q", "")
+
+        if usefulness_score >= 7 and confidence >= CONFIDENCE_THRESHOLD:
+            if keyword_focus and not any(keyword_focus in t.lower() for t in tags):
+                continue
+            if isinstance(match.values, list) and len(match.values) == 1536:
+                if answer not in seen_answers:
+                    # Compute embedding similarity to candidate_q
+                    response = client.embeddings.create(model=embedding_model, input=[candidate_q])
+                    candidate_q_embedding = response.data[0].embedding
+                    similarity_score = cosine_similarity(query_embedding, candidate_q_embedding)
+
+                    print(f"🎯 Cosine Sim = {similarity_score:.3f} between:\n→ User: {query_text}\n→ Q:    {candidate_q}\n")
+
+                    if similarity_score < 0.50:
+                        continue  # ❌ Skip irrelevant Qs
+
+                    boost = get_question_similarity_boost(query_text, candidate_q)
+                    boosted_score = usefulness_score + boost
+                    all_valid.append((match, boosted_score, confidence))
+
+                    # ✅ Match logging (preserved)
+                    print(f"✅ Matched Q: {candidate_q}\n→ Boosted score: {boosted_score:.2f} (Usefulness: {usefulness_score}, Boost: {boost:.2f}, Confidence: {confidence:.2f})\n")
+
+                    seen_answers.add(answer)
+
+    all_valid.sort(key=lambda x: (-x[1], -x[2]))  # Sort by boosted_score, then confidence
+
+    # 🔍 Apply GPT topic check to top 10
+    filtered_with_gpt = []
+    for match, boosted_score, confidence in all_valid[:10]:  # Only check top 10 to keep it fast
+        q = match.metadata.get("q", "")
+        if is_same_topic(query_text, q):
+            filtered_with_gpt.append((match, boosted_score, confidence))
+        else:
+            print(f"🚫 Rejected by GPT topic match: {q}")
+
+    filtered_with_gpt.sort(key=lambda x: -x[0].score)  # Sort by cosine similarity DESC
+    return filtered_with_gpt[:5]
+
+def is_followup_message(user_q):
+    followup_phrases = {
+        "didn't work", "didnt work", "didn't help", "didnt help",
+        "still broken", "not fixed", "didn’t resolve", "not working",
+        "it did not resolve", "it did not work", "still not fixed",
+        "that didn’t help", "that did not work", "this didn’t help",
+        "not resolved", "didn’t fix", "didnt fix", "didn’t solve",
+        "wasn’t fixed", "this didn’t fix", "that didn’t fix"
+    }
+    normalized = user_q.lower().replace("’", "'").strip()
+
+    if any(p in normalized for p in followup_phrases):
+        return True
+
+    # ✅ Fallback: ask GPT if it's a follow-up intent
+    prompt = f"""You're a support assistant. Determine if the following user message is a follow-up complaint — meaning that a previous solution attempt did not work and the user is still seeking help.
+
+Respond ONLY with "yes" or "no".
+
+User message:
+"{user_q}"
+"""
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0
+        )
+        return "yes" in response.choices[0].message.content.lower()
+    except Exception:
+        return False
 
 def run_chatbot_session(user_question: str) -> str:
     email_response = handle_email_logic(user_question)
@@ -231,110 +495,98 @@ def run_chatbot_session(user_question: str) -> str:
 
     thread_id = th_state["thread_id"]
     used_matches_by_thread = th_state["used_matches_by_thread"]
+    
+    if not thread_id:
+        return "⚠️ Please start a new support session by selecting the machine first."
 
+    # 🧠 Normalize short numeric input like "4012"
     if re.fullmatch(r"\d{4,}", user_question):
         user_question = f"how to fix error {user_question}"
-
-    if is_question_too_vague(user_question):
+        
+    # 🔁 Check for follow-up intent
+    is_followup = is_followup_message(user_question)
+        
+    # 🚫 Check for vague question (clarification fallback)
+    if not is_followup and is_question_too_vague(user_question):
         return ("That’s a bit too general. Could you describe exactly what’s going wrong "
                 "(e.g., error code, what part is malfunctioning, or what’s not working as expected)?")
 
-    is_followup_phrases = ["didn't work", "didnt work", "didn't help", "didnt help",
-                           "still broken", "not fixed", "didn’t resolve", "not working"]
-    is_followup = any(p in user_question.lower() for p in is_followup_phrases)
+    print(f"🧵 thread_id: {th_state['thread_id']}")
+    print(f"📁 has_all_matches: {'all_matches' in used_matches_by_thread.get(th_state['thread_id'], {})}")
+    print(f"🔁 is_followup: {is_followup}")
 
-    if is_followup and thread_id in used_matches_by_thread:
-        previous = used_matches_by_thread[thread_id]
-        query_embedding = previous["embedding"]
-        previous_ids = previous["used_ids"]
-        error_code_filter = previous["error_filter"]
-        original_question = previous["original_question"]
-        failure_count = track_solution_failure()
-        if failure_count >= 2:
-            return "This seems persistent. Escalating to a human agent now. Please wait..."
-        top_matches = fetch_valid_matches(query_embedding, previous_ids, error_code_filter, original_question)
-    else:
-        response = client.embeddings.create(model=embedding_model, input=[user_question])
-        query_embedding = response.data[0].embedding
-        previous_ids = set()
-        original_question = user_question
-        match = re.search(r"(\d{4,})", user_question)
-        error_code_filter = int(match.group(1)) if "error" in user_question.lower() and match else None
-        top_matches = fetch_valid_matches(query_embedding, previous_ids, error_code_filter, original_question)
-        if not top_matches:
-            return "❌ No high-confidence, high-score matches found. Escalating to a human agent now."
-        used_ids = previous_ids.union({m[0].id for m in top_matches})
-        used_matches_by_thread[thread_id] = {
-            "embedding": query_embedding,
-            "used_ids": used_ids,
-            "error_filter": error_code_filter,
-            "original_question": original_question,
-        }
-
-    # === Filter new answers only ===
-    filtered_qas = []
-    seen_ids = set()
-    for match, usefulness, confidence in top_matches:
-        if len(filtered_qas) >= 5:
-            break
-        answer = match.metadata.get("a", "[No A]").strip()
-        if not answer or match.id in seen_ids:
-            continue
-        q = match.metadata.get("q", "")
-        a = match.metadata.get("a", "")
-        if is_related(original_question, q, a) and not is_already_given(a, th_state["conversation_history"]):
-            filtered_qas.append(a)
-            seen_ids.add(match.id)
-
-    if not filtered_qas:
-        failure_count = track_solution_failure()
-        if failure_count >= 2:
-            return "This seems persistent. Escalating to a human agent now. Please wait..."
-        return "Sorry, I couldn’t find any new helpful info for this issue. Escalating this to our support team. Please hold on."
-
-    # ✅ guaranteed safe now:
-    combined_input = "\n\n".join(filtered_qas)
-    first_match_answer = filtered_qas[0] if filtered_qas else "[No valid answer found]"
-
-    simple_q_phrases = ["can i", "do you", "does it", "is there", "are there", "can we", "is it possible"]
-    is_simple_question = any(original_question.lower().startswith(p) for p in simple_q_phrases)
-    is_short_answer = len(first_match_answer.split()) <= 12 and first_match_answer.lower().startswith(("yes", "no", "sorry", "unfortunately"))
-
-    try:
-        if is_simple_question and is_short_answer:
-            final_answer = first_match_answer
+    # ✅ If it's a follow-up, reuse prior results
+    if is_followup:
+        if thread_id in used_matches_by_thread and "all_matches" in used_matches_by_thread[thread_id]:
+            return handle_followup_with_existing_matches(user_question, thread_id)
         else:
-            gpt_prompt = f"""
-You are a helpful AI assistant for customer support.{' The user said the initial solution didn\'t work.' if is_followup else ''}
+            return "I'm still trying to find the best solution. Could you restate the issue in more detail?"
 
-You are given up to 5 technical answers. Your job is to summarize only the most helpful 1–3 suggestions.
+    # 🧠 First-time question: embed and fetch matches
+    response = client.embeddings.create(model=embedding_model, input=[user_question])
+    query_embedding = response.data[0].embedding
+    previous_ids = set()
+    original_question = user_question
+    match = re.search(r"(\d{4,})", user_question)
+    error_code_filter = int(match.group(1)) if "error" in user_question.lower() and match else None
 
-Instructions:
-- Provide only the steps needed to address the issue (1 to 5 max).
-- Use bullet points (•), not numbers.
-- Be concise and do not repeat instructions.
-- Do not say “if that doesn’t work” — that will be appended later.
+    top_matches = fetch_valid_matches(query_embedding, previous_ids, error_code_filter, original_question)
 
+    # 💾 Save matches for future follow-up
+    th_state["used_matches_by_thread"][thread_id] = {
+        "embedding": query_embedding,
+        "used_ids": set(),
+        "error_filter": error_code_filter,
+        "original_question": original_question,
+        "all_matches": top_matches,
+    }
+    th_state["match_pointer"] = 1  # Start at second match for follow-up
 
-User Question:
-{original_question}
+    # ✅ Optional: filter very low-similarity matches
+    filtered_top = []
+    for match, boosted_score, confidence in top_matches:
+        cosine_sim = match.score
+        q_text = match.metadata.get("q", "")
+        a_text = match.metadata.get("a", "[No A]").strip()
 
-Answer References:
-{combined_input}
+        print(f"🎯 Cosine Sim = {cosine_sim:.3f} between:")
+        print(f"→ User: {user_question}")
+        print(f"→ Q:    {q_text}")
+        print(f"→ A:    {a_text[:120]}...\n")
+        if cosine_sim < 0.4:
+            break
+        filtered_top.append((match, boosted_score, confidence))
+    top_matches = filtered_top
 
-Final helpful answer:
-"""
-            gpt_response = client.chat.completions.create(
-                model="gpt-4",
-                messages=[{"role": "user", "content": gpt_prompt}],
-                temperature=0.3,
-            )
-            final_answer = gpt_response.choices[0].message.content.strip()
-            final_answer = final_answer.replace("•", "\n\n•")
-    except Exception:
-        final_answer = "Sorry, no answer was found. Escalating to our support team now."
+    # ❌ No valid matches
+    if not top_matches:
+        print("❌ No top matches found after similarity filtering.")
+        return "Sorry, I couldn’t find a helpful answer. Can you rephrase the question with more details?"
 
+    # ✅ Present the best GPT-filtered match (highest cosine)
+    if top_matches:
+        best_match = top_matches[0]  # Already sorted in GPT filter
+        raw_answer = best_match[0].metadata.get("a", "[No A]").strip()
+
+    # ✅ Bulletify if long
+    final_answer = bulletify_if_long(raw_answer)
+
+    # ⬇️ Add visible spacing if the answer starts with bullet points
+    if final_answer.strip().startswith("•"):
+        final_answer = "\n\n" + final_answer
+
+        print(f"✅ Answer selected after GPT topic filtering: {raw_answer}")
+
+    else:
+        final_answer = "Sorry, no valid answers found after GPT topic filtering."
+
+    # 💬 Append to conversation history
     final_answer += "\n\nIf this didn’t resolve the issue, let me know."
     th_state["conversation_history"].append({"role": "user", "content": user_question})
     th_state["conversation_history"].append({"role": "assistant", "content": final_answer})
     return final_answer
+
+
+
+
+
