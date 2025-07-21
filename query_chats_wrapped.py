@@ -161,7 +161,9 @@ Respond only with:
         response = client.chat.completions.create(
             model="gpt-4", messages=[{"role": "user", "content": prompt}], temperature=0
         )
-        return "yes" in response.choices[0].message.content.lower()
+        gpt_result = response.choices[0].message.content.lower()
+        print(f"🧠 GPT Vague Check Result: {gpt_result.strip()}")
+        return "yes" in gpt_result
     except Exception:
         return False
 
@@ -486,24 +488,30 @@ def run_chatbot_session(user_question: str) -> str:
 
     thread_id = th_state["thread_id"]
     used_matches_by_thread = th_state["used_matches_by_thread"]
-    
+
     if not thread_id:
         return "⚠️ Please start a new support session by selecting the machine first."
+    
+    print("💬 Incoming User Question:", user_question)
+    print("🧠 Checking if question is vague...")
+    print("→ is_first_message:", len(th_state["conversation_history"]) == 0)
+    print("→ is_question_too_vague():", is_question_too_vague(user_question))
+    print("→ is_followup_message():", is_followup_message(user_question))
 
     # Normalize short numeric input like "4012"
     if re.fullmatch(r"\d{4,}", user_question):
         user_question = f"how to fix error {user_question}"
-        
-    # Check for follow-up intent
-    if len(th_state["conversation_history"]) == 0:
-        is_followup = False  # First message of chat can never be follow-up
-    else:
-        is_followup = is_followup_message(user_question)
-        
-    # Check for vague question (clarification fallback)
-    if not is_followup and is_question_too_vague(user_question):
+
+    # Determine if this is the first message
+    is_first_message = len(th_state["conversation_history"]) == 0
+
+    # ✅ Step 1: Handle vague detection ONLY for first message
+    if is_first_message and is_question_too_vague(user_question):
         return ("That’s a bit too general. Could you describe exactly what’s going wrong "
                 "(e.g., error code, what part is malfunctioning, or what’s not working as expected)?")
+
+    # ✅ Step 2: Handle follow-up detection ONLY after first message
+    is_followup = False if is_first_message else is_followup_message(user_question)
 
     print(f"🧵 thread_id: {th_state['thread_id']}")
     print(f"📁 has_all_matches: {'all_matches' in used_matches_by_thread.get(th_state['thread_id'], {})}")
@@ -514,7 +522,7 @@ def run_chatbot_session(user_question: str) -> str:
         if thread_id in used_matches_by_thread and "all_matches" in used_matches_by_thread[thread_id]:
             return handle_followup_with_existing_matches(user_question, thread_id)
         else:
-            return "I'm still trying to find the best solution. Could you restate the issue in more detail?"
+            return "Thanks for letting me know. Could you describe exactly what's happening — for example, is there an error code, no power, or something not heating up?"
 
     # First-time question: embed and fetch matches
     response = client.embeddings.create(model=embedding_model, input=[user_question])
