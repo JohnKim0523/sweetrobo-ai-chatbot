@@ -510,7 +510,7 @@ def run_chatbot_session(user_question: str) -> str:
     if user_question.strip().lower() in hardcoded_phrases:
         print("🚨 Triggered hardcoded override for vague machine phrase.")
         return ("Thanks for letting me know. Could you describe exactly what's happening — for example, "
-                "is there an error code, no power, or something not heating up?")
+                "is there an error code, does the machine not turn on, or something else entirely?")
     print("🧠 Checking if question is vague...")
     print("→ is_first_message:", len(th_state["conversation_history"]) == 0)
     print("→ is_question_too_vague():", is_question_too_vague(user_question))
