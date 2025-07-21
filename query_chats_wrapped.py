@@ -165,9 +165,6 @@ Respond only with:
     except Exception:
         return False
 
-def is_similar_answer(ans1, ans2, threshold=0.85):
-    return SequenceMatcher(None, ans1, ans2).ratio() >= threshold
-
 def bulletify_if_long(answer):
     parts = re.split(r'(?<=\.)\s+', answer.strip())
     if len(parts) < 2:
@@ -352,8 +349,6 @@ def get_question_similarity_boost(user_q, candidate_q):
         return 0.1
     return 0
 
-import math
-
 # Cosine similarity
 def cosine_similarity(vec1, vec2):
     dot = sum(a * b for a, b in zip(vec1, vec2))
@@ -534,7 +529,6 @@ def run_chatbot_session(user_question: str) -> str:
     # Save matches for future follow-up
     th_state["used_matches_by_thread"][thread_id] = {
         "embedding": query_embedding,
-        "used_ids": set(),
         "error_filter": error_code_filter,
         "original_question": original_question,
         "all_matches": top_matches,
