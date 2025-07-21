@@ -170,7 +170,7 @@ def is_similar_answer(ans1, ans2, threshold=0.85):
 
 def bulletify_if_long(answer):
     parts = re.split(r'(?<=\.)\s+', answer.strip())
-    if len(parts) < 3:
+    if len(parts) < 2:
         return answer
     bullets = [f"• {p.strip()}" for p in parts if p.strip()]
     return "\n\n".join(bullets)
@@ -500,7 +500,10 @@ def run_chatbot_session(user_question: str) -> str:
         user_question = f"how to fix error {user_question}"
         
     # Check for follow-up intent
-    is_followup = is_followup_message(user_question)
+    if len(th_state["conversation_history"]) == 0:
+        is_followup = False  # First message of chat can never be follow-up
+    else:
+        is_followup = is_followup_message(user_question)
         
     # Check for vague question (clarification fallback)
     if not is_followup and is_question_too_vague(user_question):
@@ -570,11 +573,9 @@ def run_chatbot_session(user_question: str) -> str:
     # ⬇Add visible spacing if the answer starts with bullet points
     if final_answer.strip().startswith("•"):
         final_answer = "\n\n" + final_answer
-
-        print(f"✅ Answer selected after GPT topic filtering: {raw_answer}")
-
+        print(f"✅ Bulletified answer selected after GPT topic filtering: {raw_answer}")
     else:
-        final_answer = "Sorry, no valid answers found after GPT topic filtering."
+        print(f"✅ Short answer selected after GPT topic filtering: {raw_answer}")
 
     # Append to conversation history
     final_answer += "\n\nIf this didn’t resolve the issue, let me know."
