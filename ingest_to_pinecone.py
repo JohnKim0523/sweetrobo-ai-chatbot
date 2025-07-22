@@ -33,7 +33,7 @@ index = pc.Index(index_name)
 # === Wipe existing vectors (safe delete) ===
 print("\U0001f9f9 Deleting existing vectors in the index...")
 try:
-    index.delete(delete_all=True)
+    index.delete(delete_all=True, namespace="sweetrobo-v2")
 except Exception as e:
     print(f"⚠️ Could not delete existing vectors: {e}")
 
@@ -126,7 +126,7 @@ for batch_num, chunk in enumerate(chunked(paired_data, 100), start=1):
         })
 
     if vectors:
-        index.upsert(vectors=vectors)
+        index.upsert(namespace="sweetrobo-v2", vectors=vectors)
         print(f"\U0001f968 Batch {batch_num}: Upserted {len(vectors)} vectors.")
         total += len(vectors)
 

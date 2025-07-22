@@ -1406,6 +1406,23 @@
   {
     "thread_id": 24,
     "machine_type": "COTTON_CANDY",
+    "q": "How can I run a stick test?",
+    "a": "Remove any stuck sticks from the robot arm. Then, run a stick test by pressing buttons 1, 2, and 3 in 10-second intervals with the left front door open. This helps the machine reset its positioning sensors and clear any motor timeout issues.",
+    "tags": ["stick_jam", "motor_timeout", "alert_handling"],
+    "usefulness": {
+      "score": 9,
+      "reason": "Detailed response explaining the 10-second interval test and proper clearing method."
+    },
+    "metadata": {
+      "domain": "hardware",
+      "confidence": 0.95,
+      "media_reference": true,
+      "escalation": false
+    }
+  },
+  {
+    "thread_id": 24,
+    "machine_type": "COTTON_CANDY",
     "q": "The machine says 'Out sticks failed' and mentions motor timeout. I manually removed a jammed stick before and it worked for a while, but now the error returned. How do I fix this permanently?",
     "a": "Remove any stuck sticks from the robot arm. Then, run a stick test by pressing buttons 1, 2, and 3 in 10-second intervals with the left front door open. This helps the machine reset its positioning sensors and clear any motor timeout issues.",
     "tags": ["stick_jam", "motor_timeout", "alert_handling"],

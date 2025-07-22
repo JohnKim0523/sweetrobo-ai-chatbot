@@ -91,7 +91,7 @@ def is_question_too_vague(user_q):
         'contact', 'robo', 'before', 'again', 'cable', 'data', 'access', 'down',
         'reset', 'card', 'setting', 'alerts', 'sync', 'process', 'call', 'print',
         'sweet', 'clear', 'causing', 'right', 'replace', 'internal', 'loose',
-        'assistance', 'production', 'getting', 'inside', 'turn', 'turn on', 'does not turn on', 'not turning on'
+        'assistance', 'production', 'getting', 'inside'
     }
     if any(word in user_q.lower() for word in specific_keywords):
         return False
@@ -111,11 +111,14 @@ You must check if the message matches any known vague expressions from the list 
 - won’t start
 - stopped working
 - not working again
+- what’s going on?
 - can you fix this?
 - having trouble
 - doesn’t respond
 - need support
 - weird behavior
+- won’t power on
+- power issue
 - broken again
 - doesn’t run
 - not behaving right
@@ -158,9 +161,7 @@ Respond only with:
         response = client.chat.completions.create(
             model="gpt-4", messages=[{"role": "user", "content": prompt}], temperature=0
         )
-        gpt_result = response.choices[0].message.content.lower()
-        print(f"🧠 GPT Vague Check Result: {gpt_result.strip()}")
-        return "yes" in gpt_result
+        return "yes" in response.choices[0].message.content.lower()
     except Exception:
         return False
 
@@ -185,22 +186,12 @@ def is_related(user_q, match_q, match_a):
     
     return ratio > 0.05  # Can be tuned
 
-def normalize_answer(text):
-    return re.sub(r"[^a-zA-Z0-9]", "", text.lower())
-
 def is_already_given(answer, history, threshold=0.85):
-    norm_answer = normalize_answer(answer)
     for entry in history:
         if entry["role"] == "assistant":
-            norm_prev = normalize_answer(entry["content"])
-            similarity = SequenceMatcher(None, norm_answer, norm_prev).ratio()
-            print(f"🧠 Duplicate Check → Similarity = {similarity:.3f}")
-            print(f"→ Current Answer (normalized): {norm_answer[:80]}")
-            print(f"→ Previous Answer (normalized): {norm_prev[:80]}")
-            if similarity >= threshold:
-                print("✅ Match found → Already given.")
+            prev_ans = entry["content"]
+            if SequenceMatcher(None, answer.strip(), prev_ans.strip()).ratio() >= threshold:
                 return True
-    print("❌ No match found → Answer is new.")
     return False
 
 def build_followup_query(user_q: str, original_q: str):
@@ -400,6 +391,7 @@ def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_
     keyword_focus = "stick" if "stick" in query_text.lower() else None
 
     results = index.query(
+        namespace="sweetrobo-v2",
         vector=query_embedding,
         top_k=20,
         include_metadata=True,
@@ -495,41 +487,24 @@ def run_chatbot_session(user_question: str) -> str:
 
     thread_id = th_state["thread_id"]
     used_matches_by_thread = th_state["used_matches_by_thread"]
-
+    
     if not thread_id:
         return "⚠️ Please start a new support session by selecting the machine first."
-    
-    print("💬 Incoming User Question:", user_question)
-    # 🔒 Hardcoded edge-case overrides
-    hardcoded_phrases = {
-        "machine does not work.",
-        "machine does not work",
-        "machine is not working.",
-        "machine is not working"
-    }
-    if user_question.strip().lower() in hardcoded_phrases:
-        print("🚨 Triggered hardcoded override for vague machine phrase.")
-        return ("Thanks for letting me know. Could you describe exactly what's happening — for example, "
-                "is there an error code, does the machine not turn on, or something else entirely?")
-    print("🧠 Checking if question is vague...")
-    print("→ is_first_message:", len(th_state["conversation_history"]) == 0)
-    print("→ is_question_too_vague():", is_question_too_vague(user_question))
-    print("→ is_followup_message():", is_followup_message(user_question))
 
     # Normalize short numeric input like "4012"
     if re.fullmatch(r"\d{4,}", user_question):
         user_question = f"how to fix error {user_question}"
-
-    # Determine if this is the first message
-    is_first_message = len(th_state["conversation_history"]) == 0
-
-    # ✅ Step 1: Handle vague detection ONLY for first message
-    if is_first_message and is_question_too_vague(user_question):
+        
+    # Check for follow-up intent
+    if len(th_state["conversation_history"]) == 0:
+        is_followup = False  # First message of chat can never be follow-up
+    else:
+        is_followup = is_followup_message(user_question)
+        
+    # Check for vague question (clarification fallback)
+    if not is_followup and is_question_too_vague(user_question):
         return ("That’s a bit too general. Could you describe exactly what’s going wrong "
                 "(e.g., error code, what part is malfunctioning, or what’s not working as expected)?")
-
-    # ✅ Step 2: Handle follow-up detection ONLY after first message
-    is_followup = False if is_first_message else is_followup_message(user_question)
 
     print(f"🧵 thread_id: {th_state['thread_id']}")
     print(f"📁 has_all_matches: {'all_matches' in used_matches_by_thread.get(th_state['thread_id'], {})}")
@@ -540,7 +515,7 @@ def run_chatbot_session(user_question: str) -> str:
         if thread_id in used_matches_by_thread and "all_matches" in used_matches_by_thread[thread_id]:
             return handle_followup_with_existing_matches(user_question, thread_id)
         else:
-            return "Thanks for letting me know. Could you describe exactly what's happening — for example, is there an error code, no power, or something not heating up?"
+            return "I'm still trying to find the best solution. Could you restate the issue in more detail?"
 
     # First-time question: embed and fetch matches
     response = client.embeddings.create(model=embedding_model, input=[user_question])
