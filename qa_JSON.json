@@ -10012,6 +10012,35 @@
     }
   },
   {
+    "thread_id": 5005,
+    "machine_type": "ROBO_ICE_CREAM",
+    "q": "What does error code 5005 on my Robo Ice Cream machine mean?",
+    "a": "Error code 5005 is displayed if the refrigeration module is not turned on. If the refrigeration module is already on, the machine's frozen tank will also display this error. It can also be due to a shortage of ingredients, such as not having enough milk base inside, or the ice head switch not being turned on.",
+    "tags": [
+      "5005",
+      "refrigeration_module",
+      "ice_head_switch",
+      "milk_base",
+      "error_code",
+      "frozen_tank"
+    ],
+    "usefulness": {
+      "score": 8,
+      "reason": "The answer clearly outlines the multiple causes of error code 5005 and provides actionable checks to resolve it."
+    },
+    "metadata": {
+      "domain": "support",
+      "confidence": 0.95,
+      "media_reference": false,
+      "escalation": false,
+      "customer_ordered": false,
+      "part_shipped": false,
+      "error_codes": [
+        "5005"
+      ]
+    }
+  },
+  {
     "thread_id": 149,
     "machine_type": "ROBO_ICE_CREAM",
     "q": "how to make ice cream not melted or watery and how to control the hardness of the ice cream in the Robo Ice Cream machine?",

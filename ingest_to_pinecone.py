@@ -1,135 +1,568 @@
-import json
 import os
-import uuid
+import streamlit as st
 from dotenv import dotenv_values
+import json
+import uuid
+from datetime import datetime
 from openai import OpenAI
-from pinecone import Pinecone, ServerlessSpec
+from pinecone import Pinecone
+import numpy as np
 import re
+from difflib import SequenceMatcher
+import math
 
-# === Load API keys ===
 config = dotenv_values(".env")
-openai_key = config.get("OPENAI_API_KEY")
-pinecone_key = config.get("PINECONE_API_KEY")
+openai_key = st.secrets.get("OPENAI_API_KEY", config.get("OPENAI_API_KEY"))
+pinecone_key = st.secrets.get("PINECONE_API_KEY", config.get("PINECONE_API_KEY"))
 
 if not openai_key or not pinecone_key:
-    print("❌ Missing keys in .env")
-    exit(1)
+    raise ValueError("❌ Missing OPENAI_API_KEY or PINECONE_API_KEY")
 
-# === Init clients ===
+embedding_model = "text-embedding-3-small"
+CONFIDENCE_THRESHOLD = 0.6
+ESCALATION_RESPONSE = "I wasn't able to find any additional information. I'm escalating this to our support team so they can follow up with you directly."
+
 client = OpenAI(api_key=openai_key)
 pc = Pinecone(api_key=pinecone_key)
+index = pc.Index("sweetrobo-ai")
 
-index_name = "sweetrobo-ai"
-if index_name not in pc.list_indexes().names():
-    pc.create_index(
-        name=index_name,
-        dimension=1536,
-        metric="cosine",
-        spec=ServerlessSpec(cloud="aws", region="us-east-1")
+th_state = {
+    "thread_id": None,
+    "machine_type": None,
+    "used_matches_by_thread": {},
+    "conversation_history": [],
+    "solution_attempts": {},
+}
+
+def track_solution_failure():
+    thread_id = th_state["thread_id"]
+    th_state["solution_attempts"][thread_id] = (
+        th_state["solution_attempts"].get(thread_id, 0) + 1
+    )
+    return th_state["solution_attempts"][thread_id]
+
+def initialize_chat(selected_machine: str):
+    th_state["thread_id"] = str(uuid.uuid4())
+    machine_mapping = {
+        "cotton candy": "COTTON_CANDY",
+        "ice cream": "ROBO_ICE_CREAM",
+        "balloon bot": "BALLOON_BOT",
+        "candy monster": "CANDY_MONSTER",
+        "popcart": "POPCART",
+        "mr. pop": "MR_POP",
+        "marshmallow spaceship": "MARSHMALLOW_SPACESHIP",
+    }
+    machine_type = machine_mapping.get(selected_machine.strip().lower())
+    if not machine_type:
+        raise ValueError("Unknown machine type selected.")
+    th_state["machine_type"] = machine_type
+    return {"thread_id": th_state["thread_id"], "machine_type": machine_type}
+
+def extract_error_codes(user_question):
+    """Extract potential error codes from user question"""
+    # Match patterns like: E06, 4012, 5005, error 4012, etc.
+    error_patterns = [
+        r'\b[Ee]rror\s*[:\s]*([A-Za-z]?\d{2,5})\b',  # "error 4012", "error: E06"
+        r'\b([Ee]\d{2,3})\b',                        # "E06", "e02"
+        r'\b(\d{4,5})\b',                            # "4012", "5005"
+        r'\b([A-Za-z]\d{2,5})\b'                     # "V02", "E06"
+    ]
+    
+    error_codes = []
+    user_question_lower = user_question.lower()
+    
+    for pattern in error_patterns:
+        matches = re.findall(pattern, user_question_lower, re.IGNORECASE)
+        for match in matches:
+            if match:
+                # Normalize error code (remove 'error' prefix, standardize case)
+                code = match.strip().upper()
+                if code not in error_codes:
+                    error_codes.append(code)
+    
+    return error_codes
+
+def fetch_error_code_matches(error_codes, machine_type):
+    """Fetch matches specifically for error codes"""
+    if not error_codes:
+        return []
+    
+    print(f"🔍 Searching for error codes: {error_codes}")
+    
+    # Create filter for error codes
+    filter_query = {
+        "machine_type": {"$eq": machine_type},
+        "error_codes": {"$in": error_codes}
+    }
+    
+    try:
+        results = index.query(
+            namespace="sweetrobo-v2",
+            vector=[0.0] * 1536,  # Dummy vector since we're filtering by metadata only
+            top_k=10,
+            include_metadata=True,
+            filter=filter_query,
+        )
+        
+        error_matches = []
+        for match in results.matches:
+            metadata = match.metadata
+            usefulness_score = metadata.get("usefulness_score", 0)
+            confidence = metadata.get("confidence", 0.0)
+            
+            if usefulness_score >= 7 and confidence >= CONFIDENCE_THRESHOLD:
+                error_matches.append((match, usefulness_score, confidence))
+                print(f"✅ Found error code match: {metadata.get('q', '')[:100]}...")
+        
+        # Sort by usefulness score and confidence
+        error_matches.sort(key=lambda x: (-x[1], -x[2]))
+        return error_matches[:5]  # Return top 5 error matches
+        
+    except Exception as e:
+        print(f"❌ Error fetching error code matches: {e}")
+        return []
+
+def is_question_too_vague(user_q_lower):
+    specific_keywords = {
+        'machine', 'candy', 'cotton', 'issue', 'sugar', 'after', 'settings', 'check',
+        'error', 'please', 'stick', 'ensure', 'screen', 'support', 'video', 'power',
+        'system', 'clean', 'sensor', 'provide', 'test', 'burner', 'further', 'team',
+        'design', 'during', 'could', 'properly', 'furnace', 'issues', 'motor',
+        'number', 'persists', 'time', 'correct', 'cleaning', 'nozzle', 'portal',
+        'admin', 'update', 'sure', 'working', 'water', 'sticks', 'nayax', 'send',
+        'correctly', 'showing', 'help', 'confirm', 'payment', 'heating', 'machines',
+        'replacement', 'device', 'balloon', 'restart', 'problem', 'change', 'stuck',
+        'through', 'using', 'menu', 'verify', 'connected', 'alert', 'inventory',
+        'temperature', 'address', 'prevent', 'remove', 'resolve', 'software',
+        'contact', 'robo', 'before', 'again', 'cable', 'data', 'access', 'down',
+        'reset', 'card', 'setting', 'alerts', 'sync', 'process', 'call', 'print',
+        'sweet', 'clear', 'causing', 'right', 'replace', 'internal', 'loose',
+        'assistance', 'production', 'getting', 'inside'
+    }
+    return not any(word in user_q_lower for word in specific_keywords)
+
+def bulletify_if_long(answer):
+    parts = re.split(r'(?<=\.)\s+', answer.strip())
+    if len(parts) < 2:
+        return answer
+    return "\n\n".join(f"• {p.strip()}" for p in parts if p.strip())
+
+def is_related(user_q_lower, match_q, match_a):
+    full_text = (match_q + " " + match_a).lower()
+    ratio = SequenceMatcher(None, user_q_lower, full_text).ratio()
+    
+    print(f"🔗 [is_related] Similarity between user_q and match Q+A:")
+    print(f"   - User Q:    {user_q_lower}")
+    print(f"   - Match Q:   {match_q}")
+    print(f"   - Match A:   {match_a[:100]}...") 
+    print(f"   - Similarity Ratio: {ratio:.3f}")
+    print(f"   - Pass? {'✅' if ratio > 0.3 else '❌'}\n")
+    
+    return ratio > 0.05
+
+def is_already_given(answer, history, threshold=0.85):
+    answer_stripped = answer.strip()
+    for entry in history:
+        if entry["role"] == "assistant":
+            if SequenceMatcher(None, answer_stripped, entry["content"].strip()).ratio() >= threshold:
+                return True
+    return False
+
+def build_followup_query(user_q: str, original_q: str):
+    """Returns enriched question and whether enrichment was applied."""
+    cleaned = user_q.strip()
+    if len(cleaned.split()) <= 4:
+        return f"{cleaned} — referring to: {original_q.strip()}", True
+    return cleaned, False
+
+def process_match_for_followup(match, query_for_related, user_q_lower, seen_ids):
+    """Helper function to process a single match for follow-up filtering."""
+    if match.id in seen_ids:
+        return None, None
+    
+    metadata = match.metadata
+    answer = metadata.get("a", "[No A]").strip()
+    if not answer:
+        return None, None
+    
+    q = metadata.get("q", "")
+    related = is_related(user_q_lower, q, answer)
+    already_given = is_already_given(answer, th_state["conversation_history"])
+    
+    print(f"🧪 FOLLOW-UP FILTER:")
+    print(f"- Related: {related}")
+    print(f"- Already Given: {already_given}")
+    print(f"- Q: {q}")
+    print(f"- A: {answer[:80]}...\n")
+    
+    if related and not already_given:
+        return answer, match.id
+    return None, None
+
+def handle_followup_with_existing_matches(user_q, thread_id):
+    match_pointer = th_state.get("match_pointer", 1)
+    used_info = th_state["used_matches_by_thread"][thread_id]
+    all_matches = used_info["all_matches"]
+    original_question = used_info["original_question"]
+    
+    print(f"🔁 [DEBUG] Starting follow-up match filtering...")
+    print(f"🔢 Match pointer: {match_pointer}")
+    print(f"📊 Total matches available: {len(all_matches)}")
+    
+    # No matches left to try — escalate immediately
+    if match_pointer >= len(all_matches):
+        print("⚠️ All follow-up matches have been exhausted. Escalating.")
+        return ESCALATION_RESPONSE
+
+    user_q_lower = user_q.lower()
+    query_for_related, used_enriched = build_followup_query(user_q, original_question)
+    filtered_qas = []
+    seen_ids = set()
+
+    # Pass 1: try with chosen query (raw follow-up OR enriched)
+    for i in range(match_pointer, len(all_matches)):
+        match, usefulness, confidence = all_matches[i]
+        answer, match_id = process_match_for_followup(match, query_for_related, user_q_lower, seen_ids)
+        if answer:
+            th_state["match_pointer"] = i + 1
+            filtered_qas.append(answer)
+            seen_ids.add(match_id)
+
+    # Pass 2 (fallback): if we didn't enrich on pass1 AND got nothing, try enriched
+    if not filtered_qas and not used_enriched:
+        enriched_again, _ = build_followup_query("", original_question)
+        for i in range(match_pointer, len(all_matches)):
+            match, usefulness, confidence = all_matches[i]
+            answer, match_id = process_match_for_followup(match, enriched_again, user_q_lower, seen_ids)
+            if answer:
+                th_state["match_pointer"] = i + 1
+                filtered_qas.append(answer)
+                seen_ids.add(match_id)
+
+    # Nothing found after both passes -> clarification or escalation
+    if not filtered_qas:
+        print("⚠️ No valid follow-up matches found. Entering fallback mode.")
+        failure_count = track_solution_failure()
+        if failure_count == 1:
+            return ("Thanks for letting me know. Could you describe exactly what didn't work "
+                    "or what's still happening (e.g., error still shows, part stuck, no heat)?")
+        if failure_count >= 2:
+            return "This seems persistent. Escalating to a human agent now. Please wait..."
+        return "Sorry, I couldn't find any new helpful info for this issue. Escalating this to our support team. Please hold on."
+
+    # Summarize / return one or more answers
+    if len(filtered_qas) == 1:
+        final_answer = filtered_qas[0]
+    else:
+        combined_input = "\n\n".join(filtered_qas)
+        simple_q_phrases = ["can i", "do you", "does it", "is there", "are there", "can we", "is it possible"]
+        is_simple_question = any(original_question.lower().startswith(p) for p in simple_q_phrases)
+        is_short_answer = len(filtered_qas[0].split()) <= 12 and filtered_qas[0].lower().startswith(("yes", "no", "sorry", "unfortunately"))
+        try:
+            if is_simple_question and is_short_answer:
+                final_answer = filtered_qas[0]
+            else:
+                gpt_prompt = f"""
+You are a helpful AI assistant for customer support. The user said the initial solution didn't work.
+
+You are given up to 5 technical answers. Your job is to summarize only the most helpful 1–3 suggestions.
+
+Instructions:
+- Provide only the steps needed to address the issue (1 to 5 max).
+- Use bullet points (•), not numbers.
+- Be concise and do not repeat instructions.
+- Do not say "if that doesn't work" — that will be appended later.
+
+User Question:
+{original_question}
+
+Answer References:
+{combined_input}
+
+Final helpful answer:
+"""
+                gpt_response = client.chat.completions.create(
+                    model="gpt-4",
+                    messages=[{"role": "user", "content": gpt_prompt}],
+                    temperature=0.3,
+                )
+                final_answer = gpt_response.choices[0].message.content.strip()
+                final_answer = final_answer.replace("•", "\n\n•")
+        except Exception:
+            final_answer = "Sorry, no answer was found. Escalating to our support team now."
+
+    final_answer += "\n\nIf this didn't resolve the issue, let me know."
+    th_state["conversation_history"].extend([
+        {"role": "user", "content": user_q},
+        {"role": "assistant", "content": final_answer}
+    ])
+    return final_answer
+
+def get_question_similarity_boost(user_q_lower, candidate_q_lower):
+    ratio = SequenceMatcher(None, user_q_lower, candidate_q_lower).ratio()
+    if ratio >= 0.95:
+        return 0.5
+    elif ratio >= 0.85:
+        return 0.3
+    elif ratio >= 0.7:
+        return 0.1
+    return 0
+
+def cosine_similarity(vec1, vec2):
+    dot = sum(a * b for a, b in zip(vec1, vec2))
+    norm1 = math.sqrt(sum(a * a for a in vec1))
+    norm2 = math.sqrt(sum(b * b for b in vec2))
+    return dot / (norm1 * norm2 + 1e-10)
+
+def is_same_topic(user_q, candidate_q):
+    prompt = f"""You are helping match a user's support question with known help topics. Consider questions to be "the same" if they are about the same real-world issue, even if the wording is different.
+
+Are these two questions about the same issue?
+
+User: "{user_q}"
+Candidate: "{candidate_q}"
+
+Respond only with "yes" or "no".
+"""    
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0,
+        )
+        result = response.choices[0].message.content.strip().lower()
+        print(f"🧠 GPT Topic Check: '{candidate_q}' → {result}")
+        return "yes" in result
+    except Exception as e:
+        print(f"⚠️ GPT topic check failed: {e}")
+        return False
+
+def fetch_valid_matches(query_embedding, previous_ids, query_text):
+    filter_query = {"machine_type": {"$eq": th_state["machine_type"]}}
+    
+    all_valid = []
+    seen_answers = set()
+    keyword_focus = "stick" if "stick" in query_text.lower() else None
+    query_text_lower = query_text.lower()
+
+    results = index.query(
+        namespace="sweetrobo-v2",
+        vector=query_embedding,
+        top_k=20,
+        include_metadata=True,
+        include_values=True,
+        filter=filter_query,
     )
 
-index = pc.Index(index_name)
+    for match in results.matches:
+        if match.id in previous_ids:
+            continue
 
-# === Wipe existing vectors (safe delete) ===
-print("\U0001f9f9 Deleting existing vectors in the index...")
-try:
-    index.delete(delete_all=True, namespace="sweetrobo-v2")
-except Exception as e:
-    print(f"⚠️ Could not delete existing vectors: {e}")
+        metadata = match.metadata
+        usefulness_score = metadata.get("usefulness_score", 0)
+        confidence = metadata.get("confidence", 0.0)
+        answer = metadata.get("a", "")
+        tags = metadata.get("tags", [])
+        candidate_q = metadata.get("q", "")
 
-# === Load and pair Q&A data ===
-with open("qa_JSON.json", encoding="utf-8") as f:
-    qa_data = json.load(f)
-
-paired_data = []
-
-for entry in qa_data:
-    q = entry.get("q", "").strip()
-    a = entry.get("a", "").strip()
-    if not q or not a:
-        continue
-
-    full_text = f"User: {q}\nAssistant: {a}"
-    uid = str(uuid.uuid4())
-
-    meta = entry.get("metadata", {})
-    usefulness = entry.get("usefulness", {})
-
-    tags = entry.get("tags", [])
-    error_codes = []
-    for tag in tags:
-        match = re.match(r"(?:error_)?(\d{4,})", tag.lower())
-        if match:
-            try:
-                error_codes.append(str(int(match.group(1))))  # Pinecone expects strings or list of strings
-            except:
+        if usefulness_score >= 7 and confidence >= CONFIDENCE_THRESHOLD:
+            if keyword_focus and not any(keyword_focus in t.lower() for t in tags):
                 continue
+            if isinstance(match.values, list) and len(match.values) == 1536:
+                if answer not in seen_answers:
+                    # Use Pinecone's cosine similarity score directly
+                    similarity_score = match.score
 
-    metadata = {
-        "threadId": entry.get("thread_id"),
-        "machine_type": str(entry.get("machine_type", "Unknown")).strip().upper(),
-        "tags": tags,
-        "domain": meta.get("domain", "unknown"),
-        "confidence": float(meta.get("confidence", 0.0)),
-        "media_reference": meta.get("media_reference", False),
-        "escalation": meta.get("escalation", False),
-        "usefulness_score": usefulness.get("score", 0),
-        "usefulness_reason": usefulness.get("reason", ""),
-        "source": "qa_JSON",
-        "q": q,
-        "a": a,
-        "error_codes": error_codes
+                    print(f"🎯 Cosine Sim = {similarity_score:.3f} between:\n→ User: {query_text}\n→ Q:    {candidate_q}\n")
+
+                    if similarity_score < 0.50:
+                        continue  # ❌ Skip irrelevant Qs
+
+                    boost = get_question_similarity_boost(query_text_lower, candidate_q.lower())
+                    boosted_score = usefulness_score + boost
+                    all_valid.append((match, boosted_score, confidence))
+
+                    print(f"✅ Matched Q: {candidate_q}\n→ Boosted score: {boosted_score:.2f} (Usefulness: {usefulness_score}, Boost: {boost:.2f}, Confidence: {confidence:.2f})\n")
+
+                    seen_answers.add(answer)
+
+    all_valid.sort(key=lambda x: (-x[1], -x[2]))  # Sort by boosted_score, then confidence
+
+    # Apply GPT topic check to top 10
+    filtered_with_gpt = []
+    for match, boosted_score, confidence in all_valid[:10]:
+        q = match.metadata.get("q", "")
+        if is_same_topic(query_text, q):
+            filtered_with_gpt.append((match, boosted_score, confidence))
+        else:
+            print(f"🚫 Rejected by GPT topic match: {q}")
+
+    filtered_with_gpt.sort(key=lambda x: -x[0].score)  # Sort by cosine similarity DESC
+    return filtered_with_gpt[:5]
+
+def is_followup_message(user_q_lower):
+    followup_phrases = {
+        "didn't work", "didnt work", "didn't help", "didnt help",
+        "still broken", "not fixed", "didn't resolve", "not working",
+        "it did not resolve", "it did not work", "still not fixed",
+        "that didn't help", "that did not work", "this didn't help",
+        "not resolved", "didn't fix", "didnt fix", "didn't solve",
+        "wasn't fixed", "this didn't fix", "that didn't fix"
     }
+    normalized = user_q_lower.replace("'", "'")
 
-    paired_data.append((uid, full_text, metadata))
+    if any(p in normalized for p in followup_phrases):
+        return True
 
-# === Batch embed and upsert ===
-def chunked(lst, size):
-    for i in range(0, len(lst), size):
-        yield lst[i:i + size]
+    # Fallback: ask GPT if it's a follow-up intent
+    prompt = f"""You're a support assistant. Determine if the following user message is a follow-up complaint — meaning that a previous solution attempt did not work and the user is still seeking help.
 
-total = 0
-skipped = 0
+Respond ONLY with "yes" or "no".
 
-for batch_num, chunk in enumerate(chunked(paired_data, 100), start=1):
-    texts = [item[1] for item in chunk]
-
+User message:
+"{user_q_lower}"
+"""
     try:
-        response = client.embeddings.create(model="text-embedding-3-small", input=texts)
-    except Exception as e:
-        print(f"❌ Failed embedding batch {batch_num}: {e}")
-        continue
+        response = client.chat.completions.create(
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0
+        )
+        return "yes" in response.choices[0].message.content.lower()
+    except Exception:
+        return False
 
-    vectors = []
-    for emb in response.data:
-        i = emb.index
-        uid, _, meta = chunk[i]
-        embedding = emb.embedding
+def run_chatbot_session(user_question: str) -> str:
+    thread_id = th_state["thread_id"]
+    used_matches_by_thread = th_state["used_matches_by_thread"]
+    
+    if not thread_id:
+        return "⚠️ Please start a new support session by selecting the machine first."
 
-        if embedding is None:
-            print(f"❌ NULL embedding for UID {uid}")
-            skipped += 1
-            continue
-        elif not isinstance(embedding, list):
-            print(f"❌ Non-list embedding for UID {uid}")
-            skipped += 1
-            continue
-        elif len(embedding) != 1536:
-            print(f"❌ Wrong length for UID {uid} — got {len(embedding)})")
-            skipped += 1
-            continue
+    # Normalize short numeric input like "4012"
+    if re.fullmatch(r"\d{4,}", user_question):
+        user_question = f"how to fix error {user_question}"
+    
+    user_question_lower = user_question.lower()
+    
+    # Check for follow-up intent
+    is_followup = len(th_state["conversation_history"]) > 0 and is_followup_message(user_question_lower)
+        
+    # Check for vague question (clarification fallback)
+    if not is_followup and is_question_too_vague(user_question_lower):
+        return ("That's a bit too general. Could you describe exactly what's going wrong "
+                "(e.g., error code, what part is malfunctioning, or what's not working as expected)?")
 
-        vectors.append({
-            "id": uid,
-            "values": embedding,
-            "metadata": meta
-        })
+    print(f"🧵 thread_id: {th_state['thread_id']}")
+    print(f"📁 has_all_matches: {'all_matches' in used_matches_by_thread.get(th_state['thread_id'], {})}")
+    print(f"🔁 is_followup: {is_followup}")
 
-    if vectors:
-        index.upsert(namespace="sweetrobo-v2", vectors=vectors)
-        print(f"\U0001f968 Batch {batch_num}: Upserted {len(vectors)} vectors.")
-        total += len(vectors)
+    # If it's a follow-up, reuse prior results
+    if is_followup:
+        if thread_id in used_matches_by_thread and "all_matches" in used_matches_by_thread[thread_id]:
+            return handle_followup_with_existing_matches(user_question, thread_id)
+        else:
+            return "I'm still trying to find the best solution. Could you restate the issue in more detail?"
 
-print(f"\n✅ Total ingested: {total}")
-if skipped:
-    print(f"⚠️ Skipped: {skipped} entries — see logs above.")
+    # PRIORITY: Check for error codes first
+    error_codes = extract_error_codes(user_question)
+    if error_codes:
+        print(f"🚨 ERROR CODES DETECTED: {error_codes}")
+        error_matches = fetch_error_code_matches(error_codes, th_state["machine_type"])
+        
+        if error_matches:
+            print(f"✅ Found {len(error_matches)} error code matches")
+            # Save error matches for future follow-up
+            th_state["used_matches_by_thread"][thread_id] = {
+                "embedding": None,  # No embedding needed for error code matches
+                "error_filter": error_codes,
+                "original_question": user_question,
+                "all_matches": error_matches,
+            }
+            th_state["match_pointer"] = 1  # Start at second match for follow-up
+            
+            # Return the best error code match
+            best_match = error_matches[0]
+            raw_answer = best_match[0].metadata.get("a", "[No A]").strip()
+            
+            # Bulletify if long
+            final_answer = bulletify_if_long(raw_answer)
+            
+            # Add visible spacing if the answer starts with bullet points
+            if final_answer.strip().startswith("•"):
+                final_answer = "\n\n" + final_answer
+                print(f"✅ Bulletified error code answer: {raw_answer}")
+            else:
+                print(f"✅ Short error code answer: {raw_answer}")
+
+            # Append to conversation history
+            final_answer += "\n\nIf this didn't resolve the issue, let me know."
+            th_state["conversation_history"].extend([
+                {"role": "user", "content": user_question},
+                {"role": "assistant", "content": final_answer}
+            ])
+            return final_answer
+
+    # If no error codes found or no error matches, proceed with semantic search
+    print("🔍 No error codes detected or found, proceeding with semantic search...")
+    
+    # First-time question: embed and fetch matches
+    response = client.embeddings.create(model=embedding_model, input=[user_question])
+    query_embedding = response.data[0].embedding
+    previous_ids = set()
+
+    top_matches = fetch_valid_matches(query_embedding, previous_ids, user_question)
+
+    # Save matches for future follow-up
+    th_state["used_matches_by_thread"][thread_id] = {
+        "embedding": query_embedding,
+        "error_filter": None,
+        "original_question": user_question,
+        "all_matches": top_matches,
+    }
+    th_state["match_pointer"] = 1  # Start at second match for follow-up
+
+    # Optional: filter very low-similarity matches
+    filtered_top = []
+    for match, boosted_score, confidence in top_matches:
+        cosine_sim = match.score
+        metadata = match.metadata
+        q_text = metadata.get("q", "")
+        a_text = metadata.get("a", "[No A]").strip()
+
+        print(f"🎯 Cosine Sim = {cosine_sim:.3f} between:")
+        print(f"→ User: {user_question}")
+        print(f"→ Q:    {q_text}")
+        print(f"→ A:    {a_text[:120]}...\n")
+        if cosine_sim < 0.4:
+            break
+        filtered_top.append((match, boosted_score, confidence))
+    top_matches = filtered_top
+
+    # No valid matches
+    if not top_matches:
+        print("❌ No top matches found after similarity filtering.")
+        return "Sorry, I couldn't find a helpful answer. Can you rephrase the question with more details?"
+
+    # Present the best GPT-filtered match (highest cosine)
+    if top_matches:
+        best_match = top_matches[0]  # Already sorted in GPT filter
+        raw_answer = best_match[0].metadata.get("a", "[No A]").strip()
+
+    # Bulletify if long
+    final_answer = bulletify_if_long(raw_answer)
+
+    # Add visible spacing if the answer starts with bullet points
+    if final_answer.strip().startswith("•"):
+        final_answer = "\n\n" + final_answer
+        print(f"✅ Bulletified answer selected after GPT topic filtering: {raw_answer}")
+    else:
+        print(f"✅ Short answer selected after GPT topic filtering: {raw_answer}")
+
+    # Append to conversation history
+    final_answer += "\n\nIf this didn't resolve the issue, let me know."
+    th_state["conversation_history"].extend([
+        {"role": "user", "content": user_question},
+        {"role": "assistant", "content": final_answer}
+    ])
+    return final_answer

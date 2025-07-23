@@ -298,6 +298,9 @@ def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_
         if match.id in previous_ids:
             continue
 
+        if match.score < 0.25:
+            continue  # ❌ Skip bad similarity early — don't even evaluate
+
         metadata = match.metadata
         usefulness_score = metadata.get("usefulness_score", 0)
         confidence = metadata.get("confidence", 0.0)
@@ -310,35 +313,28 @@ def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_
                 continue
             if isinstance(match.values, list) and len(match.values) == 1536:
                 if answer not in seen_answers:
-                    # Use Pinecone's cosine similarity score directly instead of recalculating
-                    similarity_score = match.score
-
-                    print(f"🎯 Cosine Sim = {similarity_score:.3f} between:\n→ User: {query_text}\n→ Q:    {candidate_q}\n")
-
-                    if similarity_score < 0.50:
-                        continue  # ❌ Skip irrelevant Qs
-
                     boost = get_question_similarity_boost(query_text_lower, candidate_q.lower())
                     boosted_score = usefulness_score + boost
-                    all_valid.append((match, boosted_score, confidence))
 
-                    # Debug Q
+                    print(f"🎯 Cosine Sim = {match.score:.3f} between:\n→ User: {query_text}\n→ Q:    {candidate_q}\n")
                     print(f"✅ Matched Q: {candidate_q}\n→ Boosted score: {boosted_score:.2f} (Usefulness: {usefulness_score}, Boost: {boost:.2f}, Confidence: {confidence:.2f})\n")
 
+                    all_valid.append((match, boosted_score, confidence))
                     seen_answers.add(answer)
 
-    all_valid.sort(key=lambda x: (-x[1], -x[2]))  # Sort by boosted_score, then confidence
+    all_valid.sort(key=lambda x: (-x[1], -x[2]))  # Sort by boosted_score then confidence
 
-    # Apply GPT topic check to top 10
+    # GPT topic match check — only top 10 to minimize cost
     filtered_with_gpt = []
-    for match, boosted_score, confidence in all_valid[:10]:  # Only check top 10 to keep it fast
+    for match, boosted_score, confidence in all_valid[:10]:
         q = match.metadata.get("q", "")
         if is_same_topic(query_text, q):
             filtered_with_gpt.append((match, boosted_score, confidence))
         else:
             print(f"🚫 Rejected by GPT topic match: {q}")
 
-    filtered_with_gpt.sort(key=lambda x: -x[0].score)  # Sort by cosine similarity DESC
+    # Final return — sorted by cosine similarity for stability
+    filtered_with_gpt.sort(key=lambda x: -x[0].score)
     return filtered_with_gpt[:5]
 
 def is_followup_message(user_q_lower):
@@ -348,7 +344,7 @@ def is_followup_message(user_q_lower):
         "it did not resolve", "it did not work", "still not fixed",
         "that didn't help", "that did not work", "this didn't help",
         "not resolved", "didn't fix", "didnt fix", "didn't solve",
-        "wasn't fixed", "this didn't fix", "that didn't fix"
+        "wasn't fixed", "this didn't fix", "that didn't fix", "what if", "still"
     }
     normalized = user_q_lower.replace("'", "'")
 
@@ -435,7 +431,7 @@ def run_chatbot_session(user_question: str) -> str:
         print(f"→ User: {user_question}")
         print(f"→ Q:    {q_text}")
         print(f"→ A:    {a_text[:120]}...\n")
-        if cosine_sim < 0.4:
+        if cosine_sim < 0.3:
             break
         filtered_top.append((match, boosted_score, confidence))
     top_matches = filtered_top
