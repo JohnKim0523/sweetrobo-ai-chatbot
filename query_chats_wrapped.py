@@ -83,27 +83,38 @@ def bulletify_if_long(answer):
         return answer
     return "\n\n".join(f"• {p.strip()}" for p in parts if p.strip())
 
-def is_related(user_q_lower, match_q, match_a):
-    full_text = (match_q + " " + match_a).lower()
-    ratio = SequenceMatcher(None, user_q_lower, full_text).ratio()
-    
-    # Debug output
-    print(f"🔗 [is_related] Similarity between user_q and match Q+A:")
-    print(f"   - User Q:    {user_q_lower}")
-    print(f"   - Match Q:   {match_q}")
-    print(f"   - Match A:   {match_a[:100]}...") 
-    print(f"   - Similarity Ratio: {ratio:.3f}")
-    print(f"   - Pass? {'✅' if ratio > 0.3 else '❌'}\n")
-    
-    return ratio > 0.05
+def is_related(user_q_lower, match_q, match_a, user_embedding, client):
+    try:
+        combo_text = f"{match_q} {match_a}"
+        response = client.embeddings.create(model=embedding_model, input=[combo_text])
+        match_embedding = response.data[0].embedding
+        score = cosine_similarity(user_embedding, match_embedding)
+        print(f"🔗 Cosine similarity between user and match: {score:.3f}")
+        return score >= 0.20  # You can lower this threshold to 0.45–0.50 if needed
+    except Exception as e:
+        print(f"⚠️ is_related cosine check failed: {e}")
+        return False
 
-def is_already_given(answer, history, threshold=0.85):
-    answer_stripped = answer.strip()
-    for entry in history:
-        if entry["role"] == "assistant":
-            if SequenceMatcher(None, answer_stripped, entry["content"].strip()).ratio() >= threshold:
-                return True
-    return False
+def is_already_given(answer, history, client):
+    try:
+        response = client.embeddings.create(model=embedding_model, input=[answer])
+        answer_emb = response.data[0].embedding
+
+        for entry in history:
+            if entry["role"] == "assistant":
+                hist_resp = entry["content"]
+                hist_emb_resp = client.embeddings.create(model=embedding_model, input=[hist_resp])
+                hist_emb = hist_emb_resp.data[0].embedding
+
+                similarity = cosine_similarity(answer_emb, hist_emb)
+                if similarity >= 0.90:
+                    print(f"⚠️ Answer already given (cosine sim: {similarity:.3f})")
+                    return True
+        return False
+    except Exception as e:
+        print(f"⚠️ is_already_given cosine check failed: {e}")
+        return False
+
 
 def build_followup_query(user_q: str, original_q: str):
     """Returns enriched question and whether enrichment was applied."""
@@ -113,25 +124,33 @@ def build_followup_query(user_q: str, original_q: str):
     return cleaned, False
 
 def process_match_for_followup(match, query_for_related, user_q_lower, seen_ids):
-    """Helper function to process a single match for follow-up filtering."""
     if match.id in seen_ids:
         return None, None
-    
+
     metadata = match.metadata
     answer = metadata.get("a", "[No A]").strip()
     if not answer:
         return None, None
-    
+
     q = metadata.get("q", "")
-    related = is_related(user_q_lower, q, answer)
-    already_given = is_already_given(answer, th_state["conversation_history"])
-    
+
+    # Get user embedding once
+    try:
+        response = client.embeddings.create(model=embedding_model, input=[user_q_lower])
+        user_emb = response.data[0].embedding
+    except Exception as e:
+        print(f"⚠️ Embedding fetch failed: {e}")
+        return None, None
+
+    related = is_related(user_q_lower, q, answer, user_emb, client)
+    already_given = is_already_given(answer, th_state["conversation_history"], client)
+
     print(f"🧪 FOLLOW-UP FILTER:")
     print(f"- Related: {related}")
     print(f"- Already Given: {already_given}")
     print(f"- Q: {q}")
     print(f"- A: {answer[:80]}...\n")
-    
+
     if related and not already_given:
         return answer, match.id
     return None, None
@@ -446,15 +465,8 @@ def run_chatbot_session(user_question: str) -> str:
         best_match = top_matches[0]  # Already sorted in GPT filter
         raw_answer = best_match[0].metadata.get("a", "[No A]").strip()
 
-    # Bulletify if long
-    final_answer = bulletify_if_long(raw_answer)
-
-    # Add visible spacing if the answer starts with bullet points
-    if final_answer.strip().startswith("•"):
-        final_answer = "\n\n" + final_answer
-        print(f"✅ Bulletified answer selected after GPT topic filtering: {raw_answer}")
-    else:
-        print(f"✅ Short answer selected after GPT topic filtering: {raw_answer}")
+    final_answer = raw_answer.strip()
+    print(f"✅ Raw answer selected after GPT topic filtering: {final_answer}")
 
     # Append to conversation history
     final_answer += "\n\nIf this didn't resolve the issue, let me know."
