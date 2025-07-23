@@ -183,21 +183,6 @@
     }
   },
   {
-    "thread_id": 4,
-    "machine_type": "COTTON_CANDY",
-    "q": "The sprinkles don’t seem to stick well to the cotton candy during production. Are there any recommended settings for improving this on the Cotton Candy Machine?",
-    "a": "",
-    "tags": ["sprinkle_adhesion", "machine_settings"],
-    "usefulness": {
-      "score": 0,
-      "reason": "No response was provided to the user's question."
-    },
-    "metadata": {
-      "domain": "product_quality",
-      "confidence": 0.0
-    }
-  },
-  {
     "thread_id": 5,
     "machine_type": "COTTON_CANDY",
     "q": "I keep getting false low inventory email alerts throughout the day even though my machine has enough sticks, water, and sugar. When exactly do these alerts trigger and can they be made more specific?",
@@ -285,36 +270,6 @@
     "metadata": {
       "domain": "operations",
       "confidence": 0.8
-    }
-  },
-  {
-    "thread_id": 5,
-    "machine_type": "COTTON_CANDY",
-    "q": "Can you help add another team member (asharp@fatcatsfun.com) to the Sweet Robo support system so they can help manage support cases?",
-    "a": "",
-    "tags": ["user_access", "support_channel"],
-    "usefulness": {
-      "score": 0,
-      "reason": "No follow-up or confirmation that the requested user was added."
-    },
-    "metadata": {
-      "domain": "account_management",
-      "confidence": 0.0
-    }
-  },
-  {
-    "thread_id": 5,
-    "machine_type": "COTTON_CANDY",
-    "q": "The motor feeding the humidifier is leaking and spilling water inside the cotton candy machine. What should we do?",
-    "a": "",
-    "tags": ["motor_leak", "humidifier_issue"],
-    "usefulness": {
-      "score": 0,
-      "reason": "The issue was reported but not addressed within the thread."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.0
     }
   },
   {
@@ -1028,40 +983,6 @@
     }
   },
   {
-    "thread_id": 17,
-    "machine_type": "",
-    "q": "My machine is not showing up on the app. How do I get it to show up?",
-    "a": "",
-    "tags": ["machine_sync", "app_visibility"],
-    "usefulness": {
-      "score": 0,
-      "reason": "No response was provided in the conversation."
-    },
-    "metadata": {
-      "domain": "connectivity",
-      "confidence": 0.0,
-      "media_reference": false,
-      "escalation": false
-    }
-  },
-  {
-    "thread_id": 18,
-    "machine_type": "COTTON_CANDY",
-    "q": "Bonjour, nous avons toujours un problème avec notre TPE Nayax sur la barbe à papa. Pouvez-vous m'envoyer le numéro ERT ou le numéro de contrat avec notre fournisseur Nayax ?",
-    "a": "",
-    "tags": ["nayax", "ERT_number", "contract_id", "french"],
-    "usefulness": {
-      "score": 0,
-      "reason": "No answer was provided; request for phone support went unanswered."
-    },
-    "metadata": {
-      "domain": "payments",
-      "confidence": 0.0,
-      "media_reference": false,
-      "escalation": true
-    }
-  },
-  {
     "thread_id": 19,
     "machine_type": "COTTON_CANDY",
     "q": "Why are some of my machines showing as offline even though they are connected to the internet?",
@@ -1248,23 +1169,6 @@
       "confidence": 0.9,
       "media_reference": false,
       "escalation": true
-    }
-  },
-  {
-    "thread_id": 22,
-    "machine_type": "CANDY_MONSTER",
-    "q": "test",
-    "a": "",
-    "tags": ["test_message"],
-    "usefulness": {
-      "score": 0,
-      "reason": "No support-related question or response was provided."
-    },
-    "metadata": {
-      "domain": "general",
-      "confidence": 0.0,
-      "media_reference": false,
-      "escalation": false
     }
   },
   {
@@ -4739,26 +4643,6 @@
   {
     "thread_id": 48,
     "machine_type": "BALLOON_BOT",
-    "q": "What should I do about the error message 4007 on the balloon machine?",
-    "a": "",
-    "tags": ["error_4007"],
-    "usefulness": {
-      "score": 0,
-      "reason": "There is no answer provided in the conversation to address the error message 4007."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0,
-      "media_reference": false,
-      "escalation": false,
-      "customer_ordered": false,
-      "part_shipped": false,
-      "error_codes": [4007]
-    }
-  },
-  {
-    "thread_id": 48,
-    "machine_type": "BALLOON_BOT",
     "q": "Is there support available during high traffic business times for the balloon machine?",
     "a": "We can schedule support during your high traffic business times. Please book a time in my calendar using the provided link for technical support appointments.",
     "tags": [],
@@ -4808,25 +4692,6 @@
     "metadata": {
       "domain": "support",
       "confidence": 0.8,
-      "media_reference": false,
-      "escalation": false,
-      "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 49,
-    "machine_type": "COTTON_CANDY",
-    "q": "Can you restart my cotton candy machine remotely?",
-    "a": "",
-    "tags": [],
-    "usefulness": {
-      "score": 0,
-      "reason": "The answer is not provided in the conversation, so the usefulness is zero."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0,
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
@@ -5212,28 +5077,6 @@
       "error_codes": [
         4012
       ]
-    }
-  },
-  {
-    "thread_id": 54,
-    "machine_type": "COTTON_CANDY",
-    "q": "How can I add a new ice cream machine to my account?",
-    "a": "",
-    "tags": [
-      "account_management",
-      "machine_addition"
-    ],
-    "usefulness": {
-      "score": 0,
-      "reason": "The answer hallucinated request status or timing not supported by the original thread."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.5,
-      "media_reference": false,
-      "escalation": false,
-      "customer_ordered": false,
-      "part_shipped": false
     }
   },
   {
@@ -5799,28 +5642,6 @@
       "tags": [
         "replacement_needed"
       ]
-    }
-  },
-  {
-    "thread_id": 67,
-    "machine_type": "COTTON_CANDY",
-    "q": "Has my issue with the cotton candy machine's furnace motor been resolved?",
-    "a": "",
-    "tags": [
-      "issue_resolved",
-      "support_closure"
-    ],
-    "usefulness": {
-      "score": 0,
-      "reason": "The answer hallucinated a status, offer, or support channel not confirmed in the original thread."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.95,
-      "media_reference": false,
-      "escalation": false,
-      "customer_ordered": false,
-      "part_shipped": false
     }
   },
   {
@@ -6877,28 +6698,6 @@
     }
   },
   {
-    "thread_id": 87,
-    "machine_type": "COTTON_CANDY",
-    "q": "Do you have pictures or instructions on which wires go where for the bottom part of the cotton candy machine?",
-    "a": "",
-    "tags": [
-      "wiring_instructions",
-      "pictures_request"
-    ],
-    "usefulness": {
-      "score": 0,
-      "reason": "The answer is empty because the admin did not provide the requested pictures or instructions."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0,
-      "media_reference": false,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
     "thread_id": 88,
     "machine_type": "BALLOON_BOT",
     "q": "What should I do if the bill acceptor on my BALLOON_BOT is blinking red and not accepting cash?",
@@ -7155,27 +6954,6 @@
   {
     "thread_id": 92,
     "machine_type": "COTTON_CANDY",
-    "q": "What is the response time for support on the cotton candy machine?",
-    "a": "",
-    "tags": [
-      "support_response_time"
-    ],
-    "usefulness": {
-      "score": 0,
-      "reason": "The answer is not provided in the conversation, so the response time for support remains unclear."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0,
-      "media_reference": false,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 92,
-    "machine_type": "COTTON_CANDY",
     "q": "How can I improve communication within the app for my cotton candy machine?",
     "a": "Try changing the language settings in the app to see if that improves communication. Let us know if this resolves your issue.",
     "tags": [
@@ -7213,28 +6991,6 @@
       "confidence": 0.6,
       "media_reference": true,
       "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 92,
-    "machine_type": "COTTON_CANDY",
-    "q": "Is the arm driver replacement successful on my cotton candy machine?",
-    "a": "Yes, the arm driver replacement was successful, and your cotton candy machine is now working since .",
-    "tags": [
-      "arm_driver_replacement",
-      "successful_fix"
-    ],
-    "usefulness": {
-      "score": 0,
-      "reason": "The answer confirms that the issue has been resolved with the arm driver replacement. Answer included a time reference, which is not allowed."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.95,
-      "media_reference": false,
-      "escalation": false,
       "customer_ordered": false,
       "part_shipped": false
     }
@@ -10961,6 +10717,196 @@
       "confidence": 0.95,
       "media_reference": false,
       "escalation": false,
+      "customer_ordered": false,
+      "part_shipped": false
+    }
+  },
+    {
+    "thread_id": 111,
+    "machine_type": "ROBO_ICE_CREAM",
+    "q": "Why isn’t the machine making ice cream right after turning it on?",
+    "a": "After turning on the power and refrigeration switch, the machine needs 5–10 minutes to cool down. It will only begin making ice cream once the internal temperature is cold enough.",
+    "tags": ["startup", "refrigeration", "cooling", "delay"],
+    "usefulness": {
+      "score": 10,
+      "reason": ""
+    },
+    "metadata": {
+      "domain": "hardware",
+      "confidence": 0.95,
+      "media_reference": false,
+      "escalation": false,
+      "customer_ordered": false,
+      "part_shipped": false
+    }
+  },
+  {
+    "thread_id": 112,
+    "machine_type": "ROBO_ICE_CREAM",
+    "q": "How much ice cream mix do I need to add for it to start working properly?",
+    "a": "You need to add at least 2 liters of prepared mix into each hopper. Less than this may prevent the machine from functioning correctly.",
+    "tags": ["hopper", "ice_cream_mix", "minimum_requirement"],
+    "usefulness": {
+      "score": 10,
+      "reason": ""
+    },
+    "metadata": {
+      "domain": "operation",
+      "confidence": 0.95,
+      "media_reference": false,
+      "escalation": false,
+      "customer_ordered": false,
+      "part_shipped": false
+    }
+  },
+  {
+    "thread_id": 113,
+    "machine_type": "ROBO_ICE_CREAM",
+    "q": "Do I need to clean the machine every day?",
+    "a": "Daily tasks include wiping down the exterior and checking expiration dates on bags and settings alarms for when the mix is expired after being put into the system. A full hopper cleaning should be done every 3 days, and syrup/topping containers weekly.",
+    "tags": ["cleaning", "maintenance", "schedule"],
+    "usefulness": {
+      "score": 10,
+      "reason": ""
+    },
+    "metadata": {
+      "domain": "maintenance",
+      "confidence": 0.95,
+      "media_reference": false,
+      "escalation": false,
+      "customer_ordered": false,
+      "part_shipped": false
+    }
+  },
+  {
+    "thread_id": 114,
+    "machine_type": "ROBO_ICE_CREAM",
+    "q": "The cup didn’t drop, what do I do?",
+    "a": "Log into the backend, go to Device Testing, and try the “Cup Out” or “Reset Cup Holder” functions to realign the system. Check that cups are loaded correctly and aligned in the tubes.",
+    "tags": ["cup_issue", "device_testing", "alignment", "reset"],
+    "usefulness": {
+      "score": 10,
+      "reason": ""
+    },
+    "metadata": {
+      "domain": "hardware",
+      "confidence": 0.9,
+      "media_reference": false,
+      "escalation": true,
+      "customer_ordered": false,
+      "part_shipped": false
+    }
+  },
+  {
+    "thread_id": 115,
+    "machine_type": "ROBO_ICE_CREAM",
+    "q": "Why are the syrup or toppings not dispensing?",
+    "a": "Ensure the stock levels are set correctly in the Stock Settings menu. You can also test the syrup or toppings dispensers manually under Device Testing -- Jams/Sprinkles Test.",
+    "tags": ["topping", "syrup", "dispenser", "device_testing"],
+    "usefulness": {
+      "score": 10,
+      "reason": ""
+    },
+    "metadata": {
+      "domain": "hardware",
+      "confidence": 0.9,
+      "media_reference": false,
+      "escalation": true,
+      "customer_ordered": false,
+      "part_shipped": false
+    }
+  },
+  {
+    "thread_id": 116,
+    "machine_type": "ROBO_ICE_CREAM",
+    "q": "What does “L: 100%” or “R: 100%” mean on the customer screen?",
+    "a": "It shows the cold status of the left or right ice cream hoppers. 100% means that side is at the correct temperature for serving.",
+    "tags": ["display", "temperature", "hopper_status"],
+    "usefulness": {
+      "score": 10,
+      "reason": ""
+    },
+    "metadata": {
+      "domain": "operation",
+      "confidence": 0.95,
+      "media_reference": false,
+      "escalation": false,
+      "customer_ordered": false,
+      "part_shipped": false
+    }
+  },
+  {
+    "thread_id": 117,
+    "machine_type": "ROBO_ICE_CREAM",
+    "q": "Can I use thick sauces or chunky toppings in the machine?",
+    "a": "No. Only liquid syrups are allowed for syrup dispensers and dry solid toppings (e.g., sprinkles, crushed cookies) for topping dispensers. No chunks or thick sauces.",
+    "tags": ["topping", "syrup", "restriction", "guidelines"],
+    "usefulness": {
+      "score": 10,
+      "reason": ""
+    },
+    "metadata": {
+      "domain": "operation",
+      "confidence": 0.95,
+      "media_reference": false,
+      "escalation": false,
+      "customer_ordered": false,
+      "part_shipped": false
+    }
+  },
+  {
+    "thread_id": 118,
+    "machine_type": "ROBO_ICE_CREAM",
+    "q": "How do I access the backend to change settings or refill stock?",
+    "a": "Tap and hold the top-right corner of the touchscreen for 3–5 seconds. Enter the default password: 123456(for the F1 or F2) or password: 999999 (for Robo-Haloo).",
+    "tags": ["backend", "settings", "stock", "password"],
+    "usefulness": {
+      "score": 10,
+      "reason": ""
+    },
+    "metadata": {
+      "domain": "software",
+      "confidence": 0.9,
+      "media_reference": false,
+      "escalation": false,
+      "customer_ordered": false,
+      "part_shipped": false
+    }
+  },
+  {
+    "thread_id": 119,
+    "machine_type": "ROBO_ICE_CREAM",
+    "q": "How do I shut the machine down safely?",
+    "a": "First, switch off the main power to the ice cream machine, then use the breaker switch to cut off power. Never unplug the machine directly while it’s running.",
+    "tags": ["shutdown", "power", "safety"],
+    "usefulness": {
+      "score": 10,
+      "reason": ""
+    },
+    "metadata": {
+      "domain": "safety",
+      "confidence": 0.95,
+      "media_reference": false,
+      "escalation": false,
+      "customer_ordered": false,
+      "part_shipped": false
+    }
+  },
+  {
+    "thread_id": 120,
+    "machine_type": "ROBO_ICE_CREAM",
+    "q": "What should I do if the machine displays an error or doesn’t function normally?",
+    "a": "Check the troubleshooting section in the manual. If the issue persists, contact Sweet Robo customer support at support@sweetrobo.com or +1 (844) 793-3872 for assistance.",
+    "tags": ["error", "support", "troubleshooting"],
+    "usefulness": {
+      "score": 10,
+      "reason": ""
+    },
+    "metadata": {
+      "domain": "support",
+      "confidence": 0.85,
+      "media_reference": false,
+      "escalation": true,
       "customer_ordered": false,
       "part_shipped": false
     }

@@ -38,7 +38,7 @@ except Exception as e:
     print(f"⚠️ Could not delete existing vectors: {e}")
 
 # === Load and pair Q&A data ===
-with open("qa_JSON.json", "r") as f:
+with open("qa_JSON.json", encoding="utf-8") as f:
     qa_data = json.load(f)
 
 paired_data = []
