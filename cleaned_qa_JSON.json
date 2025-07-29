@@ -72,6 +72,43 @@
     }
   },
   {
+    "thread_id": 2,
+    "machine_type": "COTTON_CANDY",
+    "q": "How to connect to WiFi?",
+    "a": "Problem Summary:\nNeed to connect the cotton candy machine to a WiFi network.\n\nWhat to do:\n- Go to the settings screen and press System Settings.\n- Press Exit App.\n- Once exited, press the white button located in the bottom middle of the screen.\n- Navigate to Settings > Wi-Fi.\n- Connect to your local network (note: public networks with sign-in portals are not supported).\n\nHardware Check:\n- Ensure the Wi-Fi antenna is properly connected on the motherboard.\n- The antenna is a thin black wire located on the right edge of the board between a white and black connector.\n- The port is a small circular metal piece—snap the end of the antenna into it securely.",
+    "tags": [
+      "wifi_connection",
+      "network_setup",
+      "hardware_check"
+    ],
+    "usefulness": {
+      "score": 9,
+      "reason": "Provides both the correct software navigation steps and hardware antenna check."
+    },
+    "metadata": {
+      "domain": "connectivity",
+      "confidence": 0.95
+    }
+  },
+  {
+    "thread_id": 2,
+    "machine_type": "COTTON_CANDY",
+    "q": "How do I change the machine's name in the Sweet Robo app?",
+    "a": "Problem Summary:\nNeed to change the machine's name in the Sweet Robo app.\n\nWhat to do:\n- Go to the machine settings in the app.\n- Select 'Edit Machine Name'.\n- Enter the new name and save changes.",
+    "tags": [
+      "app_settings",
+      "machine_name_change"
+    ],
+    "usefulness": {
+      "score": 8,
+      "reason": "Clear instructions provided for changing machine name."
+    },
+    "metadata": {
+      "domain": "app_configuration",
+      "confidence": 0.9
+    }
+  },
+  {
     "thread_id": 3,
     "machine_type": "COTTON_CANDY",
     "q": "What is the correct way to use electrical tape to fix the stick not being pulled out completely?",
@@ -242,7 +279,7 @@
     "thread_id": 5,
     "machine_type": "COTTON_CANDY",
     "q": "I received a humidification error on the cotton candy machine. What should be done to fix it?",
-    "a": "Problem: Humidification error on the cotton candy machine.\n\nWhy is this happening?\n- Melted sugar covering the nozzle causing blockage.\n- Possible damage to the water pump.\n\nWhat to do:\n- Clean the nozzle surface using the metal brush from the spare parts kit.\n- If the issue persists, record an inspection video to check the water pump.",
+    "a": "Problem: Humidification error on the cotton candy machine.\n\nWhy is this happening?\n- Melted sugar covering the nozzle causing blockage.\n- Possible damage to the water pump.\n\nWhat to do:\n- Clean the nozzle surface using the metal brush from the spare parts kit.\n- If the issue persists, record an inspection video to check the water pump and send it to Jesse@sweetrobo.com for further assistance.",
     "tags": [
       "humidification_error",
       "maintenance"
@@ -9113,7 +9150,7 @@
     "thread_id": 104,
     "machine_type": "COTTON_CANDY",
     "q": "What should I do if my cotton candy machine is only putting out white sugar or no sugar at all?",
-    "a": "Problem: Cotton candy machine is only dispensing white sugar or not dispensing sugar at all.\n\nWhy is this happening?\n- There may be a blockage in the sugar bowl.\n- The lid of the sugar bowl may not be tightly closed.\n- The sugar may be clumped.\n- The sugar motors may not be functioning properly.\n\nWhat to check:\n- Check for any sugar or blockage in the sugar bowl.\n- Ensure the lid of the sugar bowl is tightly closed.\n- Check if the sugar is clumped.\n- Test the sugar motors to see if they are spinning correctly during the test function.\n- If the sugars are not coming out when using the test sugar function, disassemble the relevant parts to check for clogs.",
+    "a": "Problem: Cotton candy machine is only dispensing white sugar or not dispensing sugar at all.\n\nWhy is this happening?\n- There may be a blockage in the sugar container.\n- The lid of the sugar container may not be tightly closed.\n- The sugar may be clumped.\n- The sugar motors may not be functioning properly.\n\nWhat to check:\n- Check for any sugar or blockage in the sugar container.\n- Ensure the lid of the sugar container is tightly closed.\n- Check if the sugar is clumped.\n- Test the sugar motors to see if they are spinning correctly during the test function.\n\nSolutions to try:\n- If the sugars are not coming out when using the test sugar function, disassemble the relevant parts to check for clogs.\n- Disassemble the sugar container block and take out each sugar motor to clean each port in the aluminum block and each fin of the sugar motors.",
     "tags": [
       "sugar_dispensing_issue",
       "blockage",

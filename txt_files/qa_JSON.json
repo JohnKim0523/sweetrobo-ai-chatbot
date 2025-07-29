@@ -231,7 +231,7 @@
     "thread_id": 5,
     "machine_type": "COTTON_CANDY",
     "q": "I received a humidification error on the cotton candy machine. What should be done to fix it?",
-    "a": "Clean the nozzle surface using the metal brush from the spare parts kit. This is often caused by melted sugar covering the nozzle and causing blockage. If the issue persists after cleaning, record an inspection video to check whether the water pump may be damaged.",
+    "a": "Clean the nozzle surface using the metal brush from the spare parts kit. This is often caused by melted sugar covering the nozzle and causing blockage. If the issue persists after cleaning, record an inspection video to check whether the water pump may be damaged and send it to jesse@sweetrobo.com for further assistance.",
     "tags": ["humidification_error", "maintenance"],
     "usefulness": {
       "score": 9,
@@ -300,6 +300,22 @@
     "metadata": {
       "domain": "software",
       "confidence": 0.8,
+      "media_reference": false
+    }
+  },
+  {
+    "thread_id": 6,
+    "machine_type": "COTTON_CANDY",
+    "q": "How to connect to wifi",
+    "a": "To connect your machine to Wi-Fi:\n\n1. Go to the **settings screen**.\n2. Press **System Settings**, then **Exit App**.\n3. Once you've exited, tap the **white button** in the bottom middle of the screen.\n4. Navigate to **Settings > Wi-Fi**.\n5. Connect to your **local network**. (⚠️ Note: Public networks with sign-in portals are not supported.)\n\n📡 **Hardware Check**: Make sure the Wi-Fi antenna is properly connected on the motherboard. It’s the thin black wire located on the right edge of the board, between a white and a black connector. Its port is a small circular metal piece — snap the antenna into place firmly.",
+    "tags": ["wifi_connection", "network_setup", "hardware_check"],
+    "usefulness": {
+      "score": 10,
+      "reason": "Covers both the software steps and hardware checks required for successful Wi-Fi setup."
+    },
+    "metadata": {
+      "domain": "connectivity",
+      "confidence": 0.95,
       "media_reference": false
     }
   },

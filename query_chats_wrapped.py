@@ -73,7 +73,7 @@ def is_question_too_vague(user_q_lower):
         'contact', 'robo', 'before', 'again', 'cable', 'data', 'access', 'down',
         'reset', 'card', 'setting', 'alerts', 'sync', 'process', 'call', 'print',
         'sweet', 'clear', 'causing', 'right', 'replace', 'internal', 'loose',
-        'assistance', 'production', 'getting', 'inside'
+        'assistance', 'production', 'getting', 'inside', 'wifi', 'WiFi'
     }
     return not any(word in user_q_lower for word in specific_keywords)
 
