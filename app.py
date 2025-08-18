@@ -1,7 +1,7 @@
 import streamlit as st
 import uuid
 import time
-from query_chats_wrapped import initialize_chat, run_chatbot_session, th_state
+from query_chats_wrapped import initialize_chat, run_chatbot_session, get_session_state
 
 st.set_page_config(page_title="Sweet Robo AI Assistant", layout="centered")
 st.title("🤖 Sweet Robo AI Assistant")
@@ -10,19 +10,11 @@ st.title("🤖 Sweet Robo AI Assistant")
 if st.button("🔁 Reset Chat"):
     keys_to_clear = [
         "chat_initialized", "chat_id", "machine_type", "history",
-        "thread_id", "used_matches_by_thread", "match_pointer"
+        "thread_id", "used_matches_by_thread", "match_pointer", "th_state"
     ]
     for key in keys_to_clear:
         if key in st.session_state:
             del st.session_state[key]
-
-    # ✅ Also clear global in-memory th_state
-    th_state["thread_id"] = None
-    th_state["machine_type"] = None
-    th_state["used_matches_by_thread"] = {}
-    th_state["conversation_history"] = []
-    th_state["solution_attempts"] = {}
-    th_state["embedding_cache"] = {}
 
     st.rerun()
 
@@ -32,6 +24,10 @@ if "chat_initialized" not in st.session_state:
     st.session_state.chat_id = None
     st.session_state.machine_type = None
     st.session_state.history = []
+
+# Initialize th_state in session state if needed
+if "th_state" not in st.session_state:
+    get_session_state()  # This will initialize it
 
 # === Start New Chat Section ===
 st.markdown("### Start a New Chat")
@@ -64,8 +60,11 @@ if st.session_state.chat_initialized:
         with st.chat_message("user"):
             st.markdown(user_input)
         with st.spinner("Sweet Robo is thinking..."):
-            response = run_chatbot_session(user_input.strip())
-            time.sleep(0.5)
+            try:
+                response = run_chatbot_session(user_input.strip())
+                time.sleep(0.5)
+            except Exception as e:
+                response = f"⚠️ An error occurred: {str(e)}. Please try again."
         with st.chat_message("assistant"):
             st.markdown(response)
 

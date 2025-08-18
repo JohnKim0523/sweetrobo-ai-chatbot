@@ -10,8 +10,10 @@ import numpy as np
 import re
 import math
 import logging
+from collections import OrderedDict
+import time
 
-# Configure logging
+# Configure logging - use INFO level for debugging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -30,26 +32,64 @@ client = OpenAI(api_key=openai_key)
 pc = Pinecone(api_key=pinecone_key)
 index = pc.Index("sweetrobo-ai")
 
-th_state = {
-    "thread_id": None,
-    "machine_type": None,
-    "used_matches_by_thread": {},
-    "conversation_history": [],
-    "solution_attempts": {},
-    "embedding_cache": {},
-}
+# LRU Cache implementation for embeddings
+class LRUCache:
+    def __init__(self, max_size=100):
+        self.cache = OrderedDict()
+        self.max_size = max_size
+    
+    def get(self, key):
+        if key in self.cache:
+            # Move to end (most recently used)
+            self.cache.move_to_end(key)
+            return self.cache[key]
+        return None
+    
+    def put(self, key, value):
+        if key in self.cache:
+            self.cache.move_to_end(key)
+        self.cache[key] = value
+        if len(self.cache) > self.max_size:
+            # Remove least recently used
+            self.cache.popitem(last=False)
+    
+    def clear(self):
+        self.cache.clear()
+
+# Initialize thread-safe session state
+def get_session_state():
+    """Get or initialize session state for thread safety"""
+    if 'th_state' not in st.session_state:
+        st.session_state.th_state = {
+            "thread_id": None,
+            "machine_type": None,
+            "used_matches_by_thread": {},
+            "conversation_history": [],
+            "solution_attempts": {},
+            "embedding_cache": LRUCache(max_size=100),
+            "last_query_time": 0,
+            "query_count": 0
+        }
+    return st.session_state.th_state
+
+# For backward compatibility
+th_state = get_session_state()
 
 def get_or_create_embedding(text, cache_key=None):
     """Get embedding from cache or create new one. Reduces API calls significantly."""
-    if cache_key and cache_key in th_state["embedding_cache"]:
-        return th_state["embedding_cache"][cache_key]
+    th_state = get_session_state()
+    
+    if cache_key:
+        cached = th_state["embedding_cache"].get(cache_key)
+        if cached is not None:
+            return cached
     
     try:
         response = client.embeddings.create(model=embedding_model, input=[text])
         embedding = response.data[0].embedding
         
         if cache_key:
-            th_state["embedding_cache"][cache_key] = embedding
+            th_state["embedding_cache"].put(cache_key, embedding)
         
         return embedding
     except Exception as e:
@@ -57,6 +97,7 @@ def get_or_create_embedding(text, cache_key=None):
         return None
 
 def track_solution_failure():
+    th_state = get_session_state()
     thread_id = th_state["thread_id"]
     th_state["solution_attempts"][thread_id] = (
         th_state["solution_attempts"].get(thread_id, 0) + 1
@@ -64,6 +105,7 @@ def track_solution_failure():
     return th_state["solution_attempts"][thread_id]
 
 def initialize_chat(selected_machine: str):
+    th_state = get_session_state()
     th_state["thread_id"] = str(uuid.uuid4())
     machine_mapping = {
         "cotton candy": "COTTON_CANDY",
@@ -78,6 +120,7 @@ def initialize_chat(selected_machine: str):
     if not machine_type:
         raise ValueError("Unknown machine type selected.")
     th_state["machine_type"] = machine_type
+    th_state["query_count"] = 0  # Reset query count for new session
     return {"thread_id": th_state["thread_id"], "machine_type": machine_type}
 
 def is_question_too_vague(user_q_lower):
@@ -114,13 +157,14 @@ def is_question_too_vague(user_q_lower):
             similarity = SequenceMatcher(None, word, keyword).ratio()
             # Use 0.80 threshold for typo tolerance (e.g., "errro" matches "error" at 0.8)
             if similarity >= 0.80:
-                logger.info(f"Fuzzy match found: '{word}' matches '{keyword}' (similarity: {similarity:.2f})")
+                logger.debug(f"Fuzzy match found: '{word}' matches '{keyword}' (similarity: {similarity:.2f})")
                 return False
     
     return True  # No matches found, question is too vague
 
 def is_already_given(answer, history):
     try:
+        th_state = get_session_state()
         answer_cache_key = f"answer_{hash(answer)}"
         answer_emb = get_or_create_embedding(answer, answer_cache_key)
         
@@ -152,6 +196,7 @@ def build_followup_query(user_q: str, original_q: str):
     return cleaned, False
 
 def process_match_for_followup(match, user_q_lower, seen_ids):
+    th_state = get_session_state()
     if match.id in seen_ids:
         return None, None
 
@@ -172,6 +217,7 @@ def process_match_for_followup(match, user_q_lower, seen_ids):
     return None, None
 
 def handle_followup_with_existing_matches(user_q, thread_id):
+    th_state = get_session_state()
     match_pointer = th_state.get("match_pointer", 1)
     used_info = th_state["used_matches_by_thread"][thread_id]
     all_matches = used_info["all_matches"]
@@ -198,15 +244,7 @@ def handle_followup_with_existing_matches(user_q, thread_id):
             filtered_qas.append(answer)
             seen_ids.add(match_id)
 
-    # Pass 2 (fallback): if we didn't enrich on pass1 AND got nothing, try again with remaining matches
-    if not filtered_qas and not used_enriched:
-        for i in range(match_pointer, len(all_matches)):
-            match, usefulness, confidence = all_matches[i]
-            answer, match_id = process_match_for_followup(match, user_q_lower, seen_ids)
-            if answer:
-                th_state["match_pointer"] = i + 1
-                filtered_qas.append(answer)
-                seen_ids.add(match_id)
+    # Pass 2 removed - it was redundant and never found new matches
 
     # Nothing found after both passes -> clarification or escalation
     if not filtered_qas:
@@ -301,11 +339,13 @@ Respond only with "yes" or "no".
         return False
 
 def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_text):
+    th_state = get_session_state()
     filter_query = {"machine_type": {"$eq": th_state["machine_type"]}}
+    
+    # Only filter by error code if user mentioned a specific code
+    # Otherwise, include ALL Q&As (with or without error codes)
     if error_code_filter:
         filter_query["error_codes"] = {"$in": [str(error_code_filter)]}
-    else:
-        filter_query["error_codes"] = {"$exists": False}
 
     all_valid = []
     seen_answers = set()
@@ -319,6 +359,13 @@ def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_
         include_values=True,
         filter=filter_query,
     )
+    
+    logger.info(f"Pinecone query for: '{query_text[:60]}...'")
+    logger.info(f"Pinecone returned {len(results.matches)} matches")
+    if results.matches:
+        logger.info(f"Top 3 Pinecone results:")
+        for i, match in enumerate(results.matches[:3]):
+            logger.info(f"  {i+1}. Score: {match.score:.3f}, Q: '{match.metadata.get('q', '')[:60]}...'")
 
     for match in results.matches:
         if match.id in previous_ids:
@@ -333,24 +380,42 @@ def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_
         answer = metadata.get("a", "")
         tags = metadata.get("tags", [])
         candidate_q = metadata.get("q", "")
+        
+        # Debug logging for filtering process
+        if match.score >= 0.5:  # Log high-scoring matches to see why they're filtered
+            logger.info(f"Checking match (score {match.score:.3f}): usefulness={usefulness_score}, confidence={confidence:.2f}, Q='{candidate_q[:50]}...'")
 
         if usefulness_score >= 7 and confidence >= CONFIDENCE_THRESHOLD:
             if isinstance(match.values, list) and len(match.values) == 1536:
                 if answer not in seen_answers:
-                    logger.debug(f"Match found - Cosine Sim: {match.score:.3f}, Q: {candidate_q[:50]}..., Score: {usefulness_score}")
+                    logger.info(f"✓ Match accepted - Cosine: {match.score:.3f}, Usefulness: {usefulness_score}, Confidence: {confidence}")
                     all_valid.append((match, usefulness_score, confidence))
                     seen_answers.add(answer)
+            else:
+                if match.score >= 0.5:
+                    logger.warning(f"✗ Match rejected - Invalid embedding dimensions or format")
+        else:
+            if match.score >= 0.5:
+                logger.warning(f"✗ Match rejected - Failed filters: usefulness={usefulness_score} (need >=7), confidence={confidence:.2f} (need >=0.6)")
 
-    all_valid.sort(key=lambda x: (-x[1], -x[2]))  # Sort by usefulness_score then confidence
+    # Sort by cosine similarity (best semantic match first), not usefulness score
+    # The match.score is the actual relevance to the user's query
+    all_valid.sort(key=lambda x: -x[0].score)
+    
+    logger.info(f"Found {len(all_valid)} matches passing initial filters")
+    if all_valid:
+        for i, (match, score, conf) in enumerate(all_valid[:3]):
+            logger.info(f"  Pre-GPT #{i+1}: '{match.metadata.get('q', '')[:60]}...'")
 
-    # GPT topic match check — only top 10 to minimize cost
+    # GPT topic match check — only top 5 to minimize cost and latency
     filtered_with_gpt = []
-    for match, score, confidence in all_valid[:10]:
+    for match, score, confidence in all_valid[:5]:  # Reduced from 10 to 5
         q = match.metadata.get("q", "")
         if is_same_topic(query_text, q):
             filtered_with_gpt.append((match, score, confidence))
+            logger.info(f"✓ GPT approved: '{q[:50]}...'")
         else:
-            logger.debug(f"Rejected by GPT topic match: {q[:50]}...")
+            logger.info(f"✗ GPT rejected: '{q[:50]}...'")
 
     # Calculate complexity penalty for each match
     # Simpler, more direct questions should rank higher
@@ -380,11 +445,16 @@ def fetch_valid_matches(query_embedding, previous_ids, error_code_filter, query_
         # Words in candidate but not in user query (extra conditions)
         extra_words = candidate_content_words - user_content_words
         
-        # Specific penalties for common extra conditions
-        if 'hangs' in extra_words or 'hanging' in extra_words or 'frozen' in extra_words:
-            complexity_penalty += 0.15  # Heavy penalty for screen hanging condition
-        if 'screen' in extra_words and 'candy' in extra_words and 'making' in extra_words:
-            complexity_penalty += 0.10  # Penalty for specific screen mentions
+        # Dynamic penalty based on extra words count
+        # Each significant extra word adds penalty
+        significant_extras = {
+            'hangs', 'hanging', 'frozen', 'freezes', 'stuck', 'crashes', 'screen',
+            'making', 'spinning', 'loading', 'unresponsive', 'slow', 'delay'
+        }
+        
+        penalty_words = extra_words & significant_extras
+        if penalty_words:
+            complexity_penalty += len(penalty_words) * 0.05  # 0.05 per extra condition word
         
         # General penalty for question length (prefer concise matches)
         if len(q) > len(user_q_lower) * 2:
@@ -437,6 +507,21 @@ User message:
         return False
 
 def run_chatbot_session(user_question: str) -> str:
+    th_state = get_session_state()
+    
+    # Rate limiting - max 10 queries per minute
+    current_time = time.time()
+    if th_state.get("last_query_time", 0) > 0:
+        time_diff = current_time - th_state["last_query_time"]
+        if time_diff < 6:  # Less than 6 seconds between queries
+            th_state["query_count"] += 1
+            if th_state["query_count"] > 10:
+                return "⚠️ Too many requests. Please wait a moment before asking another question."
+        else:
+            th_state["query_count"] = 1  # Reset counter after 6 seconds
+    
+    th_state["last_query_time"] = current_time
+    
     thread_id = th_state["thread_id"]
     used_matches_by_thread = th_state["used_matches_by_thread"]
     

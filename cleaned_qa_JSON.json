@@ -1163,12 +1163,11 @@
   {
     "thread_id": 16,
     "machine_type": "COTTON_CANDY",
-    "q": "The NAYAX system stopped working at Dolphin World. What can I do to troubleshoot?",
-    "a": "Problem: NAYAX system at Dolphin World has stopped working.\n\nWhy is this happening?\n- The system may have encountered an error or glitch.\n\nWhat to do:\n- Perform a soft reset.\n- If the issue persists, contact Nayax's local service personnel.",
+    "q": "The NAYAX system stopped working. What can I do to troubleshoot?",
+    "a": "Problem: NAYAX system has stopped working.\n\nWhy is this happening?\n- The system may have encountered an error or glitch.\n\nWhat to do:\n- Perform a soft reset.\n- If the issue persists, contact Nayax's local service personnel.",
     "tags": [
       "nayax_down",
-      "troubleshooting",
-      "dolphin_world"
+      "troubleshooting"
     ],
     "usefulness": {
       "score": 7,
@@ -7635,8 +7634,8 @@
   {
     "thread_id": 86,
     "machine_type": "COTTON_CANDY",
-    "q": "What should I do if I receive a Java.net.unknownhostexception error on my Dolphin World cotton candy machine?",
-    "a": "Problem: Java.net.unknownhostexception error on Dolphin World cotton candy machine.\n\nWhy is this happening?\n- The machine is unable to establish a network connection.\n\nWhat to check:\n- Antenna connection\n- Network connection\n\nWhat to do:\n- Restart MiFi device (if using)\n- Restart the machine",
+    "q": "What should I do if I receive a Java.net.unknownhostexception error on my cotton candy machine?",
+    "a": "Problem: Java.net.unknownhostexception error on cotton candy machine.\n\nWhy is this happening?\n- The machine is unable to establish a network connection.\n\nWhat to check:\n- Antenna connection\n- Network connection\n\nWhat to do:\n- Restart MiFi device (if using)\n- Restart the machine",
     "tags": [
       "network_error",
       "wifi_connection",
@@ -7658,8 +7657,8 @@
   {
     "thread_id": 86,
     "machine_type": "COTTON_CANDY",
-    "q": "How can I resolve a humidification error 4012 on my Dolphin World cotton candy machine?",
-    "a": "Problem: Humidification error 4012 on Dolphin World cotton candy machine.\n\nWhy is this happening?\n- The nozzle that sprays water into the machine might be blocked.\n- The water level may be set incorrectly, at 0% or a low percentage.\n\nWhat to do:\n- Check if the nozzle is blocked.\n- Use the wire brush provided to clean the nozzle.\n- Ensure the water level is set correctly and not at 0% or a low percentage.",
+    "q": "How can I resolve a humidification error 4012 on my cotton candy machine?",
+    "a": "Problem: Humidification error 4012 on cotton candy machine.\n\nWhy is this happening?\n- The nozzle that sprays water into the machine might be blocked.\n- The water level may be set incorrectly, at 0% or a low percentage.\n\nWhat to do:\n- Check if the nozzle is blocked.\n- Use the wire brush provided to clean the nozzle.\n- Ensure the water level is set correctly and not at 0% or a low percentage.",
     "tags": [
       "error_4012",
       "humidification_error",
@@ -7685,8 +7684,8 @@
   {
     "thread_id": 86,
     "machine_type": "COTTON_CANDY",
-    "q": "How do I update the software on my Dolphin World cotton candy machine?",
-    "a": "Problem Summary: Updating software on Dolphin World cotton candy machine.\n\nWhy is this happening?\n- Software updates are not automatic; they require a manual restart.\n\nWhat to do:\n- Restart the machine for software update.\n- Manually update supplies such as water, sugar, and toppings in the system settings.",
+    "q": "How do I update the software on my cotton candy machine?",
+    "a": "Problem Summary: Updating software on cotton candy machine.\n\nWhy is this happening?\n- Software updates are not automatic; they require a manual restart.\n\nWhat to do:\n- Restart the machine for software update.\n- Manually update supplies such as water, sugar, and toppings in the system settings.",
     "tags": [
       "software_update",
       "restart"
@@ -7707,8 +7706,8 @@
   {
     "thread_id": 86,
     "machine_type": "COTTON_CANDY",
-    "q": "What should I do if my Dolphin World cotton candy machine has an issue with the stick sensor?",
-    "a": "Problem: Dolphin World cotton candy machine stick sensor issue.\n\nWhy is this happening?\n- Possible debris or residue interfering with the sensor.\n\nWhat to do:\n- Clean the machine thoroughly, focusing on the stick sensor area.\n- Ensure no pieces from a failed stick remain in the sensor area.",
+    "q": "What should I do if my cotton candy machine has an issue with the stick sensor?",
+    "a": "Problem: Cotton candy machine stick sensor issue.\n\nWhy is this happening?\n- Possible debris or residue interfering with the sensor.\n\nWhat to do:\n- Clean the machine thoroughly, focusing on the stick sensor area.\n- Ensure no pieces from a failed stick remain in the sensor area.",
     "tags": [
       "stick_sensor",
       "cleaning",
