@@ -10,7 +10,7 @@ st.title("🤖 Sweet Robo AI Assistant")
 if st.button("🔁 Reset Chat"):
     keys_to_clear = [
         "chat_initialized", "chat_id", "machine_type", "history",
-        "thread_id", "used_matches_by_thread", "match_pointer", "email_collected"
+        "thread_id", "used_matches_by_thread", "match_pointer"
     ]
     for key in keys_to_clear:
         if key in st.session_state:
@@ -22,7 +22,7 @@ if st.button("🔁 Reset Chat"):
     th_state["used_matches_by_thread"] = {}
     th_state["conversation_history"] = []
     th_state["solution_attempts"] = {}
-    th_state["email_collected"] = False
+    th_state["embedding_cache"] = {}
 
     st.rerun()
 

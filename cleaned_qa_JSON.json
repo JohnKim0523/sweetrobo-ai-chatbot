@@ -75,7 +75,7 @@
     "thread_id": 2,
     "machine_type": "COTTON_CANDY",
     "q": "How to connect to WiFi?",
-    "a": "Problem Summary:\nNeed to connect the cotton candy machine to a WiFi network.\n\nWhat to do:\n- Go to the settings screen and press System Settings.\n- Press Exit App.\n- Once exited, press the white button located in the bottom middle of the screen.\n- Navigate to Settings > Wi-Fi.\n- Connect to your local network (note: public networks with sign-in portals are not supported).\n\nHardware Check:\n- Ensure the Wi-Fi antenna is properly connected on the motherboard.\n- The antenna is a thin black wire located on the right edge of the board between a white and black connector.\n- The port is a small circular metal piece—snap the end of the antenna into it securely.",
+    "a": "Problem Summary:\nNeed to connect the cotton candy machine to a WiFi network.\n\nWhat to do:\n- Go to the settings screen and press System Settings.\n- Press Exit App.\n- Once exited, press the white button located in the bottom middle of the screen.\n- Navigate to Settings > Wi-Fi.\n- Connect to your local network (note: public networks with sign-in portals are not supported).\n\nHardware Check:\n- Ensure the Wi-Fi antenna is properly connected on the motherboard.\n- The thin black wire connected to the mother board is the antenna wire, make sure it is snapped into the small circular metal port located on the right edge of the motherboard between the white and black connector.",
     "tags": [
       "wifi_connection",
       "network_setup",
@@ -279,7 +279,7 @@
     "thread_id": 5,
     "machine_type": "COTTON_CANDY",
     "q": "I received a humidification error on the cotton candy machine. What should be done to fix it?",
-    "a": "Problem: Humidification error on the cotton candy machine.\n\nWhy is this happening?\n- Melted sugar covering the nozzle causing blockage.\n- Possible damage to the water pump.\n\nWhat to do:\n- Clean the nozzle surface using the metal brush from the spare parts kit.\n- If the issue persists, record an inspection video to check the water pump and send it to Jesse@sweetrobo.com for further assistance.",
+    "a": "Problem: Humidification error on the cotton candy machine.\n\nWhy is this happening?\n- Melted sugar covering the nozzle causing blockage.\n- Possible damage to the water pump.\n\nWhat to do:\n- Clean the nozzle surface using the metal brush from the spare parts kit.\n- If the issue persists, record an inspection video to check the water pump and send it to support@sweetrobo.com for further assistance.",
     "tags": [
       "humidification_error",
       "maintenance"
@@ -793,7 +793,7 @@
     "thread_id": 11,
     "machine_type": "COTTON_CANDY",
     "q": "My sales totals are incorrect. I sold several items at $8, but the total collected is consistently short. There are no cash transactions. Why is this happening?",
-    "a": "Problem Summary:\nSales totals are incorrect with a consistent shortfall.\n\nWhy is this happening?\n- Possible discrepancy between sales data and Nayax payment reports.\n- Issue might be related to only credit card transactions.\n\nWhat to do:\n- Email sales screenshots or videos to jesse@sweetrobo.com for further analysis.",
+    "a": "Problem Summary:\nSales totals are incorrect with a consistent shortfall.\n\nWhy is this happening?\n- Possible discrepancy between sales data and Nayax payment reports.\n- Issue might be related to only credit card transactions.\n\nWhat to do:\n- Email sales screenshots or videos to support@sweetrobo.com for further analysis.",
     "tags": [
       "payment_discrepancy",
       "sales_shortage",
@@ -9706,6 +9706,31 @@
   {
     "thread_id": 117,
     "machine_type": "ROBO_ICE_CREAM",
+    "q": "How to fix error E02?",
+    "a": "Problem Summary: \nROBO_ICE_CREAM machine showing E02 error and LV light, then turning off.\n\nWhy is this happening?\n- E02 error indicates a low voltage error.\n\nWhat to check:\n- Use a multimeter to check the voltage on the power supply.\n- Ensure the correct voltage is going through.",
+    "tags": [
+      "e02",
+      "low_voltage_error"
+    ],
+    "usefulness": {
+      "score": 7,
+      "reason": "The answer provides a clear diagnostic step for the user to follow, but the issue may still require further assistance."
+    },
+    "metadata": {
+      "domain": "hardware",
+      "confidence": 0.95,
+      "media_reference": true,
+      "escalation": true,
+      "customer_ordered": false,
+      "part_shipped": false,
+      "error_codes": [
+        "E02"
+      ]
+    }
+  },
+  {
+    "thread_id": 117,
+    "machine_type": "ROBO_ICE_CREAM",
     "q": "How do I use a multimeter to check the voltage on my ROBO_ICE_CREAM machine?",
     "a": "Problem: Using a multimeter to check the voltage on a ROBO_ICE_CREAM machine.\n\nWhat to do:\n- Place the black lead on the 7th screw top right.\n- Place the red lead on the 8th screw top right in the back of the machine.",
     "tags": [],
@@ -11071,6 +11096,33 @@
     "thread_id": 149,
     "machine_type": "ROBO_ICE_CREAM",
     "q": "What does error code E06 on my Robo Ice Cream machine mean?",
+    "a": "Problem: Error code E06 on Robo Ice Cream machine.\n\nWhy is this happening?\n- The compressor is running overtime.\n- This is usually due to the ice cream hardness setting.\n\nWhat to check:\n- Ensure your ice cream hardness is set to 1.\n- Check if there is ice cream mix in the machine when it's turned on.\n- This is to prevent the chamber from freezing.",
+    "tags": [
+      "E06",
+      "compressor",
+      "ice_cream_hardness",
+      "error_code"
+    ],
+    "usefulness": {
+      "score": 8,
+      "reason": "The answer provides a clear explanation of the error code and actionable steps to prevent it."
+    },
+    "metadata": {
+      "domain": "support",
+      "confidence": 0.95,
+      "media_reference": false,
+      "escalation": false,
+      "customer_ordered": false,
+      "part_shipped": false,
+      "error_codes": [
+        "E06"
+      ]
+    }
+  },
+  {
+    "thread_id": 149,
+    "machine_type": "ROBO_ICE_CREAM",
+    "q": "How to fix error E06",
     "a": "Problem: Error code E06 on Robo Ice Cream machine.\n\nWhy is this happening?\n- The compressor is running overtime.\n- This is usually due to the ice cream hardness setting.\n\nWhat to check:\n- Ensure your ice cream hardness is set to 1.\n- Check if there is ice cream mix in the machine when it's turned on.\n- This is to prevent the chamber from freezing.",
     "tags": [
       "E06",
