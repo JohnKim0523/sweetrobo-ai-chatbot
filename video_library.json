@@ -1,0 +1,214 @@
+[
+  {
+    "video_id": "vid_021",
+    "title": "Core Board Connection Error 5005 Fix",
+    "description": "This video provides a solution for the Core Board Connection Error (5005) on the Robo Ice Cream machine, involving flipping the main power switch to turn the unit on, then running the automatic 'Repair' function via the System Settings menu.",
+    "url": "https://drive.google.com/file/d/10doz8KqOE-2OySuEJOOP8UzqfD0wJosB/view?usp=drive_link",
+    "keywords": [
+      "Error 5005",
+      "Core Board Connection",
+      "connection error",
+      "power switch",
+      "turn on unit",
+      "Enter the system",
+      "System Setting",
+      "Repair function",
+      "automatic repair",
+      "troubleshooting",
+      "confirm",
+      "main power",
+      "software repair"
+    ],
+    "machine_types": [
+      "ROBO_ICE_CREAM"
+    ],
+    "related_errors": [
+      "5005"
+    ],
+    "topics": [
+      "error_resolution",
+      "diagnostic",
+      "power"
+    ]
+  },
+  {
+    "video_id": "vid_002",
+    "title": "Adjust Time Zone Settings (Balloon Bot)",
+    "description": "Demonstrates how to access the settings menu on the Balloon Bot and adjust the internal time zone configuration for accurate scheduling.",
+    "url": "https://drive.google.com/file/d/1kMPGCv7bcs_yYgikn39Zojr80Q_HEBC9/view?usp=drive_link",
+    "keywords": ["time zone", "settings", "clock", "adjust", "configuration", "screen", "touch panel", "system setup", "menu", "time correction", "scheduling", "update", "parameter", "interface"],
+    "machine_types": ["BALLOON_BOT"],
+    "related_errors": [],
+    "topics": ["maintenance", "calibration", "system_settings"]
+  },
+  {
+    "video_id": "vid_003",
+    "title": "Install Nayax Card Reader on Balloon-Bot",
+    "description": "A step-by-step guide demonstrating the physical installation and wiring of the Nayax cashless payment system, followed by the necessary software configuration in the Basic Configuration menu.",
+    "url": "https://drive.google.com/file/d/1eWrrBvANolrp08c04vaSb1HkbTuixP6J/view?usp=drive_link",
+    "keywords": ["Nayax", "card reader", "cashless payment", "installation", "mount", "wiring", "connect cable", "COM2 port", "drilling", "replace plate", "payment configuration", "basic configuration", "technician menu", "QWSX"],
+    "machine_types": ["BALLOON_BOT"],
+    "related_errors": [],
+    "topics": ["replacement", "payment", "system_settings"]
+  },
+  {
+    "video_id": "vid_004",
+    "title": "Exit Balloon-Bot App to Access OS/Settings",
+    "description": "This video shows the secure process for exiting the main Balloon-Bot application by using a technician password to access the system settings menu and ultimately the Android operating system (OS).",
+    "url": "https://drive.google.com/file/d/1JgLpJEOYxgRo2mRbWz_o-yB_bBohN8tv/view?usp=drive_link",
+    "keywords": ["exit app", "access OS", "android screen", "system settings", "password", "QWSX", "return to screen", "white circle", "troubleshooting access", "technician access", "main application", "clear cache", "restart", "hidden menu"],
+    "machine_types": ["BALLOON_BOT"],
+    "related_errors": [],
+    "topics": ["system_settings", "diagnostic", "maintenance"]
+  },
+  {
+    "video_id": "vid_005",
+    "title": "Balloon-Bot Internet (Wi-Fi) Connection Setup",
+    "description": "This video details the process for connecting the Balloon-Bot machine to a Wi-Fi network by accessing the hidden Android OS settings, selecting the network, and then configuring the connection within the Basic Configuration menu.",
+    "url": "https://drive.google.com/file/d/1fDUdq2rDZEOTvua3_1IBVVmyuhn0DcHr/view?usp=drive_link",
+    "keywords": ["connect internet", "Wi-Fi setup", "wireless network", "android settings", "system settings", "QWSX", "Basic Configuration", "current connection", "select Wi-Fi", "password menu", "troubleshooting network", "access OS", "press balloon", "network connection"],
+    "machine_types": ["BALLOON_BOT"],
+    "related_errors": [],
+    "topics": ["system_settings", "diagnostic", "power"]
+  },
+  {
+    "video_id": "vid_006",
+    "title": "Adjust Amperage on Cotton Candy PCB",
+    "description": "This video demonstrates how to physically adjust the amperage (current flow) on the Cotton Candy machine's main PCB using a screwdriver to prevent the circuit breaker from tripping.",
+    "url": "https://drive.google.com/file/d/1XoeXUcMS5-ySJwl4wZDNzKnP2QNZk2Y5/view?usp=drive_link",
+    "keywords": ["adjust amperage", "turn down current", "circuit board", "PCB", "breaker tripping", "reduce current", "screwdriver adjustment", "turn potentiometer", "45 to 90 degrees", "power", "electrical", "troubleshooting", "breaker"],
+    "machine_types": ["COTTON_CANDY"],
+    "related_errors": [],
+    "topics": ["calibration", "power", "maintenance"]
+  },
+  {
+    "video_id": "vid_007",
+    "title": "Fix Cotton Candy Arm Malfunction/Reset",
+    "description": "This video details two methods to fix the robotic arm: first, manually resetting its position using the Device Testing menu, and second, running the automatic repair program via the System Settings menu.",
+    "url": "https://drive.google.com/file/d/1KX-Eyl5xcRfglNhk6Ctmy5utTovvMl5P/view?usp=drive_link",
+    "keywords": ["arm malfunction", "robotic arm", "arm reset", "device testing", "management system", "System Setting", "repair function", "automatic repair", "reset arm position", "fix arm", "arm stuck", "motor problem", "confirm repair", "maintenance"],
+    "machine_types": ["COTTON_CANDY"],
+    "related_errors": [],
+    "topics": ["repair", "calibration", "diagnostic"]
+  },
+  {
+    "video_id": "vid_008",
+    "title": "Bill Acceptor Setup and USB Configuration",
+    "description": "This video guides the user through accessing the Shopping Settings using the technician password to set the payment method to 'USB' for the bill acceptor, and verifies the physical cable connection for activation.",
+    "url": "https://drive.google.com/file/d/1iu19Rsi_hMScI1HB5TaZIZ8n4X65c9Dp/view?usp=drive_link",
+    "keywords": ["bill acceptor", "money acceptance", "cash payment", "USB setting", "Shopping Settings", "management system", "payment method", "banknote machine", "cable connection", "flashing light", "activate bill acceptor", "configure", "password"],
+    "machine_types": ["COTTON_CANDY"],
+    "related_errors": [],
+    "topics": ["system_settings", "payment", "installation"]
+  },
+  {
+    "video_id": "vid_009",
+    "title": "Burner Brush Cleaning Trick (Device Test)",
+    "description": "This video shows how to use the 'Device Testing' menu to activate furnace rotation, allowing a technician to use a brush to manually clean the cotton candy sugar residue from the spinning burner head.",
+    "url": "https://drive.google.com/file/d/1qRuBPUgJxOAbcaAl5QiXTwFngtqa3mtW/view?usp=drive_link",
+    "keywords": ["burner brush", "cleaning trick", "furnace rotation", "clean burner", "device testing", "remove sugar", "spinning head", "scrubbing", "maintenance", "clean residue", "management system", "brush tool", "clean cotton candy", "activated rotation"],
+    "machine_types": ["COTTON_CANDY"],
+    "related_errors": [],
+    "topics": ["cleaning", "maintenance", "system_settings"]
+  },
+  {
+    "video_id": "vid_010",
+    "title": "Clear Any Error Message (System Repair)",
+    "description": "This video provides the quick, universal software solution for clearing any active error message on the Cotton Candy machine by running the 'Repair' function within the System Settings menu of the Management System.",
+    "url": "https://drive.google.com/file/d/15JbmQh0yq9bgf_jzcoHQL_l55khqg_AX/view?usp=drive_link",
+    "keywords": ["clear error", "reset error", "error message", "system settings", "repair function", "clear alert", "management system", "touch screen", "confirm repair", "run diagnostic", "fix software glitch", "error resolution", "system", "troubleshooting"],
+    "machine_types": ["COTTON_CANDY"],
+    "related_errors": [],
+    "topics": ["error_resolution", "diagnostic", "system_settings"]
+  },
+  {
+    "video_id": "vid_011",
+    "title": "Humidity Error Checklist & Humidifier Test",
+    "description": "This video provides a three-part checklist for solving humidity errors, including checking the water bottle, cleaning the burner head and connecting cable, and manually testing the humidifier function via the Device Testing menu.",
+    "url": "https://drive.google.com/file/d/1DXnXYEar5ALTjHq-1mEu8JIFHGFZ3Ncy/view?usp=drive_link",
+    "keywords": ["humidity error", "humidifier failure", "humidifier test", "water bottle", "clean water", "water level", "device testing", "clean up", "fill up", "stock setting", "burner head cleaning", "connecting cable", "stop humidifier", "humidification"],
+    "machine_types": ["COTTON_CANDY"],
+    "related_errors": [],
+    "topics": ["humidification", "cleaning", "diagnostic"]
+  },
+  {
+    "video_id": "vid_012",
+    "title": "Nayax Card Reader Setup (Marshall/VPOS)",
+    "description": "This video demonstrates the physical connection of the Nayax VPOS card reader, including the antenna and Marshall cabling (COM2), and the subsequent software setup via the Shopping Settings menu to select 'VPOS' as the payment method.",
+    "url": "https://drive.google.com/file/d/1IM_kXgtWmRRUoRz1nNb7ywan63rFD0Xw/view?usp=drive_link",
+    "keywords": ["Nayax", "card reader", "Marshall configuration", "VPOS", "COM2", "RS-232", "PGA cable", "payment setting", "Shopping Settings", "antenna", "cable connection", "power cycle", "troubleshooting connection", "install payment"],
+    "machine_types": ["COTTON_CANDY"],
+    "related_errors": [],
+    "topics": ["installation", "payment", "system_settings"]
+  },
+  {
+    "video_id": "vid_013",
+    "title": "Fix Price Change Screen Stuck Loading",
+    "description": "This video shows how to troubleshoot the issue where the 'Product Management' (price change) page fails to load by exiting the app and accessing the system's Wi-Fi settings to connect to the internet, which resolves the loading error.",
+    "url": "https://drive.google.com/file/d/1dv372e-rTHn1ME7jGfY2HzVBWA8l_QuI/view?usp=drive_link",
+    "keywords": ["price change stuck", "stuck loading", "product management", "exit app", "access OS", "system settings", "Wi-Fi connection", "internet fix", "reconnect internet", "white circle", "app problem", "software glitch", "troubleshooting"],
+    "machine_types": ["COTTON_CANDY"],
+    "related_errors": [],
+    "topics": ["error_resolution", "system_settings", "diagnostic"]
+  },
+  {
+    "video_id": "vid_014",
+    "title": "Troubleshoot Screen Not Working (No Power)",
+    "description": "This video guides the technician in checking the two physical connections for the screen—the HDMI cable and the power cable—and confirms that the monitor is receiving power by checking for a green light on the back panel.",
+    "url": "https://drive.google.com/file/d/1RotDxagsrf6BBbL9Q0sDl4cFwLkw1zQh/view?usp=drive_link",
+    "keywords": ["screen not working", "monitor black", "display problem", "HDMI cable", "power cable", "check connection", "plugged in", "green light", "back panel", "power supply", "reconnect", "troubleshooting display", "screen"],
+    "machine_types": ["COTTON_CANDY"],
+    "related_errors": [],
+    "topics": ["diagnostic", "power", "repair"]
+  },
+  {
+    "video_id": "vid_015",
+    "title": "Fix Stick Jam and Clear Error 4004",
+    "description": "This video shows the procedure for clearing a stick jam (Error 4004) by manually removing a stuck cotton candy stick, followed by using the 'Repair' function in the System Settings to clear the machine's error state.",
+    "url": "https://drive.google.com/file/d/1-Biqjkz7Khj7Sb-svZeCiIhPyFJA1iTJ/view?usp=drive_link",
+    "keywords": ["stick jam", "error 4004", "stuck stick", "clear jam", "manual removal", "stick dispenser", "motor", "stepper motor", "stick mechanism", "System Setting", "Repair", "error resolution", "feeding"],
+    "machine_types": ["COTTON_CANDY"],
+    "related_errors": ["4004"],
+    "topics": ["repair", "error_resolution", "feeding"]
+  },
+  {
+    "video_id": "vid_016",
+    "title": "Fix Stuck on Initializing/Logo Screen",
+    "description": "This video shows the resolution for the cotton candy machine being stuck on the initializing or logo screen by exiting the app, accessing the Android OS settings, and ensuring the machine is connected to a stable Wi-Fi network.",
+    "url": "https://drive.google.com/file/d/1gDN06utcvIWXFQkkCah1F8O6QrdcfOGU/view?usp=drive_link",
+    "keywords": ["stuck on logo", "initializing screen", "loading screen", "boot loop", "exiting the app", "access OS", "system settings", "Wi-Fi connection", "reconnect internet", "white circle", "android settings", "app problem", "troubleshooting start up", "not starting"],
+    "machine_types": ["COTTON_CANDY"],
+    "related_errors": [],
+    "topics": ["error_resolution", "system_settings", "diagnostic"]
+  },
+  {
+    "video_id": "vid_017",
+    "title": "Robotic Arm Function Testing (Device Test)",
+    "description": "This video guides the technician on how to use the 'Device Testing' menu to manually test the movement of the robotic arm (Arm 1 and Arm 2) by adjusting parameters like steps, speed, and direction to confirm its operation.",
+    "url": "https://drive.google.com/file/d/1rT18X0P7O7p9FlZSVmGEch_yYWhlzwIy/view?usp=drive_link",
+    "keywords": ["testing arm", "robotic arm", "arm movement", "arm 1", "arm 2", "device testing", "adjust speed", "adjust steps", "direction", "shoulder", "elbow", "movement test", "motor test", "calibration"],
+    "machine_types": ["COTTON_CANDY"],
+    "related_errors": [],
+    "topics": ["diagnostic", "calibration", "sensor"]
+  },
+  {
+    "video_id": "vid_018",
+    "title": "Testing Arm, Pole, and Stick Sensors",
+    "description": "This video guides the technician through the Device Testing menu to check the status (HAVE/WITHOUT) of various sensors, including the Arm Pole Sensor and Stick Sensor, to diagnose if a part is working or needs replacement.",
+    "url": "https://drive.google.com/file/d/1OBkaVW8TzVwrXSR7R0tRII7MVMXlBUKs/view?usp=drive_link",
+    "keywords": ["test sensors", "device testing", "arm pole sensor", "stick sensor", "out pole sensor", "up and down sensor", "have without", "sensor signal", "diagnose sensor", "replace sensor", "actuator test", "troubleshooting", "management system", "optical sensor"],
+    "machine_types": ["COTTON_CANDY"],
+    "related_errors": [],
+    "topics": ["diagnostic", "sensor", "repair"]
+  },
+  {
+    "video_id": "vid_019",
+    "title": "Robo Ice Cream F1/F2 Deep Cleaning Process",
+    "description": "This video shows the full cleaning process for the Robo Ice Cream F1/F2 machine, including removing, cleaning, inspecting, and reassembling the front cover, plunger, and internal parts, along with using the screen's 'Cleaning' and 'Discharge' functions.",
+    "url": "https://drive.google.com/file/d/1Yt--RkI0tvz4MfmnFkqRh3p5VzapQBmB/view?usp=drive_link",
+    "keywords": ["ice cream cleaning", "deep clean", "remove front cover", "plunger", "O-rings", "seal tube", "auger", "cleaning cycle", "manual discharge", "drain water", "cleaning button", "disassemble", "reassemble", "sanitizer", "bucket"],
+    "machine_types": ["ROBO_ICE_CREAM"],
+    "related_errors": [],
+    "topics": ["cleaning", "maintenance", "replacement", "dispensing"]
+  }
+]

@@ -1,41 +1,5 @@
 [
   {
-    "thread_id": 1,
-    "machine_type": "COTTON_CANDY",
-    "q": "After resolving error alerts on my machine, they are still not marked as closed in the Sweet Robo portal. How do I clear them?",
-    "a": "Problem Summary: \n- Error alerts not marked as closed in the Sweet Robo portal despite resolution.\n\nWhy is this happening?\n- No information provided.\n\nWhat to do:\n- Follow up with support for further assistance.",
-    "tags": [
-      "portal_error",
-      "alert_handling"
-    ],
-    "usefulness": {
-      "score": 0,
-      "reason": "No answer was provided in the conversation."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.0
-    }
-  },
-  {
-    "thread_id": 2,
-    "machine_type": "COTTON_CANDY",
-    "q": "Why does the Sweet Robo mobile app log me out daily and fail to store my password?",
-    "a": "Problem: Sweet Robo mobile app logs out daily and fails to store password.\n\nWhy is this happening?\n- Issue acknowledged by admin team but no resolution or timeline provided.\n\nWhat to do:\n- Issue has been forwarded to the app development team.",
-    "tags": [
-      "app_bug",
-      "login_issue"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "Acknowledged but no real resolution was provided."
-    },
-    "metadata": {
-      "domain": "mobile_app",
-      "confidence": 0.4
-    }
-  },
-  {
     "thread_id": 2,
     "machine_type": "COTTON_CANDY",
     "q": "In the Sweet Robo app, why are the sugar levels for white and blue sugar reversed compared to the machine?",
@@ -50,7 +14,8 @@
     },
     "metadata": {
       "domain": "mobile_app",
-      "confidence": 0.7
+      "confidence": 0.7,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -68,7 +33,8 @@
     },
     "metadata": {
       "domain": "tracking_site",
-      "confidence": 0.5
+      "confidence": 0.5,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -87,7 +53,8 @@
     },
     "metadata": {
       "domain": "connectivity",
-      "confidence": 0.95
+      "confidence": 0.95,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -105,7 +72,8 @@
     },
     "metadata": {
       "domain": "app_configuration",
-      "confidence": 0.9
+      "confidence": 0.9,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -123,7 +91,8 @@
     },
     "metadata": {
       "domain": "hardware",
-      "confidence": 0.95
+      "confidence": 0.95,
+      "entry_type": "direct_qa"
     },
     "media_reference": true
   },
@@ -142,26 +111,8 @@
     },
     "metadata": {
       "domain": "maintenance",
-      "confidence": 0.85
-    },
-    "media_reference": true
-  },
-  {
-    "thread_id": 3,
-    "machine_type": "COTTON_CANDY",
-    "q": "What should be done when a 4011 furnace heating error occurs on a Sweet Robo machine?",
-    "a": "Problem: 4011 furnace heating error on a Sweet Robo machine.\n\nWhat to do:\n- Send a video of the issue and the machine ID to the admin.\n- Provide an address for shipping replacement parts if needed.",
-    "tags": [
-      "error_4011",
-      "furnace_issue"
-    ],
-    "usefulness": {
-      "score": 8,
-      "reason": "The issue was addressed with instructions for video confirmation and part shipment."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.9
+      "confidence": 0.85,
+      "entry_type": "direct_qa"
     },
     "media_reference": true
   },
@@ -180,7 +131,8 @@
     },
     "metadata": {
       "domain": "installation",
-      "confidence": 0.95
+      "confidence": 0.95,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -198,7 +150,8 @@
     },
     "metadata": {
       "domain": "hardware",
-      "confidence": 0.92
+      "confidence": 0.92,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -216,7 +169,8 @@
     },
     "metadata": {
       "domain": "maintenance",
-      "confidence": 0.97
+      "confidence": 0.97,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -235,7 +189,8 @@
     },
     "metadata": {
       "domain": "software",
-      "confidence": 0.8
+      "confidence": 0.8,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -253,7 +208,8 @@
     },
     "metadata": {
       "domain": "support",
-      "confidence": 0.75
+      "confidence": 0.75,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -272,7 +228,8 @@
     },
     "metadata": {
       "domain": "networking",
-      "confidence": 0.8
+      "confidence": 0.8,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -290,7 +247,8 @@
     },
     "metadata": {
       "domain": "hardware",
-      "confidence": 0.9
+      "confidence": 0.9,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -308,7 +266,8 @@
     },
     "metadata": {
       "domain": "hardware",
-      "confidence": 0.85
+      "confidence": 0.85,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -326,25 +285,8 @@
     },
     "metadata": {
       "domain": "operations",
-      "confidence": 0.8
-    }
-  },
-  {
-    "thread_id": 5,
-    "machine_type": "COTTON_CANDY",
-    "q": "We’re having difficulty reaching support and resolving issues through this channel. Can support be more responsive and available for real-time help?",
-    "a": "Problem Summary:\nDifficulty reaching support and resolving issues in real time.\n\nWhat to do:\n- Call the support representative directly for assistance.\n- Schedule a video call with the technician on site to resolve issues faster.",
-    "tags": [
-      "support_responsiveness",
-      "communication"
-    ],
-    "usefulness": {
-      "score": 6,
-      "reason": "Phone support was offered but only after repeated user frustration."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.7
+      "confidence": 0.8,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -364,7 +306,8 @@
     "metadata": {
       "domain": "software",
       "confidence": 0.8,
-      "media_reference": false
+      "media_reference": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -383,7 +326,8 @@
     "metadata": {
       "domain": "software",
       "confidence": 0.75,
-      "media_reference": false
+      "media_reference": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -402,7 +346,8 @@
     "metadata": {
       "domain": "hardware_integration",
       "confidence": 0.75,
-      "media_reference": false
+      "media_reference": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -422,7 +367,8 @@
     "metadata": {
       "domain": "software",
       "confidence": 0.8,
-      "media_reference": false
+      "media_reference": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -441,7 +387,8 @@
     "metadata": {
       "domain": "hardware",
       "confidence": 0.7,
-      "media_reference": true
+      "media_reference": true,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -461,7 +408,8 @@
       "domain": "security",
       "confidence": 0.75,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -481,7 +429,8 @@
       "domain": "software",
       "confidence": 0.8,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -501,7 +450,8 @@
       "domain": "control_features",
       "confidence": 0.75,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -522,7 +472,8 @@
       "domain": "hardware",
       "confidence": 0.85,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -542,7 +493,8 @@
       "domain": "logistics",
       "confidence": 0.8,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -563,7 +515,8 @@
       "domain": "hardware",
       "confidence": 0.8,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -583,7 +536,8 @@
       "domain": "maintenance",
       "confidence": 0.85,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -603,27 +557,8 @@
       "domain": "troubleshooting",
       "confidence": 0.75,
       "media_reference": false,
-      "escalation": false
-    }
-  },
-  {
-    "thread_id": 8,
-    "machine_type": "UNKNOWN",
-    "q": "I can't figure out how to add the machine. What should I do?",
-    "a": "Problem: Difficulty in adding a machine.\n\nWhat to do:\n- Provide your machine number.\n- Submit the number for support to guide you through the setup process.",
-    "tags": [
-      "machine_setup",
-      "installation_help"
-    ],
-    "usefulness": {
-      "score": 5,
-      "reason": "Basic answer requiring user to submit machine number first."
-    },
-    "metadata": {
-      "domain": "onboarding",
-      "confidence": 0.6,
-      "media_reference": false,
-      "escalation": true
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -643,7 +578,8 @@
       "domain": "maintenance",
       "confidence": 0.8,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -664,7 +600,8 @@
       "domain": "hardware_integration",
       "confidence": 0.75,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -684,7 +621,8 @@
       "domain": "software",
       "confidence": 0.7,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -704,7 +642,8 @@
       "domain": "maintenance",
       "confidence": 0.85,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -725,7 +664,8 @@
       "domain": "software",
       "confidence": 0.8,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -745,7 +685,8 @@
       "domain": "maintenance",
       "confidence": 0.8,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -766,7 +707,8 @@
       "domain": "hardware",
       "confidence": 0.85,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -786,7 +728,8 @@
       "domain": "onboarding",
       "confidence": 0.75,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -807,7 +750,8 @@
       "domain": "finance",
       "confidence": 0.8,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -827,7 +771,8 @@
       "domain": "user_access",
       "confidence": 0.75,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -848,7 +793,11 @@
       "domain": "hardware",
       "confidence": 0.85,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa",
+      "error_codes": [
+        "4009"
+      ]
     }
   },
   {
@@ -869,7 +818,8 @@
       "confidence": 0.8,
       "media_reference": false,
       "escalation": false,
-      "customer_ordered": true
+      "customer_ordered": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -890,7 +840,8 @@
       "domain": "warranty",
       "confidence": 0.8,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -911,7 +862,8 @@
       "confidence": 0.8,
       "media_reference": false,
       "customer_ordered": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -931,7 +883,8 @@
       "domain": "inventory",
       "confidence": 0.9,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -951,7 +904,8 @@
       "domain": "maintenance",
       "confidence": 0.75,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -971,7 +925,8 @@
       "domain": "software",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -991,7 +946,8 @@
       "domain": "configuration",
       "confidence": 0.8,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1011,7 +967,8 @@
       "domain": "software",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1031,7 +988,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1051,7 +1009,8 @@
       "domain": "hardware",
       "confidence": 0.75,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -1072,7 +1031,8 @@
       "confidence": 0.85,
       "media_reference": true,
       "escalation": true,
-      "customer_ordered": true
+      "customer_ordered": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1094,7 +1054,8 @@
       "domain": "hardware",
       "confidence": 0.8,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -1115,7 +1076,11 @@
       "domain": "maintenance",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa",
+      "error_codes": [
+        "4012"
+      ]
     }
   },
   {
@@ -1136,7 +1101,8 @@
       "domain": "reporting",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1157,7 +1123,8 @@
       "domain": "payments",
       "confidence": 0.8,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -1177,7 +1144,8 @@
       "domain": "connectivity",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1198,7 +1166,8 @@
       "domain": "connectivity",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1219,7 +1188,8 @@
       "domain": "ui_display",
       "confidence": 0.9,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1240,7 +1210,8 @@
       "domain": "media_request",
       "confidence": 0.75,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -1261,7 +1232,11 @@
       "domain": "maintenance",
       "confidence": 0.85,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa",
+      "error_codes": [
+        "4012"
+      ]
     }
   },
   {
@@ -1282,7 +1257,8 @@
       "confidence": 0.85,
       "media_reference": true,
       "escalation": true,
-      "customer_order": true
+      "customer_order": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1303,7 +1279,8 @@
       "domain": "mechanical",
       "confidence": 0.9,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1324,7 +1301,8 @@
       "domain": "product_quality",
       "confidence": 0.85,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1345,7 +1323,8 @@
       "domain": "safety",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1366,7 +1345,8 @@
       "domain": "payments",
       "confidence": 0.9,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1388,7 +1368,8 @@
       "confidence": 0.9,
       "media_reference": true,
       "escalation": true,
-      "customer_order": true
+      "customer_order": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1409,7 +1390,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1430,7 +1412,8 @@
       "domain": "configuration",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -1451,7 +1434,11 @@
       "domain": "maintenance",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa",
+      "error_codes": [
+        "4011"
+      ]
     }
   },
   {
@@ -1471,7 +1458,8 @@
       "domain": "hardware",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1492,7 +1480,8 @@
       "domain": "payments",
       "confidence": 0.8,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1512,7 +1501,8 @@
       "domain": "account_management",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1533,7 +1523,11 @@
       "domain": "maintenance",
       "confidence": 0.95,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa",
+      "error_codes": [
+        "4012"
+      ]
     }
   },
   {
@@ -1554,7 +1548,8 @@
       "domain": "payments",
       "confidence": 0.9,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1575,7 +1570,8 @@
       "domain": "production_quality",
       "confidence": 0.9,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1596,7 +1592,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1617,7 +1614,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1638,7 +1636,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1659,7 +1658,8 @@
       "domain": "alert_handling",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1680,7 +1680,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1701,7 +1702,8 @@
       "domain": "interface",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1722,7 +1724,8 @@
       "domain": "production_quality",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1743,7 +1746,8 @@
       "domain": "maintenance",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1764,7 +1768,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1785,7 +1790,8 @@
       "domain": "production_quality",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1806,7 +1812,8 @@
       "domain": "production_quality",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1827,7 +1834,8 @@
       "domain": "interface",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1848,7 +1856,8 @@
       "domain": "maintenance",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1869,7 +1878,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1890,7 +1900,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1911,7 +1922,8 @@
       "domain": "system_settings",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1932,7 +1944,8 @@
       "domain": "diagnostics",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1953,7 +1966,8 @@
       "domain": "production_quality",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1974,7 +1988,8 @@
       "domain": "production_quality",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -1995,7 +2010,8 @@
       "domain": "production_quality",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2016,7 +2032,8 @@
       "domain": "diagnostics",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2037,7 +2054,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2058,7 +2076,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2079,7 +2098,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2100,7 +2120,8 @@
       "domain": "maintenance",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2121,7 +2142,8 @@
       "domain": "production_quality",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2142,7 +2164,8 @@
       "domain": "interface",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2163,7 +2186,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2184,7 +2208,8 @@
       "domain": "system_settings",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2205,7 +2230,8 @@
       "domain": "startup",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2226,7 +2252,8 @@
       "domain": "interface",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2247,7 +2274,8 @@
       "domain": "maintenance",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2268,7 +2296,8 @@
       "domain": "production_quality",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2289,7 +2318,8 @@
       "domain": "settings",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2310,7 +2340,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2331,7 +2362,8 @@
       "domain": "production_quality",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2352,7 +2384,8 @@
       "domain": "system_settings",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2373,7 +2406,8 @@
       "domain": "interface",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2394,7 +2428,8 @@
       "domain": "system_stability",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2415,7 +2450,8 @@
       "domain": "print_quality",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2436,7 +2472,8 @@
       "domain": "interface",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2457,7 +2494,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2478,7 +2516,8 @@
       "domain": "print_quality",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2499,7 +2538,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2520,7 +2560,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2541,7 +2582,8 @@
       "domain": "maintenance",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2562,7 +2604,8 @@
       "domain": "interface",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2583,7 +2626,8 @@
       "domain": "safety",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2604,7 +2648,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2625,7 +2670,8 @@
       "domain": "production_quality",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2646,7 +2692,8 @@
       "domain": "system_stability",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2667,7 +2714,8 @@
       "domain": "print_quality",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2688,7 +2736,8 @@
       "domain": "maintenance",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2709,7 +2758,8 @@
       "domain": "system_monitoring",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2730,7 +2780,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2751,7 +2802,8 @@
       "domain": "interface",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2772,7 +2824,8 @@
       "domain": "system_stability",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2793,7 +2846,8 @@
       "domain": "maintenance",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2814,7 +2868,8 @@
       "domain": "interface",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2835,7 +2890,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2856,7 +2912,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2877,7 +2934,8 @@
       "domain": "firmware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2898,7 +2956,8 @@
       "domain": "interface",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2919,7 +2978,8 @@
       "domain": "mechanical",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2940,7 +3000,8 @@
       "domain": "system_stability",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2961,7 +3022,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -2982,7 +3044,8 @@
       "domain": "interface",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3003,7 +3066,8 @@
       "domain": "interface",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3024,7 +3088,8 @@
       "domain": "software",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3045,7 +3110,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3066,7 +3132,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3087,7 +3154,8 @@
       "domain": "connectivity",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3108,7 +3176,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3129,7 +3198,8 @@
       "domain": "hardware",
       "confidence": 0.93,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3150,7 +3220,8 @@
       "domain": "software",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3171,7 +3242,8 @@
       "domain": "interface",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3192,7 +3264,8 @@
       "domain": "print_quality",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3213,7 +3286,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3234,7 +3308,8 @@
       "domain": "interface",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3255,7 +3330,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3276,7 +3352,8 @@
       "domain": "interface",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3297,7 +3374,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3318,7 +3396,8 @@
       "domain": "interface",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3339,7 +3418,8 @@
       "domain": "print_quality",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3360,7 +3440,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3381,7 +3462,8 @@
       "domain": "interface",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3402,7 +3484,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3423,7 +3506,8 @@
       "domain": "firmware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3444,7 +3528,8 @@
       "domain": "print_quality",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3465,7 +3550,8 @@
       "domain": "print_quality",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3486,7 +3572,8 @@
       "domain": "interface",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3507,7 +3594,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3528,7 +3616,8 @@
       "domain": "connectivity",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3549,7 +3638,8 @@
       "domain": "software",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3570,7 +3660,8 @@
       "domain": "software",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3591,7 +3682,8 @@
       "domain": "camera",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3612,7 +3704,8 @@
       "domain": "software",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3633,7 +3726,8 @@
       "domain": "interface",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3654,7 +3748,8 @@
       "domain": "print_quality",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3675,7 +3770,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3696,7 +3792,8 @@
       "domain": "payments",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3717,7 +3814,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3738,7 +3836,8 @@
       "domain": "software",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3759,7 +3858,8 @@
       "domain": "software",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3780,7 +3880,8 @@
       "domain": "print_quality",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3801,7 +3902,8 @@
       "domain": "firmware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3822,7 +3924,8 @@
       "domain": "interface",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3843,7 +3946,8 @@
       "domain": "software",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3864,7 +3968,8 @@
       "domain": "connectivity",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3885,7 +3990,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3906,7 +4012,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3927,7 +4034,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3948,7 +4056,8 @@
       "domain": "payments",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3969,7 +4078,8 @@
       "domain": "interface",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -3990,7 +4100,8 @@
       "domain": "software",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4011,7 +4122,8 @@
       "domain": "software",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4032,7 +4144,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4053,7 +4166,8 @@
       "domain": "print_quality",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4074,7 +4188,8 @@
       "domain": "inventory",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4095,7 +4210,8 @@
       "domain": "designs",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4116,7 +4232,8 @@
       "domain": "payments",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4137,7 +4254,8 @@
       "domain": "portal",
       "confidence": 0.9,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4158,7 +4276,8 @@
       "domain": "portal",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4179,7 +4298,8 @@
       "domain": "inventory",
       "confidence": 0.9,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4200,7 +4320,8 @@
       "domain": "portal",
       "confidence": 0.9,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4221,7 +4342,8 @@
       "domain": "payments",
       "confidence": 0.9,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4242,7 +4364,8 @@
       "domain": "portal",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4263,7 +4386,8 @@
       "domain": "portal",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4284,7 +4408,8 @@
       "domain": "inventory",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4305,7 +4430,8 @@
       "domain": "portal",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4326,7 +4452,8 @@
       "domain": "portal",
       "confidence": 0.88,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4347,7 +4474,8 @@
       "domain": "payments",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4368,7 +4496,8 @@
       "domain": "portal",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4389,7 +4518,8 @@
       "domain": "portal",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4410,7 +4540,8 @@
       "domain": "portal",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4431,7 +4562,8 @@
       "domain": "support",
       "confidence": 0.85,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4452,7 +4584,8 @@
       "domain": "support",
       "confidence": 0.9,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4473,7 +4606,8 @@
       "domain": "inventory",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4494,7 +4628,8 @@
       "domain": "portal",
       "confidence": 0.9,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4515,7 +4650,8 @@
       "domain": "support",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4536,7 +4672,8 @@
       "domain": "portal",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4557,7 +4694,8 @@
       "domain": "portal",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4578,7 +4716,8 @@
       "domain": "inventory",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4599,7 +4738,8 @@
       "domain": "inventory",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4620,7 +4760,8 @@
       "domain": "portal",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4641,7 +4782,8 @@
       "domain": "inventory",
       "confidence": 0.88,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4662,7 +4804,8 @@
       "domain": "inventory",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4683,7 +4826,8 @@
       "domain": "support",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4704,7 +4848,8 @@
       "domain": "inventory",
       "confidence": 0.9,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4725,7 +4870,8 @@
       "domain": "setup",
       "confidence": 0.88,
       "media_reference": true,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4746,7 +4892,8 @@
       "domain": "portal",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4767,7 +4914,8 @@
       "domain": "inventory",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4788,7 +4936,8 @@
       "domain": "portal",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4809,7 +4958,8 @@
       "domain": "hardware",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4830,7 +4980,8 @@
       "domain": "payments",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4851,7 +5002,8 @@
       "domain": "maintenance",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4872,28 +5024,8 @@
       "domain": "maintenance",
       "confidence": 0.8,
       "media_reference": false,
-      "escalation": false
-    }
-  },
-  {
-    "thread_id": 42,
-    "machine_type": "COTTON_CANDY",
-    "q": "The admin asked me to install the stick using steps 1, 2, and 3 and to record a video. I followed the instructions. What now?",
-    "a": "Problem Summary: \n- Stick installation and video recording completed. Unclear on next steps.\n\nWhy is this happening?\n- The admin needs to review your submission to diagnose any remaining issues.\n\nWhat to do:\n- Wait for the admin to review your submission.\n- If further issues persist, wait for additional guidance.",
-    "tags": [
-      "support_instruction",
-      "mechanical_troubleshooting",
-      "video_request"
-    ],
-    "usefulness": {
-      "score": 6,
-      "reason": "Clarifies next steps, though no direct resolution is confirmed yet."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.75,
-      "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4913,7 +5045,8 @@
       "domain": "support",
       "confidence": 0.7,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4933,7 +5066,8 @@
       "domain": "support",
       "confidence": 0.8,
       "media_reference": false,
-      "escalation": true
+      "escalation": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4954,7 +5088,8 @@
       "domain": "maintenance",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4975,7 +5110,8 @@
       "domain": "hardware",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -4996,7 +5132,8 @@
       "domain": "hardware",
       "confidence": 0.8,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5017,7 +5154,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5037,7 +5175,8 @@
       "domain": "support",
       "confidence": 0.75,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5057,7 +5196,8 @@
       "domain": "support",
       "confidence": 0.7,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5078,7 +5218,8 @@
       "domain": "hardware",
       "confidence": 0.85,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5098,7 +5239,8 @@
       "domain": "hardware",
       "confidence": 0.95,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5119,7 +5261,8 @@
       "domain": "support",
       "confidence": 0.8,
       "media_reference": true,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5140,7 +5283,8 @@
       "domain": "hardware",
       "confidence": 0.9,
       "media_reference": false,
-      "escalation": false
+      "escalation": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5163,7 +5307,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5185,7 +5330,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5207,30 +5353,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 45,
-    "machine_type": "ROBO_ICE_CREAM",
-    "q": "What should I do if my ROBO_ICE_CREAM machine is still bending sticks after adjusting the rubber bands as suggested?",
-    "a": "Problem: ROBO_ICE_CREAM machine is still bending sticks even after adjusting the rubber bands.\n\nWhat to do:\n- Provide a video showing the issue as it occurs.",
-    "tags": [
-      "stick_bending",
-      "video_request",
-      "further_assistance"
-    ],
-    "usefulness": {
-      "score": 5,
-      "reason": "The answer requests further information for diagnosis, indicating that the previous steps did not resolve the issue."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5253,7 +5377,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5276,7 +5401,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5299,7 +5425,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5325,7 +5452,8 @@
       "part_shipped": false,
       "shipping_request": [
         "relay board"
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5349,7 +5477,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5372,55 +5501,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 47,
-    "machine_type": "BALLOON_BOT",
-    "q": "What should I do about balloons popping and the cotton candy machine leaking?",
-    "a": "Problem: Balloons popping and cotton candy machine leaking.\n\nWhy is this happening?\n- Balloons may be overinflated or exposed to sharp objects.\n- Cotton candy machine may have a seal issue or overfilling problem.\n\nWhat to do:\n- Check balloon inflation level and surrounding environment.\n- Inspect cotton candy machine for any visible leaks or damage.\n- Respond to any questions from our team to assist in resolving these problems.",
-    "tags": [
-      "balloons_popping",
-      "leak",
-      "cotton_candy_machine"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer indicates that the issue is being escalated but does not provide a direct solution or next steps."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": false,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 47,
-    "machine_type": "BALLOON_BOT",
-    "q": "What are the next steps and which valve is leaking on my cotton candy machine?",
-    "a": "Problem Summary: \n- Unidentified leaking valve on cotton candy machine.\n\nWhy is this happening:\n- Not specified.\n\nWhat to do:\n- Wait for further updates on the issue identification.\n- Await information on the next steps.\n- Await delivery of replacement part if needed.",
-    "tags": [
-      "next_steps",
-      "leak",
-      "valve",
-      "replacement_needed"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The response acknowledges the issue and mentions a replacement but lacks immediate actionable steps for the user."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": false,
-      "escalation": true,
-      "customer_ordered": true,
       "part_shipped": false,
-      "shipping_request": true
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5447,7 +5529,8 @@
       "part_shipped": false,
       "error_codes": [
         "419018"
-      ]
+      ],
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -5472,7 +5555,8 @@
       "part_shipped": false,
       "error_codes": [
         "4004"
-      ]
+      ],
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -5495,26 +5579,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 48,
-    "machine_type": "BALLOON_BOT",
-    "q": "Can the reporting time on the Sweet Robo app be changed to United States Eastern time instead of United Kingdom time?",
-    "a": "Problem Summary:\nRequest to change the reporting time on the Sweet Robo app from United Kingdom time to United States Eastern time.\n\nWhat to do:\n- Contact the app team with the request.",
-    "tags": [],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer indicates that the admin will notify the app team, but it does not resolve the issue or provide a timeframe for the fix."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": false,
-      "escalation": false,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5533,26 +5599,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 48,
-    "machine_type": "BALLOON_BOT",
-    "q": "What does an Axis alert on the balloon machine indicate?",
-    "a": "Problem Summary:\nAxis alert on the balloon machine.\n\nWhat to do:\n- Send a picture or video showing the problem.",
-    "tags": [],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requests additional information to diagnose the issue, but does not provide a resolution or explanation of the Axis alert."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5571,29 +5619,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 48,
-    "machine_type": "BALLOON_BOT",
-    "q": "How can I order a new belt and a replacement sensor wire for the balloon machine?",
-    "a": "Problem Summary:\nOrdering a new belt and a replacement sensor wire for the balloon machine.\n\nWhat to do:\n- Confirm shipping address",
-    "tags": [
-      "replacement_needed",
-      "shipping_request"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer offers to send the requested parts but does not confirm the shipment, so the issue is not fully resolved."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": false,
-      "escalation": false,
-      "customer_ordered": true,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5612,7 +5639,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5631,26 +5659,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 48,
-    "machine_type": "BALLOON_BOT",
-    "q": "Why is the Sweet Robo app not tracking any cash or credit sales after setting up the machine at the venue?",
-    "a": "Problem: Sweet Robo app not tracking any cash or credit sales after machine setup.\n\nWhy is this happening:\n- Possible app malfunction.\n\nWhat to do:\n- Await updates from the app team.",
-    "tags": [],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer indicates that the issue has been reported to the app team, but it does not resolve the problem or provide a timeframe for the fix."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": false,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5669,7 +5679,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5688,7 +5699,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5714,7 +5726,8 @@
       "part_shipped": false,
       "error_codes": [
         4012
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5737,7 +5750,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -5760,7 +5774,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5782,7 +5797,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5805,30 +5821,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 50,
-    "machine_type": "COTTON_CANDY",
-    "q": "What should I check if my Cotton Candy machine keeps going offline and online intermittently?",
-    "a": "Problem Summary:\nCotton Candy machine is intermittently going offline and online.\n\nWhat to do:\n- Provide a video showing the behavior of the machine.\n- Highlight if it's a full power down or just the screen going offline.",
-    "tags": [
-      "machine_offline",
-      "power_issue",
-      "troubleshooting"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requires the user to provide a video, which means the issue cannot be fully resolved without further visual analysis."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5851,95 +5845,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 51,
-    "machine_type": "COTTON_CANDY",
-    "q": "Why is the cotton candy machine dropping sticks in the middle of a vend?",
-    "a": "Problem: Cotton candy machine dropping sticks in the middle of a vend.\n\nWhat to do:\n- Record a video of the entire production process for further analysis.",
-    "tags": [
-      "sticks_dropping",
-      "production_issue"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer depends on further analysis of the video, which is yet to be provided."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.4,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 51,
-    "machine_type": "COTTON_CANDY",
-    "q": "Why is the spun sugar accumulating in the bowl instead of adhering to the stick?",
-    "a": "Problem: Spun sugar is accumulating in the bowl instead of adhering to the stick.\n\nWhy is this happening?\n- Possible issue with the machine's operation.\n\nWhat to check:\n- Record a video of the entire production process to diagnose the problem accurately.",
-    "tags": [
-      "sugar_accumulation",
-      "adherence_issue"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requires a video analysis to provide a specific solution, which has not yet been completed."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.4,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 51,
-    "machine_type": "COTTON_CANDY",
-    "q": "What causes the cotton candy to have a wispy shape and slide down the center of the stick?",
-    "a": "Problem: Cotton candy has a wispy shape and slides down the stick.\n\nWhy is this happening?\n- Possible operational issues with the machine.\n\nWhat to do:\n- Provide a detailed video of the production process for further analysis.",
-    "tags": [
-      "wispy_shape",
-      "sliding_issue"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer is contingent on a video review to identify the root cause, which is pending."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.4,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 51,
-    "machine_type": "COTTON_CANDY",
-    "q": "Is deep cleaning the central components of the cotton candy machine the best maintenance method?",
-    "a": "Problem: Deep cleaning the central components of the cotton candy machine for maintenance.\n\nWhy is this happening?\n- Issues may persist even after regular deep cleaning.\n\nWhat to check:\n- Regular deep cleaning of the central components.\n- Video of the production process to identify other underlying problems.",
-    "tags": [
-      "deep_cleaning",
-      "maintenance"
-    ],
-    "usefulness": {
-      "score": 6,
-      "reason": "The answer provides a general maintenance recommendation but suggests further analysis for specific issues."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.7,
-      "media_reference": false,
-      "escalation": false,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -5961,29 +5868,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 52,
-    "machine_type": "COTTON_CANDY",
-    "q": "Why does the cotton candy machine start producing cotton candy even when no order has been placed, and how can I stop it?",
-    "a": "Problem: Cotton candy machine starts producing cotton candy without an order.\n\nWhy is this happening?\n- Possible malfunction with the machine's automatic start system.\n\nWhat to do:\n- Capture a video of the machine starting production without an order.\n- Send the video to customer support for further assistance.",
-    "tags": [
-      "unintended_operation",
-      "video_request"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer depends on a video for further analysis, which means the issue cannot be resolved immediately."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.4,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6005,7 +5891,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6027,7 +5914,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6051,30 +5939,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 53,
-    "machine_type": "COTTON_CANDY",
-    "q": "How can I troubleshoot the stick dispenser malfunction on my cotton candy machine?",
-    "a": "Problem: Stick dispenser malfunction on a cotton candy machine.\n\nWhat to do:\n- Record a video of you picking up a stick from the dispenser.\n- Share the video with us for further assistance.",
-    "tags": [
-      "stick dispenser",
-      "malfunction",
-      "troubleshooting"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer instructs the user to provide a video for troubleshooting, which is a necessary step but does not resolve the issue immediately."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6099,33 +5965,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 53,
-    "machine_type": "COTTON_CANDY",
-    "q": "What should I do if some color sticks don ' t work on my cotton candy machine?",
-    "a": "Problem Summary:\nSome color sticks are not working on the cotton candy machine.\n\nWhat to do:\n- Wait for the supplies team to send white replacement sticks.",
-    "tags": [
-      "color sticks",
-      "replacement",
-      "supplies"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer indicates that a replacement is being arranged, but the issue is not resolved until the new sticks are received and tested."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.95,
-      "media_reference": false,
-      "escalation": false,
-      "customer_ordered": true,
       "part_shipped": false,
-      "tags": [
-        "replacement_needed"
-      ]
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6152,30 +5993,8 @@
       "part_shipped": false,
       "error_codes": [
         4012
-      ]
-    }
-  },
-  {
-    "thread_id": 55,
-    "machine_type": "COTTON_CANDY",
-    "q": "What should I do if my cotton candy machine is indicating there is a stick in the holder when there is not?",
-    "a": "Problem Summary:\nCotton candy machine falsely indicates a stick in the holder.\n\nWhy is this happening?\n- Sensor malfunction\n- Software glitch\n\nWhat to do:\n- Send a video of the machine's behavior for further assistance.",
-    "tags": [
-      "stick detection",
-      "sensor issue",
-      "troubleshooting"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requests additional information and does not provide an immediate solution."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6197,7 +6016,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6220,7 +6040,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6243,29 +6064,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 55,
-    "machine_type": "COTTON_CANDY",
-    "q": "How can I get a barrel lock for my cotton candy machine?",
-    "a": "Problem Summary:\nNeed a barrel lock for a cotton candy machine.\n\nWhat to do:\n- Provide shipping address for the delivery of the barrel lock.",
-    "tags": [
-      "barrel lock",
-      "shipping_request"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer offers to fulfill a request but does not confirm the shipment of the part."
-    },
-    "metadata": {
-      "domain": "inventory",
-      "confidence": 0.6,
-      "media_reference": false,
-      "escalation": false,
-      "customer_ordered": true,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6288,7 +6088,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6307,7 +6108,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6330,7 +6132,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6353,7 +6156,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6376,7 +6180,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6399,30 +6204,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 61,
-    "machine_type": "COTTON_CANDY",
-    "q": "Why am I getting a furnace temp sensor error on my cotton candy machine?",
-    "a": "Problem: Furnace temp sensor error on cotton candy machine.\n\nWhat to do:\n- Take a closer look at the error message.\n- Send a picture of the error that appears on the machine.",
-    "tags": [
-      "furnace_temp_sensor_error",
-      "error_message",
-      "photo_request"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requests additional information to diagnose the problem, but does not resolve the issue on its own."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6445,7 +6228,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6468,7 +6252,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6490,29 +6275,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 62,
-    "machine_type": "BALLOON_BOT",
-    "q": "What should I do if the marshmallow machine is showing an error message?",
-    "a": "Problem Summary:\nMarshmallow machine is displaying an error message.\n\nWhat to do:\n- Record a video of the malfunction.\n- Take pictures or video of your settings page.\n- Capture images of the cabling connections.",
-    "tags": [
-      "error_message",
-      "marshmallow_machine"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requires the user to provide additional visual information for diagnosis, so the issue cannot be resolved without further action."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6535,7 +6299,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": true,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6557,7 +6322,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6579,7 +6345,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -6602,7 +6369,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6625,7 +6393,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6647,7 +6416,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": true,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6670,7 +6440,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6693,7 +6464,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6717,7 +6489,8 @@
       "part_shipped": false,
       "tags": [
         "replacement_needed"
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6740,7 +6513,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6763,7 +6537,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6786,7 +6561,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -6810,30 +6586,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 70,
-    "machine_type": "COTTON_CANDY",
-    "q": "Why am I experiencing an 'out stick' error on my Cotton Candy machine every day?",
-    "a": "Problem: Recurring 'out stick' error on Cotton Candy machine.\n\nWhy is this happening?\n- Possible issue with the machine's internal system.\n\nWhat to do:\n- Connect with customer support for troubleshooting.\n- Provide a suitable time for connection.\n- Alternatively, communicate via WhatsApp for further assistance.",
-    "tags": [
-      "out_stick_error",
-      "daily_issue",
-      "troubleshooting"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer suggests a plan for troubleshooting but does not resolve the issue directly and depends on further communication."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": false,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -6854,7 +6608,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6877,7 +6632,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6904,7 +6660,8 @@
       "error_codes": [
         4004,
         419006
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6926,7 +6683,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6949,7 +6707,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -6973,7 +6732,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -6996,7 +6756,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -7019,7 +6780,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -7042,7 +6804,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7066,29 +6829,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 76,
-    "machine_type": "ROBO_ICE_CREAM",
-    "q": "How can I fix the insufficient change error notifications on my ROBO_ICE_CREAM machine?",
-    "a": "Problem Summary:\nInsufficient change error notifications on ROBO_ICE_CREAM machine.\n\nWhy is this happening?\n- Not specified.\n\nWhat to do:\n- Contact customer support and report the issue.\n- Await response from the team who will investigate and resolve the issue.",
-    "tags": [
-      "insufficient_change",
-      "error_notification"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer acknowledges the issue but does not provide an immediate solution, indicating that further investigation is needed."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": false,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -7110,30 +6852,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 78,
-    "machine_type": "COTTON_CANDY",
-    "q": "What should I do if my cotton candy machine is not working?",
-    "a": "Problem: Cotton candy machine is not working.\n\nWhat to check:\n- Detailed description of the issue.\n- Any error messages displayed.\n- Image or video of the issue if available.",
-    "tags": [
-      "cotton_candy",
-      "machine_issue",
-      "troubleshooting"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer provides a pathway for further assistance but is not a resolution in itself; it depends on additional information and potentially visual content from the customer."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -7156,30 +6876,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 81,
-    "machine_type": "ROBO_ICE_CREAM",
-    "q": "What should I do about the strawberry sauce holder leaking onto the rail of my ROBO_ICE_CREAM machine?",
-    "a": "Problem: Strawberry sauce holder leaking onto the rail of ROBO_ICE_CREAM machine.\n\nWhat to do:\n- Provide a video showing the leak from the canister that holds the syrup.\n- Capture the specific details of where the leak is occurring.",
-    "tags": [
-      "leak",
-      "sauce_holder",
-      "video_request"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requests additional information (video) from the user to provide further assistance, which is a necessary step but does not resolve the issue immediately."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -7201,7 +6899,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7224,7 +6923,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -7246,52 +6946,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 81,
-    "machine_type": "ROBO_ICE_CREAM",
-    "q": "How can I manually update the software on my ROBO_ICE_CREAM machine?",
-    "a": "Problem: Manual software update needed for ROBO_ICE_CREAM machine.\n\nWhat to do:\n- Wait for files and instructions from support.\n- Confirm receipt of files and instructions.\n- Request a step-by-step video if needed.",
-    "tags": [
-      "software_update",
-      "manual_update"
-    ],
-    "usefulness": {
-      "score": 4,
-      "reason": "The answer offers to send the necessary files and instructions, which is helpful, but the resolution depends on the user confirming receipt and potentially needing further assistance with a video guide."
-    },
-    "metadata": {
-      "domain": "software",
-      "confidence": 0.65,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": true,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 81,
-    "machine_type": "ROBO_ICE_CREAM",
-    "q": "My ROBO_ICE_CREAM machine has not had a sale since 4/5 and keeps saying to try later, what should I do?",
-    "a": "Problem: ROBO_ICE_CREAM machine not processing sales and displays \"try later\" message.\n\nWhy is this happening:\n- The machine might be experiencing a technical issue.\n\nWhat to do:\n- Await feedback from our ongoing troubleshooting process.\n- Coordinate with your onsite technician for resolution.",
-    "tags": [
-      "no_sales",
-      "troubleshooting",
-      "software_error"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer indicates ongoing troubleshooting but does not provide an immediate solution or a clear timeline for resolution."
-    },
-    "metadata": {
-      "domain": "software",
-      "confidence": 0.6,
-      "media_reference": false,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7314,7 +6970,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7337,51 +6994,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 84,
-    "machine_type": "COTTON_CANDY",
-    "q": "How can I get a new power cord for my Cotton Candy machine and how do I replace it?",
-    "a": "Problem: Need a new power cord for Cotton Candy machine and guidance on how to replace it.\n\nWhat to do:\n- Take a picture of the damaged power cord\n- Contact customer support for further assistance with the replacement process.",
-    "tags": [
-      "power_cord",
-      "replacement_needed"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requests additional information and does not resolve the issue without further interaction."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 84,
-    "machine_type": "COTTON_CANDY",
-    "q": "How can I resolve the issue with my bill acceptor on the cotton candy machine that stopped taking bills and shows 2 blinking lights?",
-    "a": "Problem: Bill acceptor on the cotton candy machine stopped taking bills and shows 2 blinking lights.\n\nWhat to do:\n- Record a video showing the current status of the bill acceptor on the cotton candy machine.",
-    "tags": [
-      "bill_acceptor",
-      "troubleshooting"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requests additional information and does not resolve the issue without further interaction."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7404,7 +7018,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": true,
-      "part_shipped": true
+      "part_shipped": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7425,7 +7040,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7448,7 +7064,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7470,7 +7087,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7492,7 +7110,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7514,7 +7133,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7536,29 +7156,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 84,
-    "machine_type": "COTTON_CANDY",
-    "q": "What could be causing a loud noise coming from the back of my Cotton Candy machine?",
-    "a": "Problem: Loud noise coming from the back of the Cotton Candy machine.\n\nWhy is this happening?\n- The noise could be coming from the burner or one of the fans.\n\nWhat to do:\n- Make a video pointing out where the sound is coming from.\n- Send us the video for further assistance.",
-    "tags": [
-      "loud_noise",
-      "troubleshooting"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requests additional information and does not resolve the issue without further interaction."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7582,7 +7181,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7604,7 +7204,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7628,7 +7229,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7651,7 +7253,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7678,7 +7281,8 @@
       "part_shipped": false,
       "error_codes": [
         4012
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7700,7 +7304,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7723,7 +7328,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7747,7 +7353,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7770,26 +7377,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 88,
-    "machine_type": "BALLOON_BOT",
-    "q": "What should I do if the bill acceptor on my BALLOON_BOT is blinking red and not accepting cash?",
-    "a": "Problem: Bill acceptor on BALLOON_BOT is blinking red and not accepting cash.\n\nWhat to do:\n- Provide a video demonstrating the problem.\n- Send current shop settings.",
-    "tags": [],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer is a request for more information and does not provide an immediate solution to the problem."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7813,7 +7402,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7836,7 +7426,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7860,29 +7451,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 89,
-    "machine_type": "COTTON_CANDY",
-    "q": "What is the next step if my team suspects the motor on the arm of the cotton candy machine isn't working properly?",
-    "a": "Problem Summary:\nMotor on the arm of the cotton candy machine is suspected to be malfunctioning.\n\nWhy is this happening?\n- The motor may be faulty or worn out.\n\nWhat to do:\n- Further inspection of the motor is required.\n- Consider replacement if necessary.",
-    "tags": [
-      "motor issue",
-      "diagnosis"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer indicates ongoing support but does not provide a resolution or specific next steps."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7905,56 +7475,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 90,
-    "machine_type": "COTTON_CANDY",
-    "q": "Why is my cotton candy machine showing offline in the app when it is connected to the internet?",
-    "a": "Problem: Cotton candy machine showing offline in the app despite internet connection.\n\nWhy is this happening:\n- The machine may not be within a strong and stable internet connection range.\n\nWhat to check:\n- Check the internet connection range of the machine.\n\nWhat to do:\n- Restart the machine.\n- Restart the app.\n- Contact support if the issue persists.",
-    "tags": [
-      "offline",
-      "app",
-      "internet_connection"
-    ],
-    "usefulness": {
-      "score": 4,
-      "reason": "The answer provides initial troubleshooting steps but ultimately indicates that further investigation may be necessary."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": false,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 90,
-    "machine_type": "COTTON_CANDY",
-    "q": "How do I resolve the furnace heating error (4011) on my cotton candy machine?",
-    "a": "Problem: Furnace heating error (4011) on a cotton candy machine.\n\nWhat to do:\n- Provide a clear video of the machine in operation.\n- Show the error and the changes in the numbers in the video.\n- Send the video to our support team for diagnosis.",
-    "tags": [
-      "furnace_heating_error",
-      "error_4011",
-      "troubleshooting"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requests further information for diagnosis, indicating the issue cannot be resolved without additional visual evidence."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.5,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
       "part_shipped": false,
-      "error_codes": [
-        4011
-      ]
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -7976,7 +7498,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8000,7 +7523,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8026,7 +7550,8 @@
       "part_shipped": false,
       "error_codes": [
         "4004"
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8048,29 +7573,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 92,
-    "machine_type": "COTTON_CANDY",
-    "q": "Do I need a video to help me change the arm driver on my cotton candy machine?",
-    "a": "Problem: Need assistance changing the arm driver on a cotton candy machine.\n\nWhat to do:\n- Request for a video call from the support team\n- Confirm the scheduled time for the video call",
-    "tags": [
-      "video_assistance",
-      "arm_driver_change"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer offers assistance but relies on further action to be taken, and a video call needs to be scheduled."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8096,32 +7600,8 @@
       "part_shipped": false,
       "error_codes": [
         4012
-      ]
-    }
-  },
-  {
-    "thread_id": 93,
-    "machine_type": "COTTON_CANDY",
-    "q": "Is the machine out of operation when error 4012 occurs?",
-    "a": "Problem Summary: \n- Machine is likely out of operation when error 4012 occurs.\n\nWhy is this happening?\n- Error 4012 is typically indicative of a machine malfunction.\n\nWhat to do:\n- Check error code 4012 in the machine's manual for specific troubleshooting steps.\n- Contact technical support if the issue persists.",
-    "tags": [
-      "error_4012",
-      "machine_status"
-    ],
-    "usefulness": {
-      "score": 9,
-      "reason": "The answer is straightforward and informs the user about the operational status of the machine when this error is present."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.95,
-      "media_reference": false,
-      "escalation": false,
-      "customer_ordered": false,
-      "part_shipped": false,
-      "error_codes": [
-        4012
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8143,7 +7623,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8166,7 +7647,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8189,7 +7671,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8215,7 +7698,8 @@
       "part_shipped": false,
       "error_codes": [
         4012
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8241,7 +7725,8 @@
       "part_shipped": false,
       "error_codes": [
         4012
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8264,30 +7749,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 93,
-    "machine_type": "COTTON_CANDY",
-    "q": "What should I do if the arm of my cotton candy machine is malfunctioning and causing errors?",
-    "a": "Problem: Cotton candy machine arm malfunctioning and causing errors.\n\nWhat to do:\n- Send a video of the issue for better analysis.",
-    "tags": [
-      "arm_malfunction",
-      "error",
-      "video_request"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requests a video for further diagnosis, which indicates that the issue cannot be resolved without additional visual information."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8309,7 +7772,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8333,53 +7797,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 94,
-    "machine_type": "COTTON_CANDY",
-    "q": "Should I increase or decrease humidity to improve the shape of my cotton candy?",
-    "a": "Problem Summary:\nUncertainty about whether to increase or decrease humidity to improve cotton candy shape.\n\nWhat to do:\n- Record the entire production process.\n- Take a photo of the sugar dispenser in the lower right corner.\n- Send the recorded video and photo to us for further advice.",
-    "tags": [
-      "humidity_adjustment",
-      "candy_shape",
-      "sugar_dispenser"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requires the user to provide additional information before a definitive solution can be given."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 94,
-    "machine_type": "COTTON_CANDY",
-    "q": "How can I improve the scraggly shape of the cotton candy produced by my machine?",
-    "a": "Problem: Scraggly shape of cotton candy produced by machine.\n\nWhat to do:\n- Send a full video of the machine making the cotton candy for further diagnosis.",
-    "tags": [
-      "candy_shape",
-      "troubleshooting",
-      "scraggly_cotton_candy"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer is not complete without the video, which is necessary to diagnose the issue."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8403,29 +7822,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 94,
-    "machine_type": "COTTON_CANDY",
-    "q": "Will tech support be available tomorrow morning around 10am PST to help with my cotton candy machine issues?",
-    "a": "Problem: Availability of tech support for cotton candy machine issues at 10am PST tomorrow.\n\nWhat to do:\n- Confirm your availability for 10am PST tomorrow\n- Schedule tech support for assistance with cotton candy machine issues",
-    "tags": [
-      "tech_support",
-      "availability"
-    ],
-    "usefulness": {
-      "score": 0,
-      "reason": "The answer is helpful but requires confirmation of availability to finalize the support schedule. Answer included a time reference, which is not allowed."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.9,
-      "media_reference": false,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8448,7 +7846,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8470,7 +7869,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8493,7 +7893,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8515,7 +7916,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8537,7 +7939,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8560,7 +7963,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8583,7 +7987,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8605,7 +8010,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": true,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8628,7 +8034,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8651,7 +8058,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8673,30 +8081,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 97,
-    "machine_type": "COTTON_CANDY",
-    "q": "What should I do when the cotton candy machine shows an error during production?",
-    "a": "Problem: Cotton candy machine shows an error during production.\n\nWhat to do:\n- Record a video of the machine while it is still in production.\n- Share the video here for further assistance.",
-    "tags": [
-      "error",
-      "video",
-      "production"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requires the customer to take further action and is dependent on a follow-up, making it incomplete."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8718,7 +8104,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8740,7 +8127,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8763,7 +8151,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8786,7 +8175,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8809,7 +8199,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8831,7 +8222,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8854,7 +8246,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8877,7 +8270,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8899,30 +8293,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 99,
-    "machine_type": "COTTON_CANDY",
-    "q": "Why is there a massive puddle of sugar water underneath my cotton candy machine even though the waste bucket was in place and had both hoses in it?",
-    "a": "Problem: Massive puddle of sugar water under cotton candy machine despite waste bucket being correctly positioned.\n\nWhy is this happening?\n- Possible leak in the machine.\n\nWhat to do:\n- Make a video of the machine running to identify the source of the leak.\n- Check if the machine is set up correctly.",
-    "tags": [
-      "leak_issue",
-      "sugar_water_puddle",
-      "video_diagnosis"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer suggests a diagnostic step but is not a resolution on its own and requires further review of a video."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.5,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8948,31 +8320,8 @@
       "part_shipped": false,
       "error_codes": [
         "4012"
-      ]
-    }
-  },
-  {
-    "thread_id": 101,
-    "machine_type": "COTTON_CANDY",
-    "q": "Why is my cotton candy machine displaying an 'out of stickers' error with code 4004?",
-    "a": "Problem: Cotton candy machine displaying an 'out of stickers' error with code 4004.\n\nWhy is this happening:\n- Possible malfunction\n- Sensor issue\n\nWhat to do:\n- Provide a contact number for further diagnosis.",
-    "tags": [
-      "error_4004"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer acknowledges the error and indicates a need for direct follow-up, but does not resolve the issue or provide troubleshooting steps."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.6,
-      "media_reference": false,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false,
-      "error_codes": [
-        4004
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -8991,7 +8340,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9010,7 +8360,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9029,7 +8380,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9053,7 +8405,8 @@
       "part_shipped": false,
       "error_codes": [
         400
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9074,7 +8427,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": true,
-      "part_shipped": true
+      "part_shipped": true,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9097,7 +8451,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9119,7 +8474,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9142,7 +8498,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9166,7 +8523,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9189,7 +8547,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9211,7 +8570,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9234,7 +8594,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9257,7 +8618,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9279,7 +8641,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9301,7 +8664,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9323,7 +8687,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -9347,7 +8712,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -9366,7 +8732,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9385,26 +8752,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 108,
-    "machine_type": "BALLOON_BOT",
-    "q": "Why can't the balloon machine be accessed remotely to change prices?",
-    "a": "Problem: The balloon machine cannot be accessed remotely for price changes.\n\nWhy is this happening?\n- Possible software change preventing remote access.\n\nWhat to do:\n- Contact relevant team members to investigate the issue.",
-    "tags": [],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer provides a possible reason for the issue and indicates that further investigation is needed, but does not offer an immediate fix."
-    },
-    "metadata": {
-      "domain": "software",
-      "confidence": 0.6,
-      "media_reference": false,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -9426,7 +8775,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9450,31 +8800,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 110,
-    "machine_type": "ROBO_ICE_CREAM",
-    "q": "How can I fix a leak below the hopper at the joint on my ROBO_ICE_CREAM machine?",
-    "a": "Problem: Leak below the hopper at the joint on ROBO_ICE_CREAM machine.\n\nWhat to do:\n- Access the internal components of the machine.\n- Request visual guidance from our team if necessary.\n- Remove the foam insulation to better understand the area.",
-    "tags": [
-      "leak",
-      "hopper",
-      "joint",
-      "internal_access"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer provides a pathway to resolve the issue but depends on further assistance and visual guidance, which is not yet provided."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9498,7 +8825,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": true,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9520,30 +8848,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 112,
-    "machine_type": "COTTON_CANDY",
-    "q": "Where do these 3 wires connect on the cotton candy machine?",
-    "a": "Problem Summary:\nUncertainty about where to connect three wires on a cotton candy machine.\n\nWhat to do:\n- Use a multimeter to measure the voltage of the wires.\n- Record a video to show the measurements.",
-    "tags": [
-      "wiring",
-      "troubleshooting",
-      "multimeter"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer is partially useful as it instructs the user to use a multimeter and record a video, but it is incomplete without the actual wiring instructions which depend on further information."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9565,7 +8871,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9584,7 +8891,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9606,7 +8914,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -9629,7 +8938,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9652,7 +8962,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -9674,7 +8985,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9699,7 +9011,8 @@
       "part_shipped": false,
       "error_codes": [
         "E02"
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9724,7 +9037,8 @@
       "part_shipped": false,
       "error_codes": [
         "E02"
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9743,7 +9057,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9767,7 +9082,8 @@
       "confidence": 0.8,
       "media_reference": false,
       "escalation": false,
-      "customer_ordered": false
+      "customer_ordered": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9789,7 +9105,8 @@
       "confidence": 0.7,
       "media_reference": false,
       "escalation": true,
-      "customer_ordered": false
+      "customer_ordered": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9812,7 +9129,8 @@
       "confidence": 0.95,
       "media_reference": false,
       "escalation": false,
-      "customer_ordered": false
+      "customer_ordered": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9835,7 +9153,8 @@
       "confidence": 0.7,
       "media_reference": false,
       "escalation": true,
-      "customer_ordered": false
+      "customer_ordered": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9857,7 +9176,8 @@
       "confidence": 0.8,
       "media_reference": false,
       "escalation": true,
-      "customer_ordered": false
+      "customer_ordered": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9884,7 +9204,8 @@
       "part_shipped": false,
       "error_codes": [
         4009
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9907,7 +9228,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9929,30 +9251,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 121,
-    "machine_type": "COTTON_CANDY",
-    "q": "What should I do if the mushroom design for my cotton candy machine is hitting the top part of the filter area and coming out lopsided?",
-    "a": "Problem: Mushroom design for cotton candy machine is hitting the top part of the filter area and coming out lopsided.\n\nWhat to do:\n- Send a video of the mushroom in production for further assessment.",
-    "tags": [
-      "mushroom_design",
-      "filter_area",
-      "lopsided_issue"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requires the user to send a video for further assessment, indicating the issue is not resolved and needs further review."
-    },
-    "metadata": {
-      "domain": "support",
-      "confidence": 0.4,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9975,7 +9275,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -9997,7 +9298,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10020,7 +9322,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10042,7 +9345,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10064,7 +9368,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10090,7 +9395,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10113,7 +9419,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10136,7 +9443,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10158,7 +9466,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10181,7 +9490,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10207,7 +9517,8 @@
       "part_shipped": false,
       "error_codes": [
         4011
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10230,7 +9541,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10254,7 +9566,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10277,7 +9590,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10303,7 +9617,8 @@
       "part_shipped": false,
       "shipping_request": [
         "manual"
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10325,26 +9640,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 128,
-    "machine_type": "ROBO_ICE_CREAM",
-    "q": "Why is my ROBO_ICE_CREAM machine running very slow and displaying an error after taking payment without making ice cream?",
-    "a": "Problem: ROBO_ICE_CREAM machine is running slow and displaying an error after taking payment without making ice cream.\n\nWhat to do:\n- Send a video of the issue for better understanding of the problem.",
-    "tags": [],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer requires the customer to send a video for further diagnosis, which means the issue cannot be resolved immediately and depends on follow-up assistance."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.4,
-      "media_reference": true,
-      "escalation": true,
-      "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10363,7 +9660,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10382,7 +9680,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10401,7 +9700,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10424,7 +9724,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": true,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10447,7 +9748,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10471,7 +9773,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10493,7 +9796,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10516,7 +9820,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10538,7 +9843,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10561,7 +9867,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10585,7 +9892,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10608,7 +9916,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10631,7 +9940,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -10654,7 +9964,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10676,7 +9987,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10698,7 +10010,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10720,7 +10033,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10743,7 +10057,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10766,7 +10081,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10788,7 +10104,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10811,7 +10128,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10835,7 +10153,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10857,7 +10176,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10879,7 +10199,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10902,7 +10223,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10924,7 +10246,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10946,7 +10269,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10969,7 +10293,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -10995,7 +10320,8 @@
       "part_shipped": false,
       "error_codes": [
         4004
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11017,7 +10343,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11043,7 +10370,8 @@
       "part_shipped": false,
       "error_codes": [
         4004
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11065,7 +10393,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11088,7 +10417,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11115,7 +10445,8 @@
       "part_shipped": false,
       "error_codes": [
         "E06"
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11142,7 +10473,8 @@
       "part_shipped": false,
       "error_codes": [
         "E06"
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11171,7 +10503,8 @@
       "part_shipped": false,
       "error_codes": [
         "5005"
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11197,7 +10530,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11219,7 +10553,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11241,7 +10576,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11264,7 +10600,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11287,7 +10624,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11310,7 +10648,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11333,7 +10672,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11360,7 +10700,8 @@
       "part_shipped": false,
       "error_codes": [
         4009
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11387,7 +10728,8 @@
       "part_shipped": false,
       "error_codes": [
         4009
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11409,7 +10751,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11437,7 +10780,8 @@
       "error_codes": [
         "406005",
         "4003"
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11462,7 +10806,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11486,7 +10831,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11509,7 +10855,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -11532,7 +10879,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11556,7 +10904,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11583,7 +10932,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11605,7 +10955,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11628,7 +10979,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11654,7 +11006,8 @@
       "part_shipped": false,
       "error_codes": [
         4012
-      ]
+      ],
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11676,7 +11029,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11699,33 +11053,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
-    }
-  },
-  {
-    "thread_id": 181,
-    "machine_type": "COTTON_CANDY",
-    "q": "What should I do about the 'Alert: Furnace motor error (4010)' on my cotton candy machine?",
-    "a": "Problem: 'Alert: Furnace motor error (4010)' on cotton candy machine.\n\nWhy is this happening:\n- Issue with the furnace motor.\n- Furnace Rotation in Device Testing is not working.\n- Burner plate is confirmed clean.\n\nWhat to do:\n- Contact support team.\n- Arrange for further troubleshooting.\n- Schedule a repair if necessary.",
-    "tags": [
-      "furnace_motor_error",
-      "error_4010",
-      "troubleshooting"
-    ],
-    "usefulness": {
-      "score": 3,
-      "reason": "The answer provides a potential next step but does not resolve the issue without further action."
-    },
-    "metadata": {
-      "domain": "hardware",
-      "confidence": 0.6,
-      "media_reference": false,
-      "escalation": true,
-      "customer_ordered": false,
       "part_shipped": false,
-      "error_codes": [
-        4010
-      ]
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11747,7 +11076,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11766,7 +11096,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11790,9 +11121,7 @@
       "escalation": true,
       "customer_ordered": false,
       "part_shipped": false,
-      "error_codes": [
-        "CT0305779"
-      ]
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -11814,7 +11143,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -11836,7 +11166,8 @@
       "media_reference": true,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "knowledge_base"
     }
   },
   {
@@ -11860,7 +11191,8 @@
       "media_reference": true,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11882,7 +11214,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11906,7 +11239,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11929,7 +11263,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11952,7 +11287,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -11976,7 +11312,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -12000,7 +11337,8 @@
       "media_reference": false,
       "escalation": true,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -12023,7 +11361,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -12047,7 +11386,8 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
@@ -12071,14 +11411,15 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
     "thread_id": 119,
     "machine_type": "ROBO_ICE_CREAM",
     "q": "How do I shut the machine down safely?",
-    "a": "Problem: Shutting down the machine safely.\n\nWhat to do:\n- Switch off the main power to the ice cream machine.\n- Use the breaker switch to cut off power.\n- Never unplug the machine directly while it’s running.",
+    "a": "Problem: Shutting down the machine safely.\n\nWhat to do:\n- Switch off the main power to the ice cream machine.\n- Use the breaker switch to cut off power.\n- Never unplug the machine directly while it's running.",
     "tags": [
       "shutdown",
       "power",
@@ -12094,30 +11435,37 @@
       "media_reference": false,
       "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "entry_type": "direct_qa"
     }
   },
   {
-    "thread_id": 120,
-    "machine_type": "ROBO_ICE_CREAM",
-    "q": "What should I do if the machine displays an error or doesn’t function normally?",
-    "a": "Problem: Machine displays an error or doesn't function normally.\n\nWhat to check:\n- Troubleshooting section in the manual.\n\nWhat to do:\n- Contact Sweet Robo customer support at support@sweetrobo.com \n- Call +1 (844) 793-3872 for assistance.",
+    "thread_id": 9026,
+    "machine_type": "BALLOON_BOT",
+    "q": "How do I connect my Balloon Bot machine to a local Wi-Fi network?",
+    "a": "To connect the Balloon Bot to Wi-Fi:\n\n1. Access System Settings\nTap the left top corner of the screen until the password menu appears, then enter password QWSX.\n\n2. Exit to Android OS\nTap and hold near 'System settings' text, press 'Return to screen', then press the white circle icon to access Android settings.\n\n3. Connect to Wi-Fi\nIn Android Settings, go to Wi-Fi, select your network, and enter the password. Return to the Balloon app afterward.\n\n4. Confirm in Basic Configuration\nFrom System Settings, go to Basic Configuration > Current connection, and select your Wi-Fi network from the list.\n\nThe connection is successful when Basic Configuration shows your Wi-Fi network name.",
     "tags": [
-      "error",
-      "support",
-      "troubleshooting"
+      "Wi-Fi",
+      "network",
+      "system_settings",
+      "connect",
+      "internet",
+      "Basic_Configuration",
+      "QWSX"
     ],
     "usefulness": {
-      "score": 10,
-      "reason": ""
+      "score": 9,
+      "reason": "Provides specific, dual-part instructions needed for networking the Balloon Bot: connecting in the hidden Android OS first, and then confirming/selecting the connection within the machine's native Basic Configuration menu."
     },
     "metadata": {
       "domain": "support",
-      "confidence": 0.85,
-      "media_reference": false,
-      "escalation": true,
+      "confidence": 0.95,
+      "media_reference": true,
+      "escalation": false,
       "customer_ordered": false,
-      "part_shipped": false
+      "part_shipped": false,
+      "error_codes": [],
+      "entry_type": "direct_qa"
     }
   }
 ]

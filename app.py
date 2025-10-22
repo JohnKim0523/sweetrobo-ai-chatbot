@@ -1,7 +1,12 @@
 import streamlit as st
 import uuid
 import time
+# Standard mode (dataset only):
 from query_chats_wrapped import initialize_chat, run_chatbot_session, get_session_state
+
+# Hybrid mode (dataset + GPT-4 generation):
+# from query_chats_wrapped import initialize_chat, get_session_state
+# from query_chats_hybrid import run_hybrid_chatbot as run_chatbot_session
 
 st.set_page_config(page_title="Sweet Robo AI Assistant", layout="centered")
 st.title("🤖 Sweet Robo AI Assistant")
