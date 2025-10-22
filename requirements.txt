@@ -1,5 +1,7 @@
 openai>=1.0.0
-pinecone
+pinecone-client
 streamlit
 python-dotenv
 numpy
+sentence-transformers
+rank-bm25
